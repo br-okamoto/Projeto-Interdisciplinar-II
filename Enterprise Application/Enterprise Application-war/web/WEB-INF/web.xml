@@ -58,6 +58,14 @@
         <servlet-name>DetalheDoProduto</servlet-name>
         <servlet-class>allshoes.web.servlet.DetalheDoProduto</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Pagamento</servlet-name>
+        <servlet-class>allshoes.web.servlet.Pagamento</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FinalizacaoDoPedido</servlet-name>
+        <servlet-class>allshoes.web.servlet.FinalizacaoDoPedido</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern>/index.html</url-pattern>
@@ -113,6 +121,14 @@
     <servlet-mapping>
         <servlet-name>DetalheDoProduto</servlet-name>
         <url-pattern>/DetalheDoProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Pagamento</servlet-name>
+        <url-pattern>/Pagamento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FinalizacaoDoPedido</servlet-name>
+        <url-pattern>/FinalizacaoDoPedido</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>  
