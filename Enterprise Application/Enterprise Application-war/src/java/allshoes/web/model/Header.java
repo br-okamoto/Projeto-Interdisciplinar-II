@@ -37,7 +37,7 @@ public class Header {
         this.headerPadrao += "</div>";
         this.headerPadrao += "</div>";
         this.headerPadrao += "</div>";
-        this.headerPadrao += "<div id='menu'>";
+        this.headerPadrao += "<div id='menuT'>";
         this.headerPadrao += "<ul>";
         this.headerPadrao += "<li><a href='Masculino'>Masculino</a></li>";
         this.headerPadrao += "<li><a href='Feminino'>Feminino</a></li>";

@@ -44,13 +44,29 @@ public class Index extends HttpServlet {
             out.println("<title>All Shoes - Home</title>");
             out.println("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
             out.println("<link rel='stylesheet' href='" + CSSurl + "'/>");
+            out.println("<script type='text/javascript' src='"+request.getContextPath()+"/js/jquery-1.8.2.min.js' ></script>");
+            out.println("<script type='text/javascript' src='"+request.getContextPath()+"/js/script.js' ></script>");
             out.println("</head>");
             out.println("<body>");
             out.println(header.getHeaderPadrao());
             
             out.println("<div id='contentSemMenu'>");
-            
+            out.println("<div id='gallery'>");
+            out.println("<div id='slides'>");
+            out.println("<div class='slide'><img src='"+request.getContextPath()+"/images/adidas.jpg' width='1000' height='300' alt='side' /></div>");
+            out.println("<div class='slide'><img src='"+request.getContextPath()+"/images/mizuno.jpg' width='1000' height='300' alt='side' /></div>");
+            out.println("<div class='slide'><img src='"+request.getContextPath()+"/images/nike.jpg' width='1000' height='300' alt='side' /></div>");
             out.println("</div>");
+            out.println("<div id='menu'>");
+            out.println("<ul>");
+            out.println("<li class='fbar'>&nbsp;</li>");
+            out.println("<li class='menuItem'><a href='DetalheDoProduto/?pid=111'><img src='"+request.getContextPath()+"/images/thumb_adidas.jpg' alt='thumbnail' /></a></li>");
+            out.println("<li class='menuItem'><a href='DetalheDoProduto/?pid=222'><img src='"+request.getContextPath()+"/images/thumb_mizuno.jpg' alt='thumbnail' /></a></li>");
+            out.println("<li class='menuItem'><a href='DetalheDoProduto/?pid=222'><img src='"+request.getContextPath()+"/images/thumb_nike.jpg' alt='thumbnail' /></a></li>");
+            out.println("</ul>");
+            out.println("</div>");
+            out.println("</div>");
+
             
             out.println(footer.getFooterPadrao());
             out.println("</body>");
