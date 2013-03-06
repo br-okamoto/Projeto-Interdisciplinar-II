@@ -181,7 +181,7 @@ body {
 	height:300px;
 	
 	/* jQuery changes the width later on to the sum of the widths of all the slides. */
-	width:992px;
+	width:1000px;
 	overflow:hidden;
 }
 
