@@ -4,10 +4,9 @@
  */
 package allshoes.web.servlet;
 
-import allshoes.web.model.Footer;
-import allshoes.web.model.Header;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Bruno
  */
-public class Login extends HttpServlet {
+public class AdicionarProduto extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -33,50 +32,29 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        Header header = new Header(false);
-        Footer footer = new Footer(false);
-        String CSSurl = request.getContextPath() + "/css/styles.css";
         
+        String action = request.getParameter("action");
+
+        if ("Adicionar a Lista de Desejos".equals(action)) {
+            // instruções para adicionar o produto na lista de desejos
+            
+            RequestDispatcher rd = request.getRequestDispatcher("ListaDeDesejos");
+            rd.forward(request, response);
+        } else if ("Comprar".equals(action)) {
+            // instruções para adicionar o produto no carrinho
+            
+            RequestDispatcher rd = request.getRequestDispatcher("MeuCarrinho");
+            rd.forward(request, response);
+        }
+
         try {
+            /* TODO output your page here. You may use following sample code. */
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>All Shoes - Login</title>");
-            out.println("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
-            out.println("<link rel='stylesheet' href='" + CSSurl + "'/>");
+            out.println("<title>Servlet AdicionarProduto</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println(header.getHeaderPadrao());
-            
-            out.println("<div id='loginBox'>");
-            out.println("<h1>Login</h1>");
-            out.println("<form action='Autenticar' method='post'>");
-            out.println("<table border='0' cellpadding='3' cellspacing='3'>");
-            out.println("<tr>");
-            out.println("<td>Usuário</td>");
-            out.println("<td colspan='2'><input type='text' name='txtLogin'/></td>");
-            out.println("</tr>");
-            out.println("<tr>");
-            out.println("<td>Senha</td>");
-            out.println("<td colspan='2'><input type='password' name='txtSenha'/></td>");
-            out.println("</tr>");
-            out.println("<tr>");
-            out.println("<td colspan='2'><a href='EsqueciMinhaSenha'>Esqueci minha senha</></td>");
-            out.println("<td align='right'><input type='submit' value='Acessar'/></td>");
-            out.println("</tr>");
-            out.println("</table>");
-            out.println("</form>");
-            out.println("</div>");
-            
-            out.println("<div id='loginCadastrarbt'>");
-            out.println("<h2>Ainda não tenho cadastro</h2>");
-            out.println("<form action='Cadastrar' method='post'>");
-            out.println("<div>");
-            out.println("<input type='submit' value='Cadastrar'/>");
-            out.println("</div>");
-            out.println("</form>");
-            out.println("</div>");
-            
-            out.println(footer.getFooterPadrao());
+            out.println("<h1>"+action+"</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {            

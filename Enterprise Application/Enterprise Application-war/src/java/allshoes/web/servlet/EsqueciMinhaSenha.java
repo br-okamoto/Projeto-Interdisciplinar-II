@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Bruno
  */
-public class Login extends HttpServlet {
+public class EsqueciMinhaSenha extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -40,7 +40,7 @@ public class Login extends HttpServlet {
         try {
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>All Shoes - Login</title>");
+            out.println("<title>All Shoes - Esqueci minha senha</title>");
             out.println("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
             out.println("<link rel='stylesheet' href='" + CSSurl + "'/>");
             out.println("</head>");
@@ -48,31 +48,20 @@ public class Login extends HttpServlet {
             out.println(header.getHeaderPadrao());
             
             out.println("<div id='loginBox'>");
-            out.println("<h1>Login</h1>");
-            out.println("<form action='Autenticar' method='post'>");
+            out.println("<h1>Esqueci minha senha</h1>");
+            out.println("<form action='EnviarNovaSenha' method='post'>");
             out.println("<table border='0' cellpadding='3' cellspacing='3'>");
             out.println("<tr>");
-            out.println("<td>Usuário</td>");
-            out.println("<td colspan='2'><input type='text' name='txtLogin'/></td>");
+            out.println("<td colspan='2' align='right'>&nbsp;</td>");
             out.println("</tr>");
             out.println("<tr>");
-            out.println("<td>Senha</td>");
-            out.println("<td colspan='2'><input type='password' name='txtSenha'/></td>");
+            out.println("<td>E-mail</td>");
+            out.println("<td><input size='37' type='text' name='txtEmail'/></td>");
             out.println("</tr>");
             out.println("<tr>");
-            out.println("<td colspan='2'><a href='EsqueciMinhaSenha'>Esqueci minha senha</></td>");
-            out.println("<td align='right'><input type='submit' value='Acessar'/></td>");
+            out.println("<td colspan='2' align='right'><input type='submit' value='Enviar nova senha'/></td>");
             out.println("</tr>");
             out.println("</table>");
-            out.println("</form>");
-            out.println("</div>");
-            
-            out.println("<div id='loginCadastrarbt'>");
-            out.println("<h2>Ainda não tenho cadastro</h2>");
-            out.println("<form action='Cadastrar' method='post'>");
-            out.println("<div>");
-            out.println("<input type='submit' value='Cadastrar'/>");
-            out.println("</div>");
             out.println("</form>");
             out.println("</div>");
             

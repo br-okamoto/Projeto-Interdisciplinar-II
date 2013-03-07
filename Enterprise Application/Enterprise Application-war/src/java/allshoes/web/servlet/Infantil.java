@@ -64,7 +64,7 @@ public class Infantil extends HttpServlet {
             out.println("</div>");
             
             out.println("<div id='content'>");
-            out.println("<div id='pageTitle'><h1>Infantil<h1></div>");
+            out.println("<div id='pageTitle'><h1>Infantil</h1></div>");
             out.println("<div id='breadcrumb'>Você está em: ");
             out.println("<a href='" + request.getContextPath() + "'>Home</a>");
             out.println(" > ");

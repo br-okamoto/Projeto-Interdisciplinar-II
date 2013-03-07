@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Bruno
  */
-public class Login extends HttpServlet {
+public class Cadastrar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -40,7 +40,7 @@ public class Login extends HttpServlet {
         try {
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>All Shoes - Login</title>");
+            out.println("<title>All Shoes - Cadastrar</title>");
             out.println("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
             out.println("<link rel='stylesheet' href='" + CSSurl + "'/>");
             out.println("</head>");

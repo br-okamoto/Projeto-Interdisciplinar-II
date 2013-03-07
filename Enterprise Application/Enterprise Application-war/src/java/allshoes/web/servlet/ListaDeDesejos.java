@@ -54,6 +54,18 @@ public class ListaDeDesejos extends HttpServlet {
             out.println(" > ");
             out.println("Lista de Desejos");
             out.println("</div>");
+            
+            out.println("<div class='departamentoProduto'>");
+            out.println("<form action='RemoverProduto' method='post'>");
+            out.println("<img src='" + request.getContextPath() + "/images/adidas-galeria.jpg' alt='' />");
+            out.println("<h2>Tênis Adidas 4.3</h2>");
+            out.println("<div class='precoProduto'>R$ 159,90</div>");
+            out.println("<div class='precoProduto'>6 x R$ 26,65 sem juros</div>");
+            out.println("<input type='hidden' value='RemoverListaDesejos' />");
+            out.println("<input type='submit' id='removerLista' value=' Remover ' />");
+            out.println("</form>");
+            out.println("</div>");
+            
             out.println("</div>");
             
             out.println(footer.getFooterPadrao());

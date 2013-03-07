@@ -66,6 +66,18 @@
         <servlet-name>FinalizacaoDoPedido</servlet-name>
         <servlet-class>allshoes.web.servlet.FinalizacaoDoPedido</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EsqueciMinhaSenha</servlet-name>
+        <servlet-class>allshoes.web.servlet.EsqueciMinhaSenha</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Cadastrar</servlet-name>
+        <servlet-class>allshoes.web.servlet.Cadastrar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdicionarProduto</servlet-name>
+        <servlet-class>allshoes.web.servlet.AdicionarProduto</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern>/index.html</url-pattern>
@@ -129,6 +141,18 @@
     <servlet-mapping>
         <servlet-name>FinalizacaoDoPedido</servlet-name>
         <url-pattern>/FinalizacaoDoPedido</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EsqueciMinhaSenha</servlet-name>
+        <url-pattern>/EsqueciMinhaSenha</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cadastrar</servlet-name>
+        <url-pattern>/Cadastrar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdicionarProduto</servlet-name>
+        <url-pattern>/AdicionarProduto</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>  

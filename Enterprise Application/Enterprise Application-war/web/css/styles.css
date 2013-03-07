@@ -13,11 +13,14 @@ body {
     font-size:12px;
     color:#666;
 }
+img {
+    border:0;
+}
 #header {
     width:100%;
     clear:both;
     margin:5px 0 15px 0;
-    height: 110px;
+    height: 150px;
 }
 #topo-left {
     float:left;
@@ -136,6 +139,7 @@ body {
     float:left;
     margin-left:15px;
     min-height: 500px;
+    width:785px;
 }
 #content h1 {
     margin: 5px 0;
@@ -238,4 +242,81 @@ body {
 
 #menu a img{
 	border:none;
+}
+
+/** Login **/
+#loginBox {
+    border:1px solid #ccc;
+    width:330px;
+    margin:75px auto 15px auto;
+    padding:10px;
+    clear: both;
+}
+#loginBox h1 {
+    margin:5px 0;
+    padding:0;
+    line-height: 25px;
+}
+
+#loginCadastrarbt {
+    width:330px;
+    margin:0 auto 75px auto;
+    padding:10px;
+    clear: both;
+}
+#loginCadastrarbt input {
+    width:350px;
+}
+
+/** Produtos - departamentos **/
+.departamentoProduto {
+    width:162px;
+    padding:10px;
+    margin:10px 0 10px 10px;
+    float:left;
+}
+.departamentoProduto a {
+    clear:both;
+}
+.departamentoProduto h2{
+    margin:5px 0;
+    padding:0;
+    height:50px;
+}
+.precoProduto {
+    font-size: 14px;
+    padding-bottom:7px;
+}
+
+#removerLista {
+    width:165px;
+}
+
+/** Detalhe do produto**/
+.imgDetalheProduto {
+    float:left;
+    margin:15px 15px 15px 0;
+    width:450px;
+}
+#produtosInfo {
+    width:535px;
+    float:left;
+}
+
+/** Carrinho **/
+#tbCarrinho td {
+    margin:0;
+    padding: 0 !important;
+}
+#tbCarrinho h2 {
+    margin: 0 0 5px 0;
+    paddin:0;
+}
+#tbCarrinho input {
+    text-align: center;
+}
+
+/** Pagamento **/
+.divFormaPgto {
+    display: none;
 }

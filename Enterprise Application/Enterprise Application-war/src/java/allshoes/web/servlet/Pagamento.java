@@ -43,6 +43,8 @@ public class Pagamento extends HttpServlet {
             out.println("<title>All Shoes - Meus Pedidos</title>");
             out.println("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
             out.println("<link rel='stylesheet' href='" + CSSurl + "'/>");
+            out.println("<script type='text/javascript' src='"+request.getContextPath()+"/js/jquery-1.8.2.min.js' ></script>");
+            out.println("<script type='text/javascript' src='"+request.getContextPath()+"/js/custom.js' ></script>");
             out.println("</head>");
             out.println("<body>");
             out.println(header.getHeaderPadrao());
@@ -56,6 +58,14 @@ public class Pagamento extends HttpServlet {
             out.println(" > ");
             out.println("Pagamento");
             out.println("</div>");
+            
+            out.println("<h2>Escolha a forma de pagamento:</h2>");
+            out.println("<img src='images/visa-48px.png' alt='visa' class='formaPgto' onclick=\"mostrarFormaPgtoEscolhida('visa');\" />");
+            
+            out.println("<div class='divFormaPgto' id='visa'>");
+            out.println("asd");
+            out.println("</div>");
+            
             out.println("</div>");
             
             out.println(footer.getFooterPadrao());

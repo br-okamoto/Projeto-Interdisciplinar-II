@@ -64,12 +64,42 @@ public class Masculino extends HttpServlet {
             out.println("</div>");
             
             out.println("<div id='content'>");
-            out.println("<div id='pageTitle'><h1>Masculino<h1></div>");
+            
+            out.println("<div id='pageTitle'><h1>Masculino</h1></div>");
             out.println("<div id='breadcrumb'>Você está em: ");
             out.println("<a href='" + request.getContextPath() + "'>Home</a>");
             out.println(" > ");
             out.println("Masculino");
             out.println("</div>");
+            
+            out.println("<div class='departamentoProduto'>");
+            out.println("<a href='DetalheDoProduto?pid=111'><img src='" + request.getContextPath() + "/images/adidas-galeria.jpg' alt='' /></a>");
+            out.println("<h2><a href='DetalheDoProduto?pid=111'>Adidas 4.3</a></h2>");
+            out.println("<div class='precoProduto'>R$ 159,90</div>");
+            out.println("<div class='precoProduto'>6 x R$ 26,65 sem juros</div>");
+            out.println("</div>");
+            
+            out.println("<div class='departamentoProduto'>");
+            out.println("<img src='" + request.getContextPath() + "/images/mizuno-galeria.jpg' alt='' />");
+            out.println("<h2>Mizuno Wave Ultima 4</h2>");
+            out.println("<div class='precoProduto'>R$ 399,90</div>");
+            out.println("<div class='precoProduto'>6 x R$ 66,65 sem juros</div>");
+            out.println("</div>");
+            
+            out.println("<div class='departamentoProduto'>");
+            out.println("<img src='" + request.getContextPath() + "/images/nike-galeria.jpg' alt='' />");
+            out.println("<h2>Nike Lunarglide+4</h2>");
+            out.println("<div class='precoProduto'>R$ 499,90</div>");
+            out.println("<div class='precoProduto'>6 x R$ 83,32 sem juros</div>");
+            out.println("</div>");
+            
+            out.println("<div class='departamentoProduto'>");
+            out.println("<img src='" + request.getContextPath() + "/images/adidas-galeria.jpg' alt='' />");
+            out.println("<h2>Tênis Adidas 4.3</h2>");
+            out.println("<div class='precoProduto'>R$ 159,90</div>");
+            out.println("<div class='precoProduto'>6 x R$ 26,65 sem juros</div>");
+            out.println("</div>");
+            
             out.println("</div>");
             
             out.println(footer.getFooterPadrao());
