@@ -320,3 +320,8 @@ img {
 .divFormaPgto {
     display: none;
 }
+
+.ckbsPgto {
+    float: left;
+    width: 150px;
+}
