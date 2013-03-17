@@ -114,6 +114,11 @@ public class CadastroUsuario extends javax.swing.JFrame {
         });
 
         Pedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matrizimg/Pedidos.jpg"))); // NOI18N
+        Pedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PedidosActionPerformed(evt);
+            }
+        });
 
         Sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matrizimg/Sair.jpg"))); // NOI18N
         Sair.addActionListener(new java.awt.event.ActionListener() {
@@ -441,6 +446,15 @@ public class CadastroUsuario extends javax.swing.JFrame {
         dispose();
         r.setVisible(true);
     }//GEN-LAST:event_RelatoriosActionPerformed
+
+    private void PedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PedidosActionPerformed
+        Pedido p = new Pedido();
+        CadastroUsuario user = new CadastroUsuario();
+        user.setVisible(false);
+        dispose();
+        p.setVisible(true);
+        p.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_PedidosActionPerformed
 
     /**
      * @param args the command line arguments

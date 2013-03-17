@@ -380,9 +380,13 @@ public class Relatorio extends javax.swing.JFrame {
     }//GEN-LAST:event_HomeActionPerformed
 
     private void PedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PedidosActionPerformed
+        Pedido p = new Pedido();
         Usuario u = new Usuario();
         u.setVisible(false);
         dispose();
+        p.setVisible(true);
+        p.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        
     }//GEN-LAST:event_PedidosActionPerformed
 
     private void relatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relatoriosActionPerformed

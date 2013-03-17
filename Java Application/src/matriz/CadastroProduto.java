@@ -370,12 +370,14 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_RelatoriosActionPerformed
 
     private void PedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PedidosActionPerformed
-        Produto m = new Produto();
-        CadastroProduto p = new CadastroProduto();
-        p.setVisible(false);
+        Pedido p = new Pedido();
+        CadastroProduto cp = new CadastroProduto();
+        cp.setVisible(false);
         dispose();
-        m.setVisible(true);
-        m.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        p.setVisible(true);
+        p.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        
+        
     }//GEN-LAST:event_PedidosActionPerformed
 
     private void UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioActionPerformed

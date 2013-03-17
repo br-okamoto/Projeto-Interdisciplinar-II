@@ -278,12 +278,12 @@ public class RelatorioProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_HomeActionPerformed
 
     private void PedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PedidosActionPerformed
-        //Pedido pe = new Pedido();
+        Pedido pe = new Pedido();
         Produto p = new Produto();
         p.setVisible(false);
         dispose();
-        //pe.setVisible(true);
-        //pe.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        pe.setVisible(true);
+        pe.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_PedidosActionPerformed
 
     private void relatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relatoriosActionPerformed

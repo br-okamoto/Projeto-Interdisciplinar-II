@@ -338,6 +338,9 @@
               <Image iconType="3" name="/matrizimg/Pedidos.jpg"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PedidosActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="Sair">
           <Properties>
