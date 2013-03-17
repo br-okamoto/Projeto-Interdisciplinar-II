@@ -225,7 +225,7 @@ public class Produto extends javax.swing.JFrame {
 
         jLabel13.setText("BUSCAR");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/me/myimageapp/resources/Cabeçalho.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matrizimg/Cabeçalho.jpg"))); // NOI18N
 
         jLabel17.setText("DEPARTAMENTO");
 

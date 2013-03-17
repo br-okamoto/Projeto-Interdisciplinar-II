@@ -217,7 +217,7 @@ public class Pedido extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(0, 51, 153));
         jLabel9.setText("PEDIDOS");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/me/myimageapp/resources/Cabeçalho.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matrizimg/Cabeçalho.jpg"))); // NOI18N
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
