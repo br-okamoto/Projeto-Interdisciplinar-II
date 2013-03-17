@@ -4,6 +4,8 @@
  */
 package allshoes.jpa.facade;
 
+import allshoes.jpa.Pessoa;
+import java.util.List;
 import javax.ejb.Remote;
 
 /**
@@ -12,5 +14,19 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface PessoaFacadeRemote {
+    
+    void create(Pessoa pessoa);
+
+    void edit(Pessoa pessoa);
+
+    void remove(Pessoa pessoa);
+
+    Pessoa find(Object id);
+
+    List<Pessoa> findAll();
+
+    List<Pessoa> findRange(int[] range);
+
+    int count();
     
 }
