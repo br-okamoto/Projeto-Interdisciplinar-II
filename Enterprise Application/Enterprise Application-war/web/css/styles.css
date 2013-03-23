@@ -1,0 +1,327 @@
+/* 
+    Document   : styles
+    Created on : 02/03/2013, 08:03:00
+    Author     : Bruno
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body { 
+    width:1000px;
+    margin:0 auto;
+    font-family:"Segoe UI";
+    font-size:12px;
+    color:#666;
+}
+img {
+    border:0;
+}
+#header {
+    width:100%;
+    clear:both;
+    margin:5px 0 15px 0;
+    height: 150px;
+}
+#topo-left {
+    float:left;
+}
+#topo-right {
+    float: right;
+}
+.logo {
+    width:130px;
+    height:100px;
+}
+#links-topo {
+    height: 30px;
+}
+#links-botoes {
+    clear:both;
+}
+#links, #usuario {
+    float:right;
+}
+#links {
+    width: 600px;
+    text-align: center;
+}
+#links a {
+    margin-right:20px;
+}
+#botoes input {
+    float:right;
+}
+#menuT {
+    width: 100%;
+    clear: both;
+    padding-top:10px;
+}
+#menuT ul {
+    margin-left: 0;
+    padding: 0;
+}
+#menuT ul li{
+    float: left;
+    margin-right:40px;
+    list-style: none;
+    margin-left: 0;
+    padding: 0;
+    line-height: 25px;
+}
+#menuT form {
+    float:right;
+}
+#contentzone {
+    height:100%;
+    width:100%;
+    clear:both;
+    min-height: 500px;
+}
+#footer {
+    text-align: center;
+    clear:both;
+    margin-top: 25px;
+}
+#footer h2 {
+    margin-bottom: 5px;
+}
+#footer-topo {
+    width: 100%;
+}
+#formasPagamento {
+    float:left;
+    text-align: left;
+    font-weight: bold;
+}
+#formasPagamento img {
+    width:50px;
+    height:30px;
+    float:left;
+    margin-right: 10px;
+    margin-top:5px;
+}
+#redesSociais {
+    font-weight: bold;
+    float:right;
+    width:150px;
+}
+#redesSociais img {
+    width:30px;
+    height:30px;
+    margin-right:5px;
+    float:left;
+    margin-top:5px;
+}
+#redesSociais div {
+    clear:both;
+    text-align: left;
+}
+#footer-central {
+    margin-bottom: 15px;
+    width: 100%;
+    clear: both;
+}
+
+#menuLateral {
+    width:200px;
+    float:left;
+    margin-top: 15px;
+}
+#menuLateral h2 {
+    margin: 5px;
+}
+#Categorias, #Marcas, #Tamanho, #Preco {
+    background:#eee;
+    padding:5px;
+    margin: 0 0 10px 0;
+}
+#content {
+    float:left;
+    margin-left:15px;
+    min-height: 500px;
+    width:785px;
+}
+#content h1 {
+    margin: 5px 0;
+}
+
+#contentSemMenu {
+    float:left;
+    min-height: 500px;
+    width: 100%;
+}
+#contentSemMenu h1 {
+    margin: 10px 0 5px 0;
+}
+
+/* Slider */
+#gallery{
+	/* CSS3 Box Shadow */
+	-moz-box-shadow:0 0 3px #AAAAAA;
+	-webkit-box-shadow:0 0 3px #AAAAAA;
+	box-shadow:0 0 3px #AAAAAA;
+	
+	/* CSS3 Rounded Corners */
+	
+	-moz-border-radius-bottomleft:4px;
+	-webkit-border-bottom-left-radius:4px;
+	border-bottom-left-radius:4px;
+	
+	-moz-border-radius-bottomright:4px;
+	-webkit-border-bottom-right-radius:4px;
+	border-bottom-right-radius:4px;
+	
+	border:1px solid white;
+	
+	background:url(../images/panel.jpg) repeat-x bottom center #ffffff;
+	
+	/* The width of the gallery */
+	width:1000px;
+	overflow:hidden;
+}
+
+#slides{
+	/* This is the slide area */
+	height:300px;
+	
+	/* jQuery changes the width later on to the sum of the widths of all the slides. */
+	width:992px;
+	overflow:hidden;
+}
+
+.slide{
+	float:left;
+}
+
+#menu{
+	/* This is the container for the thumbnails */
+	height:45px;
+        text-align:center;
+}
+
+#menu ul{
+	margin:0px;
+	padding:0px;
+}
+
+#menu li{
+	/* Every thumbnail is a li element */
+	width:60px;
+	display:inline-block;
+	list-style:none;
+	height:45px;
+	overflow:hidden;
+}
+
+#menu li.inact:hover{
+	/* The inactive state, highlighted on mouse over */
+	background:url(../images/pic_bg.png) repeat;
+}
+
+#menu li.act,li.act:hover{
+	/* The active state of the thumb */
+	background:url(../images/active_bg.png) no-repeat;
+}
+
+#menu li.act a{
+	cursor:default;
+}
+
+.fbar{
+	/* The left-most vertical bar, next to the first thumbnail */
+	width:2px;
+	background:url(../images/divider.png) no-repeat right;
+}
+
+#menu li a{
+	display:block;
+	background:url(../images/divider.png) no-repeat right;
+	height:35px;
+	padding-top:10px;
+}
+
+#menu a img{
+	border:none;
+}
+
+/** Login **/
+#loginBox {
+    border:1px solid #ccc;
+    width:330px;
+    margin:75px auto 15px auto;
+    padding:10px;
+    clear: both;
+}
+#loginBox h1 {
+    margin:5px 0;
+    padding:0;
+    line-height: 25px;
+}
+
+#loginCadastrarbt {
+    width:330px;
+    margin:0 auto 75px auto;
+    padding:10px;
+    clear: both;
+}
+#loginCadastrarbt input {
+    width:350px;
+}
+
+/** Produtos - departamentos **/
+.departamentoProduto {
+    width:162px;
+    padding:10px;
+    margin:10px 0 10px 10px;
+    float:left;
+}
+.departamentoProduto a {
+    clear:both;
+}
+.departamentoProduto h2{
+    margin:5px 0;
+    padding:0;
+    height:50px;
+}
+.precoProduto {
+    font-size: 14px;
+    padding-bottom:7px;
+}
+
+#removerLista {
+    width:165px;
+}
+
+/** Detalhe do produto**/
+.imgDetalheProduto {
+    float:left;
+    margin:15px 15px 15px 0;
+    width:450px;
+}
+#produtosInfo {
+    width:535px;
+    float:left;
+}
+
+/** Carrinho **/
+#tbCarrinho td {
+    margin:0;
+    padding: 0 !important;
+}
+#tbCarrinho h2 {
+    margin: 0 0 5px 0;
+    paddin:0;
+}
+#tbCarrinho input {
+    text-align: center;
+}
+
+/** Pagamento **/
+.divFormaPgto {
+    display: none;
+}
+
+.ckbsPgto {
+    float: left;
+    width: 150px;
+}
