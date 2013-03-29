@@ -3,6 +3,7 @@ package exemplo;
 import exemplo.exceptions.ObjetoNotNullException;
 import javax.ejb.Stateful;
 
+
 /**
  *
  * @author Calebe de Paula Bianchini
