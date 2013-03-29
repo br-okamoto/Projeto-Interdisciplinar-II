@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package filial;
+package hibernate;
 
 /**
  *
  * @author rodrigo
  */
-public class Filial {
+public class Hibernate {
 
     /**
      * @param args the command line arguments
