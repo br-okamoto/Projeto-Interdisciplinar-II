@@ -14,11 +14,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.annotation.WebServlet;
 
 /**
  *
  * @author Bruno
  */
+@WebServlet(name = "Autenticar", urlPatterns = {"/Autenticar"})
 public class Autenticar extends HttpServlet {
     
     @EJB
