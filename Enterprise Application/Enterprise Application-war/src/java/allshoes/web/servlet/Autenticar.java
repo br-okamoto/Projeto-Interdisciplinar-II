@@ -39,15 +39,23 @@ public class Autenticar extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String username = request.getParameter("txtLogin");
-        String senha = request.getParameter("txtSenha");
+        char[] senha = request.getParameter("txtSenha").toCharArray();
         String returnURL = request.getParameter("returnURL");
         Usuario usuario = ejb.find(username);
         
+        //usuario nao encontrado
         if(usuario==null) {
             RequestDispatcher rd = request.getRequestDispatcher("Login");
             rd.forward(request, response);
         } else {
-            response.sendRedirect(returnURL);
+            Usuario tentandoLogar = new Usuario(username, senha);
+            //usuario encontrado, mas senha errada
+            if (usuario.getSenha() != tentandoLogar.getSenha()) {
+                RequestDispatcher rd = request.getRequestDispatcher("Login");
+                rd.forward(request, response);
+            } else { //usuario encontrado e senha correta: redireciona para a pagina que o usuario estava antes do login
+                response.sendRedirect(returnURL);
+            }
         }
         
             

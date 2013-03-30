@@ -18,12 +18,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+
 @Entity
 public class Usuario extends Pessoa implements Serializable, Cloneable {
 
     @Id
     @GeneratedValue
     private int idPessoa;
+    @Column(unique=true)
     private String login;
     @Column(name = "senha", length = 32, columnDefinition = "VARCHAR(32)")
     private char[] senha;
@@ -43,6 +45,11 @@ public class Usuario extends Pessoa implements Serializable, Cloneable {
     
     public Usuario(int idPessoa, char[] senha){
         this.idPessoa = idPessoa;
+        this.senha = hashPassword(senha);
+    }
+    
+    public Usuario(String login, char[] senha){
+        this.login = login;
         this.senha = hashPassword(senha);
     }
 
