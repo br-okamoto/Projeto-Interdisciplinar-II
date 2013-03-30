@@ -22,6 +22,8 @@ public interface UsuarioFacadeRemote {
     void remove(Usuario usuario);
 
     Usuario find(Object id);
+    
+    Usuario find(String username);
 
     List<Usuario> findAll();
 

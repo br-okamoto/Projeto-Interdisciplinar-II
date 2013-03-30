@@ -4,10 +4,12 @@
  */
 package allshoes.web.servlet;
 
-import allshoes.web.model.Footer;
-import allshoes.web.model.Header;
+import allshoes.jpa.Usuario;
+import allshoes.jpa.facade.UsuarioFacadeRemote;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +19,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Bruno
  */
-public class Cadastrar extends HttpServlet {
+public class Autenticar extends HttpServlet {
+    
+    @EJB
+    private UsuarioFacadeRemote ejb;
 
     /**
      * Processes requests for both HTTP
@@ -33,44 +38,30 @@ public class Cadastrar extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        Header header = new Header(false, "Cadastrar");
-        Footer footer = new Footer(false);
+        String username = request.getParameter("txtLogin");
+        String senha = request.getParameter("txtSenha");
+        String returnURL = request.getParameter("returnURL");
+        Usuario usuario = ejb.find(username);
         
-        try {
-           
-            out.println(header.getHeaderPadrao());
+        if(usuario==null) {
+            RequestDispatcher rd = request.getRequestDispatcher("Login");
+            rd.forward(request, response);
+        } else {
+            response.sendRedirect(returnURL);
+        }
+        
             
-            out.println("<div id='loginBox'>");
-            out.println("<h1>Login</h1>");
-            out.println("<form action='Autenticar' method='post'>");
-            out.println("<table border='0' cellpadding='3' cellspacing='3'>");
-            out.println("<tr>");
-            out.println("<td>Usuário</td>");
-            out.println("<td colspan='2'><input type='text' name='txtLogin'/></td>");
-            out.println("</tr>");
-            out.println("<tr>");
-            out.println("<td>Senha</td>");
-            out.println("<td colspan='2'><input type='password' name='txtSenha'/></td>");
-            out.println("</tr>");
-            out.println("<tr>");
-            out.println("<td colspan='2'><a href='EsqueciMinhaSenha'>Esqueci minha senha</></td>");
-            out.println("<td align='right'><input type='submit' value='Acessar'/></td>");
-            out.println("</tr>");
-            out.println("</table>");
-            out.println("</form>");
-            out.println("</div>");
-            
-            out.println("<div id='loginCadastrarbt'>");
-            out.println("<h2>Ainda não tenho cadastro</h2>");
-            out.println("<form action='Cadastrar' method='post'>");
-            out.println("<div>");
-            out.println("<input type='submit' value='Cadastrar'/>");
-            out.println("</div>");
-            out.println("</form>");
-            out.println("</div>");
-            
-            out.println(footer.getFooterPadrao());
+       
 
+        try {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AdicionarProduto</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("</body>");
+            out.println("</html>");
         } finally {            
             out.close();
         }

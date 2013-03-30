@@ -30,6 +30,8 @@ public class Footer {
         this.footerPadrao += "</div>";
         this.footerPadrao += "<div id='footer-copyright'>Todos os direitos reservados.</div>";
         this.footerPadrao += "</div>";
+        this.footerPadrao += "</body>";
+        this.footerPadrao += "</html>";
     }
 
     public String getFooterPadrao() {

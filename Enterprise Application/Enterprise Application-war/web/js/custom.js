@@ -3,3 +3,7 @@ function mostrarFormaPgtoEscolhida(formapagamento) {
     $('#'+formapagamento).show();
     
 }
+$(document).ready(function(){
+    var currentURL = window.location.href;
+    $("#linkLogin").attr("href","Login?returnURL="+currentURL);
+});

@@ -82,6 +82,10 @@
         <servlet-name>RealizarPagamento</servlet-name>
         <servlet-class>allshoes.web.servlet.RealizarPagamento</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Autenticar</servlet-name>
+        <servlet-class>allshoes.web.servlet.Autenticar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern>/index.html</url-pattern>
@@ -161,6 +165,10 @@
     <servlet-mapping>
         <servlet-name>RealizarPagamento</servlet-name>
         <url-pattern>/RealizarPagamento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Autenticar</servlet-name>
+        <url-pattern>/Autenticar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>  

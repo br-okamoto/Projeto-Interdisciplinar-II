@@ -33,18 +33,11 @@ public class MeuCarrinho extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        Header header = new Header(false);
+        Header header = new Header(false, "Meu Carrinho");
         Footer footer = new Footer(false);
-        String CSSurl = request.getContextPath() + "/css/styles.css";
         
         try {
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>All Shoes - Meu Carrinho</title>");
-            out.println("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
-            out.println("<link rel='stylesheet' href='" + CSSurl + "'/>");
-            out.println("</head>");
-            out.println("<body>");
+
             out.println(header.getHeaderPadrao());
             
             out.println("<div id='contentSemMenu'>");
@@ -91,8 +84,7 @@ public class MeuCarrinho extends HttpServlet {
             out.println("</div>");
             
             out.println(footer.getFooterPadrao());
-            out.println("</body>");
-            out.println("</html>");
+
         } finally {            
             out.close();
         }

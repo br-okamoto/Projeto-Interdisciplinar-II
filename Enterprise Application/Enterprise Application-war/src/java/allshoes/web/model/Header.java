@@ -4,7 +4,17 @@ public class Header {
     
     private String headerPadrao = "";
 
-    public Header(boolean logado) {
+    public Header(boolean logado, String pageTitle) {
+        this.headerPadrao += "<html>";
+        this.headerPadrao += "<head>";
+        this.headerPadrao += "<title>All Shoes - "+ pageTitle +"</title>";
+        this.headerPadrao += "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>";
+        this.headerPadrao += "<link rel='stylesheet' href='/Enterprise_Application-war/css/styles.css'/>";
+        this.headerPadrao += "<script type='text/javascript' src='/Enterprise_Application-war/js/jquery-1.8.2.min.js'></script>";
+        this.headerPadrao += "<script type='text/javascript' src='/Enterprise_Application-war/js/custom.js'></script>";
+        this.headerPadrao += "<script type='text/javascript' src='/Enterprise_Application-war/js/script.js'></script>";
+        this.headerPadrao += "</head>";
+        this.headerPadrao += "<body>";
         this.headerPadrao += "<div id='header'>";
         this.headerPadrao += "<div id='topo'>";
         this.headerPadrao += "<div id='topo-left'>";
@@ -16,7 +26,7 @@ public class Header {
         this.headerPadrao += "<div id='links-topo'>";
         this.headerPadrao += "<div id='usuario'>";
         
-        this.headerPadrao += "Bem-vindo, <a href='Login'>faça seu login ou cadastre-se</a>";
+        this.headerPadrao += "Bem-vindo, <a id='linkLogin' href='Login'>faça seu login ou cadastre-se</a>";
         
         this.headerPadrao += "</div>";
         this.headerPadrao += "<div id='links'>";

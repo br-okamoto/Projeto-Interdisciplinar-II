@@ -4,7 +4,16 @@
  */
 package allshoes.jpa;
 
+import antlr.ByteBuffer;
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,24 +25,25 @@ public class Usuario extends Pessoa implements Serializable, Cloneable {
     @GeneratedValue
     private int idPessoa;
     private String login;
-    private String senha;
+    @Column(name = "senha", length = 32, columnDefinition = "VARCHAR(32)")
+    private char[] senha;
     private int idTipoUsuario;
     private String email;
 
     public Usuario() {
     }
 
-    public Usuario (int idPessoa, String login, String senha, int idTipoUsuario, String email) {
+    public Usuario (int idPessoa, String login, char[] senha, int idTipoUsuario, String email) {
         this.idPessoa = idPessoa;
         this.login = login;
-        this.senha = senha;
+        this.senha = hashPassword(senha);
         this.idTipoUsuario = idTipoUsuario;
         this.email = email;
     }
     
-    public Usuario(int idPessoa, String senha){
+    public Usuario(int idPessoa, char[] senha){
         this.idPessoa = idPessoa;
-        this.senha = senha;
+        this.senha = hashPassword(senha);
     }
 
     public String getLogin() {
@@ -44,11 +54,11 @@ public class Usuario extends Pessoa implements Serializable, Cloneable {
         this.login = login;
     }
 
-    public String getSenha() {
+    public char[] getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public void setSenha(char[] senha) {
         this.senha = senha;
     }
 
@@ -66,5 +76,21 @@ public class Usuario extends Pessoa implements Serializable, Cloneable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    
+    private char[] hashPassword(char[] password) {
+        char[] encoded = null;
+        try {
+            java.nio.ByteBuffer passwdBuffer = 
+              Charset.defaultCharset().encode(CharBuffer.wrap(password));
+            byte[] passwdBytes = passwdBuffer.array();
+            MessageDigest mdEnc = MessageDigest.getInstance("MD5");
+            mdEnc.update(passwdBytes, 0, password.length);
+            encoded = new BigInteger(1, mdEnc.digest()).toString(16).toCharArray();
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return encoded;
     }
 }
