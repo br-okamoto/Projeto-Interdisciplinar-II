@@ -40,7 +40,12 @@ public class Cadastrar extends HttpServlet {
            
             out.println(header.getHeaderPadrao());
             
-            
+            out.println("<div class='cadastroSucesso'>");
+            out.println("<img src='images/icon-ok.png' alt='sucesso' />");
+            out.println("<span>Cadastro realizado com sucesso!</span><br/>");
+            out.println("<input type='button' value=' Voltar ' onclick='javascript:history.go(-2);' />");
+            out.println("</div>");
+
             
             out.println(footer.getFooterPadrao());
 

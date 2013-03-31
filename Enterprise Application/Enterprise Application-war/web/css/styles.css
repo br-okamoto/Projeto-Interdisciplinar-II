@@ -367,3 +367,23 @@ img {
     margin-top:20px;
     margin-bottom:100px;
 }
+.cadastroSucesso {
+	width:440px;
+	padding:20px;
+	margin:0 auto;
+	height:100px;
+}
+.cadastroSucesso img {
+	float:left;
+	height:60px;
+}
+.cadastroSucesso span {
+	font-size:18px;
+	font-weight:bold;
+	padding:5px;
+}
+.cadastroSucesso input {
+    width:75px;
+    text-align: center;
+    margin: 10px 0 0 90px;
+}

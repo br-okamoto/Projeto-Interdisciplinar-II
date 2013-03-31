@@ -72,7 +72,7 @@
     </servlet>
     <servlet>
         <servlet-name>Cadastrar</servlet-name>
-        <servlet-class>allshoes.web.servlet.Cadastro</servlet-class>
+        <servlet-class>allshoes.web.servlet.Cadastrar</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdicionarProduto</servlet-name>
