@@ -325,3 +325,45 @@ img {
     float: left;
     width: 150px;
 }
+
+/** Cadastro **/
+.lbl_cadastro {
+	text-align:right;
+	padding-right:5px;
+	width:150px;
+}
+.lbl_cadastro2 {
+	text-align:right;
+	padding-right:5px;
+	width:75px;
+}
+.txtNome {
+	width:400px;
+}
+.txtCPF, .txtSenha, .txtComplemento {
+	width:150px;
+}
+.txtDtNascimento {
+	width:90px;
+}
+.txtTelefone, .txtCelular, .txtCEP {
+	width:100px;
+}
+.txtEmail, .txtRua, .txtCidade {
+	width:300px;
+}
+.txtNumero {
+	width:75px;	
+}
+.txtBairro {
+	width:200px;
+}
+.btnSubmit {
+    text-align: right;
+    width: 653px;
+}
+.btnSubmit input {
+    width:150px;
+    margin-top:20px;
+    margin-bottom:100px;
+}

@@ -65,7 +65,7 @@ public class Login extends HttpServlet {
             
             out.println("<div id='loginCadastrarbt'>");
             out.println("<h2>Ainda não tenho cadastro</h2>");
-            out.println("<form action='Cadastrar' method='post'>");
+            out.println("<form action='Cadastro' method='post'>");
             out.println("<div>");
             out.println("<input type='submit' value='Cadastrar'/>");
             out.println("</div>");

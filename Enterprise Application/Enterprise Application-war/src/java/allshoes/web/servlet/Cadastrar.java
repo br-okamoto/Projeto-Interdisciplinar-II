@@ -40,34 +40,7 @@ public class Cadastrar extends HttpServlet {
            
             out.println(header.getHeaderPadrao());
             
-            out.println("<div id='loginBox'>");
-            out.println("<h1>Login</h1>");
-            out.println("<form action='Autenticar' method='post'>");
-            out.println("<table border='0' cellpadding='3' cellspacing='3'>");
-            out.println("<tr>");
-            out.println("<td>Usuário</td>");
-            out.println("<td colspan='2'><input type='text' name='txtLogin'/></td>");
-            out.println("</tr>");
-            out.println("<tr>");
-            out.println("<td>Senha</td>");
-            out.println("<td colspan='2'><input type='password' name='txtSenha'/></td>");
-            out.println("</tr>");
-            out.println("<tr>");
-            out.println("<td colspan='2'><a href='EsqueciMinhaSenha'>Esqueci minha senha</></td>");
-            out.println("<td align='right'><input type='submit' value='Acessar'/></td>");
-            out.println("</tr>");
-            out.println("</table>");
-            out.println("</form>");
-            out.println("</div>");
             
-            out.println("<div id='loginCadastrarbt'>");
-            out.println("<h2>Ainda não tenho cadastro</h2>");
-            out.println("<form action='Cadastrar' method='post'>");
-            out.println("<div>");
-            out.println("<input type='submit' value='Cadastrar'/>");
-            out.println("</div>");
-            out.println("</form>");
-            out.println("</div>");
             
             out.println(footer.getFooterPadrao());
 

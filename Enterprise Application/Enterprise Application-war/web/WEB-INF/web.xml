@@ -72,7 +72,7 @@
     </servlet>
     <servlet>
         <servlet-name>Cadastrar</servlet-name>
-        <servlet-class>allshoes.web.servlet.Cadastrar</servlet-class>
+        <servlet-class>allshoes.web.servlet.Cadastro</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdicionarProduto</servlet-name>
@@ -85,6 +85,10 @@
     <servlet>
         <servlet-name>Autenticar</servlet-name>
         <servlet-class>allshoes.web.servlet.Autenticar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Cadastro</servlet-name>
+        <servlet-class>allshoes.web.servlet.Cadastro</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
@@ -169,6 +173,10 @@
     <servlet-mapping>
         <servlet-name>Autenticar</servlet-name>
         <url-pattern>/Autenticar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cadastro</servlet-name>
+        <url-pattern>/Cadastro</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>  
