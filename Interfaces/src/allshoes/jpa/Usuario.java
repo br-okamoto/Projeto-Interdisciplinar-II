@@ -24,9 +24,6 @@ import javax.persistence.Temporal;
 @Entity
 public class Usuario extends Pessoa implements Serializable, Cloneable {
 
-    @Id
-    @GeneratedValue
-    private int idPessoa;
     @Column(unique=true)
     private String login;
     @Column(name = "senha", length = 32, columnDefinition = "VARCHAR(32)")
@@ -37,20 +34,7 @@ public class Usuario extends Pessoa implements Serializable, Cloneable {
 
     public Usuario() {
     }
-
-    public Usuario (int idPessoa, String login, char[] senha, int idTipoUsuario, String email) {
-        this.idPessoa = idPessoa;
-        this.login = login;
-        this.senha = hashPassword(senha);
-        this.idTipoUsuario = idTipoUsuario;
-        this.email = email;
-    }
-    
-    public Usuario(int idPessoa, char[] senha){
-        this.idPessoa = idPessoa;
-        this.senha = hashPassword(senha);
-    }
-    
+   
     public Usuario(String login, char[] senha){
         this.login = login;
         this.senha = hashPassword(senha);

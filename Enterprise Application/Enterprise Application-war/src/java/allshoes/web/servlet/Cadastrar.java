@@ -6,6 +6,7 @@ package allshoes.web.servlet;
 
 import allshoes.jpa.Sexo;
 import allshoes.jpa.Usuario;
+import allshoes.jpa.facade.UsuarioFacadeRemote;
 import allshoes.web.model.Footer;
 import allshoes.web.model.Header;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +26,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author Bruno
  */
 public class Cadastrar extends HttpServlet {
+    
+    @EJB(mappedName = "ejb/UsuarioFacade")
+    UsuarioFacadeRemote ejb;
 
     /**
      * Processes requests for both HTTP
@@ -65,7 +70,7 @@ public class Cadastrar extends HttpServlet {
         try {
            
             out.println(header.getHeaderPadrao());
-            
+            ejb.create(usuario);
             out.println("<div class='cadastroSucesso'>");
             out.println("<img src='images/icon-ok.png' alt='sucesso' />");
             out.println("<span>Cadastro realizado com sucesso!</span><br/>");
@@ -75,6 +80,12 @@ public class Cadastrar extends HttpServlet {
             
             out.println(footer.getFooterPadrao());
 
+        } catch(Exception e) {
+            out.println("<div class='cadastroSucesso'>");
+            out.println("<img src='images/icon-error.png' alt='erro' />");
+            out.println("<span>Não foi possível realizar o cadastro. Por favor, tente novamente</span><br/>");
+            out.println("<input type='button' value=' Voltar ' onclick='javascript:history.go(-2);' />");
+            out.println("</div>");
         } finally {            
             out.close();
         }
