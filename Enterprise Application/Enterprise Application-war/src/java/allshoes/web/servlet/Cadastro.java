@@ -57,7 +57,7 @@ public class Cadastro extends HttpServlet {
             out.println("</tr>");
             out.println("<tr>");
             out.println("<td class='lbl_cadastro'>Sexo</td>");
-            out.println("<td><input name='rdSexo' type='radio' class='txtSexo'>Masculino</input><input name='rdSexo' type='radio' class='txtSexo'>Feminino</input></td>");
+            out.println("<td><input name='rdSexo' type='radio' class='txtSexo' value='Masculino'>Masculino</input><input name='rdSexo' type='radio' class='txtSexo' value='Feminino'>Feminino</input></td>");
             out.println("</tr>");
             out.println("<tr>");
             out.println("<td class='lbl_cadastro'>Telefone</td>");

@@ -4,10 +4,16 @@
  */
 package allshoes.web.servlet;
 
+import allshoes.jpa.Sexo;
+import allshoes.jpa.Usuario;
 import allshoes.web.model.Footer;
 import allshoes.web.model.Header;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +41,26 @@ public class Cadastrar extends HttpServlet {
         PrintWriter out = response.getWriter();
         Header header = new Header(false, "Cadastrar");
         Footer footer = new Footer(false);
+        Date date;
+        
+        Usuario usuario = new Usuario();
+        usuario.setNome(request.getParameter("txtNome"));
+        usuario.setCpf(request.getParameter("txtCPF"));
+        try {
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+            date = (java.util.Date)formatter.parse(request.getParameter("txtDtNascimento"));
+        }
+        catch (ParseException e) {
+            date = null;
+        }
+        usuario.setDataNascimento(date);
+        Sexo sexo = request.getParameter("rdSexo")=="Masculino" ? Sexo.Masculino : Sexo.Feminino;
+        usuario.setSexo(sexo);
+        usuario.setTelefone(request.getParameter("txtTelefone"));
+        usuario.setCelular(request.getParameter("txtCelular"));
+        usuario.setEmail(request.getParameter("txtEmail"));
+        usuario.setLogin(request.getParameter("txtEmail"));
+        usuario.setSenha(request.getParameter("txtSenha").toCharArray());
         
         try {
            
