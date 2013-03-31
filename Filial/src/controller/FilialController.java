@@ -26,4 +26,8 @@ public class FilialController {
     public List<Contato> findAll() {
         return (contatoFacade.findAll());
     }
+    
+    public String find(Usuario usuario){
+        return (contatoFacade.find(usuario));
+    }
 }
