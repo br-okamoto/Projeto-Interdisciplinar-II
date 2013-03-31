@@ -15,9 +15,12 @@ public class Pessoa implements Serializable, Cloneable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idPessoa;
     private String nome;
-    private int cpf;
+    private String cpf;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataNascimento;
+    private String telefone;
+    private String celular;
+    private Sexo sexo;
     
     protected Pessoa(){
     
@@ -39,11 +42,11 @@ public class Pessoa implements Serializable, Cloneable {
         this.nome = nome;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -53,6 +56,30 @@ public class Pessoa implements Serializable, Cloneable {
 
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
     }
     
 }

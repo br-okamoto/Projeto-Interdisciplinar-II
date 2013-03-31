@@ -11,12 +11,14 @@ import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 
 @Entity
@@ -31,6 +33,7 @@ public class Usuario extends Pessoa implements Serializable, Cloneable {
     private char[] senha;
     private int idTipoUsuario;
     private String email;
+
 
     public Usuario() {
     }
@@ -66,7 +69,7 @@ public class Usuario extends Pessoa implements Serializable, Cloneable {
     }
 
     public void setSenha(char[] senha) {
-        this.senha = senha;
+        this.senha = hashPassword(senha);
     }
 
     public int getItTipoUsuario() {
@@ -83,6 +86,14 @@ public class Usuario extends Pessoa implements Serializable, Cloneable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getIdTipoUsuario() {
+        return idTipoUsuario;
+    }
+
+    public void setIdTipoUsuario(int idTipoUsuario) {
+        this.idTipoUsuario = idTipoUsuario;
     }
     
     private char[] hashPassword(char[] password) {
