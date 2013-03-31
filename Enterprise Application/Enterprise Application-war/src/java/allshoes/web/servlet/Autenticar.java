@@ -23,7 +23,7 @@ import javax.servlet.annotation.WebServlet;
 @WebServlet(name = "Autenticar", urlPatterns = {"/Autenticar"})
 public class Autenticar extends HttpServlet {
     
-    @EJB
+    @EJB(mappedName = "ejb/UsuarioFacade")
     private UsuarioFacadeRemote ejb;
 
     /**
