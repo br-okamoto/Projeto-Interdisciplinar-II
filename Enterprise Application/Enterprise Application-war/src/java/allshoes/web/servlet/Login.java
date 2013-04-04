@@ -61,6 +61,7 @@ public class Login extends HttpServlet {
             out.println("</tr>");
             out.println("</table>");
             out.println("</form>");
+            out.println("<div>"+request.getParameter("msgErro") +"</div>");
             out.println("</div>");
             
             out.println("<div id='loginCadastrarbt'>");

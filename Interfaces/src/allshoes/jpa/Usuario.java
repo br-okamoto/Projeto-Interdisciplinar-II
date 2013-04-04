@@ -37,7 +37,8 @@ public class Usuario extends Pessoa implements Serializable, Cloneable {
    
     public Usuario(String login, char[] senha){
         this.login = login;
-        this.senha = hashPassword(senha);
+        //this.senha = hashPassword(senha);
+        this.senha = senha;
     }
 
     public String getLogin() {
@@ -53,7 +54,7 @@ public class Usuario extends Pessoa implements Serializable, Cloneable {
     }
 
     public void setSenha(char[] senha) {
-        this.senha = hashPassword(senha);
+        this.senha = senha;
     }
 
     public int getItTipoUsuario() {

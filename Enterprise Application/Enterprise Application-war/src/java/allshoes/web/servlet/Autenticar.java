@@ -47,13 +47,17 @@ public class Autenticar extends HttpServlet {
         
         //usuario nao encontrado
         if(usuario==null) {
+            request.setAttribute("msgErro","Usuário não existe. Por favor, faça o cadastro primeiro.");
             RequestDispatcher rd = request.getRequestDispatcher("Login");
+            
             rd.forward(request, response);
         } else {
             Usuario tentandoLogar = new Usuario(username, senha);
             //usuario encontrado, mas senha errada
             if (usuario.getSenha() != tentandoLogar.getSenha()) {
+                request.setAttribute("msgErro","Senha incorreta. Por favor, tente de novo.");
                 RequestDispatcher rd = request.getRequestDispatcher("Login");
+                
                 rd.forward(request, response);
             } else { //usuario encontrado e senha correta: redireciona para a pagina que o usuario estava antes do login
                 response.sendRedirect(returnURL);
