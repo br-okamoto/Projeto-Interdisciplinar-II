@@ -1,6 +1,7 @@
 
 package controller;
 
+import allshoes.jpa.Usuario;
 import exemplo.jpa.Contato;
 import exemplo.jpa.facade.ContatoFacadeRemote;
 import java.util.List;
@@ -27,7 +28,5 @@ public class FilialController {
         return (contatoFacade.findAll());
     }
     
-    public String find(Usuario usuario){
-        return (contatoFacade.find(usuario));
-    }
+    
 }

@@ -152,7 +152,7 @@ public class Login extends javax.swing.JFrame {
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
         Principal principal = new Principal();
-        FilialController controller;
+        FilialController controller = null;
         try {
             controller = new FilialController();
         } catch (Exception ex) {
