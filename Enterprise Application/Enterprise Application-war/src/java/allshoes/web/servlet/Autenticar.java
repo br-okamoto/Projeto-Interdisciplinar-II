@@ -8,6 +8,7 @@ import allshoes.jpa.Usuario;
 import allshoes.jpa.facade.UsuarioFacadeRemote;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -54,8 +55,8 @@ public class Autenticar extends HttpServlet {
         } else {
             Usuario tentandoLogar = new Usuario(username, senha);
             //usuario encontrado, mas senha errada
-            if (usuario.getSenha() != tentandoLogar.getSenha()) {
-                request.setAttribute("msgErro","Senha incorreta. Por favor, tente de novo.");
+            if (!Arrays.equals(usuario.getSenha(),senha)) {
+                request.setAttribute("msgErro","Senha incorreta. Por favor, tente de novo." + usuario.getSenha().toString() + " - " + senha.toString());
                 RequestDispatcher rd = request.getRequestDispatcher("Login");
                 
                 rd.forward(request, response);

@@ -24,8 +24,12 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     }
     
     public Usuario find(String username) {
-        Query q1 = em.createQuery("SELECT u FROM Usuario u WHERE u.");
-        Usuario usuario = (Usuario)q1.getSingleResult();
-        return usuario;
+        Query q1 = em.createQuery("SELECT u FROM Usuario u WHERE u.login = :login");
+        q1.setParameter("login", username);
+        List<Usuario> usuarios = q1.getResultList();
+        if (usuarios.isEmpty())
+            return null;
+        else
+            return usuarios.get(0);
     }
 }
