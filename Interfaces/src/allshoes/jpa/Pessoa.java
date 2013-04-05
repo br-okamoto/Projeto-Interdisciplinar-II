@@ -2,6 +2,7 @@ package allshoes.jpa;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +20,7 @@ public abstract class Pessoa implements Serializable, Cloneable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idPessoa;
     private String nome;
+    @Column(unique=true)
     private String cpf;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataNascimento;

@@ -120,6 +120,21 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
+        //declarar variavel @EJB UsuarioFacade ejb (ver servlet Autenticar)
+        
+        //verificar se os campos estao preenchidos
+        
+        //obter os dados dos textboxes
+        
+        //Criar uma variavel do tipo Usuario e executar o metodo find(login) que retorna um objeto do tipo Usuario
+        //ver servlet
+        
+        //verificar se a variavel é null: usuario nao existe -> mensagem de erro
+        
+        //se existir, verificar se a senha do usuario no banco é igual a senha digitada. se nao for, mensagem de erro
+        
+        //else logou com sucesso, executar os metodos abaixo
+        
         MatrizMain principal = new MatrizMain();
         Login l = new Login();
         l.setVisible(false);
