@@ -4,8 +4,9 @@
  */
 package allshoes.web.servlet;
 
+import allshoes.jpa.Cliente;
 import allshoes.jpa.Usuario;
-import allshoes.jpa.facade.UsuarioFacadeRemote;
+import allshoes.jpa.facade.ClienteFacadeRemote;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
@@ -24,8 +25,8 @@ import javax.servlet.annotation.WebServlet;
 @WebServlet(name = "Autenticar", urlPatterns = {"/Autenticar"})
 public class Autenticar extends HttpServlet {
     
-    @EJB(mappedName = "ejb/UsuarioFacade")
-    private UsuarioFacadeRemote ejb;
+    @EJB(mappedName = "ejb/ClienteFacade")
+    private ClienteFacadeRemote ejb;
 
     /**
      * Processes requests for both HTTP
@@ -44,10 +45,10 @@ public class Autenticar extends HttpServlet {
         String username = request.getParameter("txtLogin");
         char[] senha = request.getParameter("txtSenha").toCharArray();
         String returnURL = request.getParameter("returnURL");
-        Usuario usuario = ejb.find(username);
+        Cliente cliente = ejb.find(username);
         
         //usuario nao encontrado
-        if(usuario==null) {
+        if(cliente==null) {
             request.setAttribute("msgErro","Usuário não existe. Por favor, faça o cadastro primeiro.");
             RequestDispatcher rd = request.getRequestDispatcher("Login");
             
@@ -55,8 +56,8 @@ public class Autenticar extends HttpServlet {
         } else {
             Usuario tentandoLogar = new Usuario(username, senha);
             //usuario encontrado, mas senha errada
-            if (!Arrays.equals(usuario.getSenha(),senha)) {
-                request.setAttribute("msgErro","Senha incorreta. Por favor, tente de novo." + usuario.getSenha().toString() + " - " + senha.toString());
+            if (!Arrays.equals(cliente.getSenha(),senha)) {
+                request.setAttribute("msgErro","Senha incorreta. Por favor, tente de novo." + cliente.getSenha().toString() + " - " + senha.toString());
                 RequestDispatcher rd = request.getRequestDispatcher("Login");
                 
                 rd.forward(request, response);

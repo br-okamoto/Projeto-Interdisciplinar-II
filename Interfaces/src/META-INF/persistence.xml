@@ -5,6 +5,11 @@
     <jta-data-source>jdbc/sample</jta-data-source>
     <class>allshoes.jpa.Usuario</class>
     <class>allshoes.jpa.Pessoa</class>
+    <class>allshoes.jpa.Cliente</class>
+    <class>allshoes.jpa.Funcionario</class>
+    <class>allshoes.jpa.Endereco</class>
+    <class>allshoes.jpa.Produto</class>
+    <class>allshoes.jpa.ListaDeDesejo</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
 

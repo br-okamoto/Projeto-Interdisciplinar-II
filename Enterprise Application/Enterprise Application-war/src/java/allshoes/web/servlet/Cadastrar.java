@@ -5,8 +5,8 @@
 package allshoes.web.servlet;
 
 import allshoes.jpa.Sexo;
-import allshoes.jpa.Usuario;
-import allshoes.jpa.facade.UsuarioFacadeRemote;
+import allshoes.jpa.Cliente;
+import allshoes.jpa.facade.ClienteFacadeRemote;
 import allshoes.web.model.Footer;
 import allshoes.web.model.Header;
 import java.io.IOException;
@@ -27,8 +27,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class Cadastrar extends HttpServlet {
     
-    @EJB(mappedName = "ejb/UsuarioFacade")
-    UsuarioFacadeRemote ejb;
+    @EJB(mappedName = "ejb/ClienteFacade")
+    ClienteFacadeRemote ejb;
 
     /**
      * Processes requests for both HTTP
@@ -48,9 +48,9 @@ public class Cadastrar extends HttpServlet {
         Footer footer = new Footer(false);
         Date date;
         
-        Usuario usuario = new Usuario();
-        usuario.setNome(request.getParameter("txtNome"));
-        usuario.setCpf(request.getParameter("txtCPF"));
+        Cliente cliente = new Cliente();
+        cliente.setNome(request.getParameter("txtNome"));
+        cliente.setCpf(request.getParameter("txtCPF"));
         try {
             DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
             date = (java.util.Date)formatter.parse(request.getParameter("txtDtNascimento"));
@@ -58,19 +58,19 @@ public class Cadastrar extends HttpServlet {
         catch (ParseException e) {
             date = null;
         }
-        usuario.setDataNascimento(date);
+        cliente.setDataNascimento(date);
         Sexo sexo = request.getParameter("rdSexo")=="Masculino" ? Sexo.Masculino : Sexo.Feminino;
-        usuario.setSexo(sexo);
-        usuario.setTelefone(request.getParameter("txtTelefone"));
-        usuario.setCelular(request.getParameter("txtCelular"));
-        usuario.setEmail(request.getParameter("txtEmail"));
-        usuario.setLogin(request.getParameter("txtEmail"));
-        usuario.setSenha(request.getParameter("txtSenha").toCharArray());
+        cliente.setSexo(sexo);
+        cliente.setTelefone(request.getParameter("txtTelefone"));
+        cliente.setCelular(request.getParameter("txtCelular"));
+        cliente.setEmail(request.getParameter("txtEmail"));
+        cliente.setLogin(request.getParameter("txtEmail"));
+        cliente.setSenha(request.getParameter("txtSenha").toCharArray());
         
         try {
            
             out.println(header.getHeaderPadrao());
-            ejb.create(usuario);
+            ejb.create(cliente);
             out.println("<div class='cadastroSucesso'>");
             out.println("<img src='images/icon-ok.png' alt='sucesso' />");
             out.println("<span>Cadastro realizado com sucesso!</span><br/>");

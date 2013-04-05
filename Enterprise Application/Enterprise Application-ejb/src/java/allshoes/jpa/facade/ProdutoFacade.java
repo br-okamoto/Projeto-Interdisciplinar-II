@@ -1,6 +1,6 @@
 package allshoes.jpa.facade;
 
-import allshoes.jpa.Cliente;
+import allshoes.jpa.Produto;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -8,8 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-@Stateless(mappedName = "ejb/ClienteFacade")
-public class ClienteFacade extends AbstractFacade<Cliente> implements ClienteFacadeRemote {
+@Stateless(mappedName = "ejb/ProdutoFacade")
+public class ProdutoFacade extends AbstractFacade<Produto> implements ProdutoFacadeRemote {
 
     @PersistenceContext(unitName = "Enterprise_Application-ejbPU")
     private EntityManager em;
@@ -19,17 +19,17 @@ public class ClienteFacade extends AbstractFacade<Cliente> implements ClienteFac
         return em;
     }
 
-    public ClienteFacade() {
-        super(Cliente.class);
+    public ProdutoFacade() {
+        super(Produto.class);
     }
     
-    public Cliente find(String username) {
-        Query q1 = em.createQuery("SELECT c FROM Cliente c WHERE c.login = :login");
+    public Produto find(String username) {
+        Query q1 = em.createQuery("SELECT c FROM Produto c JOIN Usuario u WHERE c.idPessoa = u.idPEssoa AND u.login = :login");
         q1.setParameter("login", username);
-        List<Cliente> clientes = q1.getResultList();
-        if (clientes.isEmpty())
+        List<Produto> produtos = q1.getResultList();
+        if (produtos.isEmpty())
             return null;
         else
-            return clientes.get(0);
+            return produtos.get(0);
     }
 }
