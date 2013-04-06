@@ -1,9 +1,12 @@
 
 package Filial;
 
+import allshoes.jpa.Usuario;
+import allshoes.jpa.facade.UsuarioFacadeRemote;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import controller.FilialController;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -153,18 +156,22 @@ public class Login extends javax.swing.JFrame {
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
         Principal principal = new Principal();
         FilialController controller = null;
+        
         try {
             controller = new FilialController();
+            String username = JTextUsuario.getText();
+            char[] pass = JTextSenha.getText().toCharArray();
+            Usuario usuario = new Usuario(username, pass);
+            
+            if(!Arrays.equals(usuario.getSenha(),pass)) {
+                JOptionPane.showMessageDialog(this, "Usuario/Senha incorreta!");
+            } else {
+                principal.setVisible(true);
+            }
         } catch (Exception ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if(controller.equals(evt) == false){
-        JOptionPane.showMessageDialog(this, "Usuario/Senha invalido");
-        } else{
-        principal.setVisible(true);
-        }
-        JTextUsuario.getText();
-        JTextSenha.getText();
+        }     
+        
     }//GEN-LAST:event_entrarActionPerformed
 
     private void JTextUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextUsuarioActionPerformed

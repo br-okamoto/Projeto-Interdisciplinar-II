@@ -2,8 +2,7 @@
 package controller;
 
 import allshoes.jpa.Usuario;
-import exemplo.jpa.Contato;
-import exemplo.jpa.facade.ContatoFacadeRemote;
+import allshoes.jpa.facade.UsuarioFacadeRemote;
 import java.util.List;
 import java.util.Properties;
 import javax.naming.InitialContext;
@@ -11,21 +10,26 @@ import javax.naming.InitialContext;
 
 public class FilialController {
 
-    private ContatoFacadeRemote contatoFacade;
+    private UsuarioFacadeRemote usuarioFacade;
 
     public FilialController() throws Exception {
         Properties props = new Properties();
         props.load(new java.io.FileInputStream("jndi.properties"));
         InitialContext ctx = new InitialContext(props);
-        contatoFacade = (ContatoFacadeRemote) ctx.lookup("ejb/UsuarioFacade");
+        usuarioFacade = (UsuarioFacadeRemote) ctx.lookup("ejb/UsuarioFacade");
     }
 
-    public void create(Contato entity) {
-        contatoFacade.create(entity);
+    public void create(Usuario usuario) {
+        usuarioFacade.create(usuario);
     }
 
-    public List<Contato> findAll() {
-        return (contatoFacade.findAll());
+    public Usuario find(String username){
+        return usuarioFacade.find(username);
+    }
+            
+            
+    public List<Usuario> findAll() {
+        return (usuarioFacade.findAll());
     }
     
     
