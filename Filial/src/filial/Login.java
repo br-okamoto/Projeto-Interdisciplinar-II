@@ -162,6 +162,7 @@ public class Login extends javax.swing.JFrame {
             String username = JTextUsuario.getText();
             char[] pass = JTextSenha.getText().toCharArray();
             Usuario usuario = new Usuario(username, pass);
+            controller.find(username);
             
             if(!Arrays.equals(usuario.getSenha(),pass)) {
                 JOptionPane.showMessageDialog(this, "Usuario/Senha incorreta!");
