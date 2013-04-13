@@ -1,13 +1,15 @@
 package allshoes.jpa;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
-public class Endereco {
+public class Endereco implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,7 +20,10 @@ public class Endereco {
     private String complemento;
     private String cep;
     private String cidade;
-    private Estado estado;    
+    private Estado estado;  
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private Pessoa pes;
 
     public int getIdEndereco() {
         return idEndereco;
@@ -83,10 +88,13 @@ public class Endereco {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
-    
-    @OneToOne(mappedBy="endereco")
-    public Endereco getEndereco(){
-        return this;
+
+    public Pessoa getPes() {
+        return pes;
+    }
+
+    public void setPes(Pessoa pes) {
+        this.pes = pes;
     }
     
 }

@@ -29,7 +29,7 @@ public abstract class Pessoa implements Serializable, Cloneable {
     private String telefone;
     private String celular;
     private Sexo sexo;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(mappedBy="pes",cascade = CascadeType.PERSIST)
     private Endereco endereco;
     
     protected Pessoa(){
