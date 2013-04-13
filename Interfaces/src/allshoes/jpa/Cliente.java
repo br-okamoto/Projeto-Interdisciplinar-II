@@ -16,7 +16,5 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @PrimaryKeyJoinColumn(name = "idPessoa")
 public class Cliente extends Usuario {
     @OneToOne
-    private Endereco enderecoPrincipal;
-    @OneToOne
     private ListaDeDesejo listaDeDesejo;
 }

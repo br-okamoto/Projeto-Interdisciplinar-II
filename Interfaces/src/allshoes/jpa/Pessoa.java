@@ -2,6 +2,7 @@ package allshoes.jpa;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 @Entity
@@ -27,6 +29,8 @@ public abstract class Pessoa implements Serializable, Cloneable {
     private String telefone;
     private String celular;
     private Sexo sexo;
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Endereco endereco;
     
     protected Pessoa(){
     
@@ -86,6 +90,14 @@ public abstract class Pessoa implements Serializable, Cloneable {
 
     public void setSexo(Sexo sexo) {
         this.sexo = sexo;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
     
 }
