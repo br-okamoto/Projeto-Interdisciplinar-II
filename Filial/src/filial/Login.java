@@ -11,7 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Login extends javax.swing.JFrame {
-
     
     public Login() {
         initComponents();
@@ -159,12 +158,13 @@ public class Login extends javax.swing.JFrame {
         
         try {
             controller = new FilialController();
-            String username = JTextUsuario.getText();
+            String username = JTextUsuario.getText().toString();
             char[] pass = JTextSenha.getText().toCharArray();
-            Usuario usuario = new Usuario(username, pass);
-            controller.find(username);
+            Usuario usuario = controller.find(username);
             
-            if(!Arrays.equals(usuario.getSenha(),pass)) {
+            if (usuario == null) {
+                JOptionPane.showMessageDialog(this, "Usuario incorreto ou inexistente!");
+            } else if(!Arrays.equals(usuario.getSenha(),pass)) {
                 JOptionPane.showMessageDialog(this, "Usuario/Senha incorreta!");
             } else {
                 principal.setVisible(true);

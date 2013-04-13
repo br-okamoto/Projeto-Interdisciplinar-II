@@ -1,6 +1,14 @@
 
 package matriz;
 
+import controller.MatrizController;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import allshoes.jpa.Usuario;
+import allshoes.jpa.facade.UsuarioFacadeRemote;
+
 
 public class Login extends javax.swing.JFrame {
 
@@ -57,6 +65,12 @@ public class Login extends javax.swing.JFrame {
         entrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 entrarActionPerformed(evt);
+            }
+        });
+
+        usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usuarioActionPerformed(evt);
             }
         });
 
@@ -120,27 +134,35 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-        //declarar variavel @EJB UsuarioFacade ejb (ver servlet Autenticar)
-        
-        //verificar se os campos estao preenchidos
-        
-        //obter os dados dos textboxes
-        
-        //Criar uma variavel do tipo Usuario e executar o metodo find(login) que retorna um objeto do tipo Usuario
-        //ver servlet
-        
-        //verificar se a variavel é null: usuario nao existe -> mensagem de erro
-        
-        //se existir, verificar se a senha do usuario no banco é igual a senha digitada. se nao for, mensagem de erro
-        
-        //else logou com sucesso, executar os metodos abaixo
-        
+        MatrizController controller = null;
         MatrizMain principal = new MatrizMain();
-        Login l = new Login();
-        l.setVisible(false);
-        dispose();
-        principal.setVisible(true);
+        
+        try {
+            controller = new MatrizController();
+            String username = usuario.getText().toString();
+            char[] pass = senha.getText().toCharArray();
+            Usuario usuario = controller.find(username);
+            
+            if (usuario == null) {
+                JOptionPane.showMessageDialog(this, "Usuario incorreto ou inexistente!");
+            } else if(!Arrays.equals(usuario.getSenha(),pass)) {
+                JOptionPane.showMessageDialog(this, "Usuario/Senha incorreta!");
+            } else {
+                Login l = new Login();
+                l.setVisible(false);
+                dispose();
+                principal.setVisible(true);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }//GEN-LAST:event_entrarActionPerformed
+
+    private void usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usuarioActionPerformed
 
     /**
      * @param args the command line arguments
