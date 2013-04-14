@@ -90,6 +90,10 @@
         <servlet-name>Cadastro</servlet-name>
         <servlet-class>allshoes.web.servlet.Cadastro</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MeuCadastroAlterar</servlet-name>
+        <servlet-class>allshoes.web.servlet.MeuCadastroAlterar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern>/index.html</url-pattern>
@@ -177,6 +181,10 @@
     <servlet-mapping>
         <servlet-name>Cadastro</servlet-name>
         <url-pattern>/Cadastro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MeuCadastroAlterar</servlet-name>
+        <url-pattern>/MeuCadastroAlterar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>  

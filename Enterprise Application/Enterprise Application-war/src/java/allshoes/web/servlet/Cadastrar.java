@@ -23,6 +23,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -51,8 +52,13 @@ public class Cadastrar extends HttpServlet {
         Header header = new Header(false, "Cadastrar");
         Footer footer = new Footer(false);
         Date date;
+        String action = request.getParameter("action");
         
         Cliente cliente = new Cliente();
+        if(action.equals("Alterar")) {
+            HttpSession session = request.getSession();
+            cliente.setIdPessoa(Integer.parseInt(session.getAttribute("idpessoa").toString()));
+        }
         cliente.setNome(request.getParameter("txtNome"));
         cliente.setCpf(request.getParameter("txtCPF"));
         try {
@@ -85,12 +91,23 @@ public class Cadastrar extends HttpServlet {
         try {
            
             out.println(header.getHeaderPadrao());
-            ejb.create(cliente);
-            out.println("<div class='cadastroSucesso'>");
-            out.println("<img src='images/icon-ok.png' alt='sucesso' />");
-            out.println("<span>Cadastro realizado com sucesso!</span><br/>");
-            out.println("<input type='button' value=' Voltar ' onclick='javascript:history.go(-2);' />");
-            out.println("</div>");
+            if(action.equals("Cadastrar")) {
+                ejb.create(cliente);
+                out.println("<div class='cadastroSucesso'>");
+                out.println("<img src='images/icon-ok.png' alt='sucesso' />");
+                out.println("<span>Cadastro realizado com sucesso!</span><br/>");
+                out.println("<input type='button' value=' Voltar ' onclick='javascript:history.go(-2)' />");
+                out.println("</div>");
+            }
+            else if (action.equals("Alterar")) {
+                ejb.edit(cliente);
+                out.println("<div class='cadastroSucesso'>");
+                out.println("<img src='images/icon-ok.png' alt='sucesso' />");
+                out.println("<span>Alteração realizada com sucesso!</span><br/>");
+                out.println("<input type='button' value=' Voltar ' onclick='/Enterprise_Application-war/MeuCadastro' />");
+                out.println("</div>");
+            }
+            
 
             
             out.println(footer.getFooterPadrao());

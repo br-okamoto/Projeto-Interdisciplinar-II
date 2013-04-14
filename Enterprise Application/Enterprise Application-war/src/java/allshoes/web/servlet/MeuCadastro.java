@@ -10,6 +10,10 @@ import allshoes.web.model.Footer;
 import allshoes.web.model.Header;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,6 +47,7 @@ public class MeuCadastro extends HttpServlet {
         PrintWriter out = response.getWriter();
         Header header = new Header(false, "Meu Cadastro");
         Footer footer = new Footer(false);
+        Date date;
         
         try {
             HttpSession session = request.getSession(false);
@@ -60,7 +65,7 @@ public class MeuCadastro extends HttpServlet {
             out.println("Meu Cadastro");
             out.println("</div>");
             
-            out.println("<form action='MeuCadastro-Alterar' method='post'>");
+            out.println("<form action='MeuCadastroAlterar' method='post'>");
             out.println("<h1>Dados Pessoais</h1>");
             out.println("<table width='100%' cellpadding='3' cellspacing='3' border='0'>");
             out.println("<tr>");
@@ -73,7 +78,11 @@ public class MeuCadastro extends HttpServlet {
             out.println("</tr>");
             out.println("<tr>");
             out.println("<td class='lbl_cadastro'>Data de Nascimento</td>");
-            out.println("<td>" + cliente.getDataNascimento() + "</td>");
+
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+            String data = formatter.format(cliente.getDataNascimento());
+
+            out.println("<td>" + data + "</td>");
             out.println("</tr>");
             out.println("<tr>");
             out.println("<td class='lbl_cadastro'>Sexo</td>");

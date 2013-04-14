@@ -66,6 +66,7 @@ public class Autenticar extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("username", cliente.getLogin());
                 session.setAttribute("nome", cliente.getNome());
+                session.setAttribute("idpessoa", cliente.getIdPessoa());
                 response.sendRedirect(returnURL);
             }
         }
