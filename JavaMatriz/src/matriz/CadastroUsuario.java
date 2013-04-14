@@ -484,7 +484,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
             funcionario.setCelular(jTextField13.getText());
             funcionario.setLogin(jTextField9.getText());
             funcionario.setSenha(jPasswordField1.getPassword());
-            funcionario.setLocalDeTrabalho(LocalDeTrabalho.valueOf(local.toString()));
+            funcionario.setLocalDeTrabalho(LocalDeTrabalho.valueOf(local.getSelectedItem().toString()));
             funcionario.setCargo(jTextField8.getText());
             
             Endereco endereco = new Endereco();
