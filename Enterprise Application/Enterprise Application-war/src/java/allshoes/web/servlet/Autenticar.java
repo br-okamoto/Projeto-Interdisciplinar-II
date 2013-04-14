@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -62,6 +63,9 @@ public class Autenticar extends HttpServlet {
                 
                 rd.forward(request, response);
             } else { //usuario encontrado e senha correta: redireciona para a pagina que o usuario estava antes do login
+                HttpSession session = request.getSession();
+                session.setAttribute("username", cliente.getLogin());
+                session.setAttribute("nome", cliente.getNome());
                 response.sendRedirect(returnURL);
             }
         }

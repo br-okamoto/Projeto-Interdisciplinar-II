@@ -1,6 +1,7 @@
 package allshoes.jpa.facade;
 
 import allshoes.jpa.Cliente;
+import allshoes.jpa.Endereco;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -29,7 +30,16 @@ public class ClienteFacade extends AbstractFacade<Cliente> implements ClienteFac
         List<Cliente> clientes = q1.getResultList();
         if (clientes.isEmpty())
             return null;
-        else
+        else {
+            /*Query q2 = em.createQuery("SELECT e FROM Endereco e WHERE e.pes.idPessoa = :idPes");
+            q2.setParameter("idPes", clientes.get(0).getIdPessoa());
+            List<Endereco> endereco = q2.getResultList();
+            if (endereco.isEmpty()) {
+                clientes.get(0).setEndereco(new Endereco());
+            } else {
+                clientes.get(0).setEndereco(endereco.get(0));
+            }*/
             return clientes.get(0);
+        }
     }
 }

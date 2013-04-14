@@ -7,6 +7,8 @@ package allshoes.web.servlet;
 import allshoes.jpa.Sexo;
 import allshoes.jpa.Cliente;
 import allshoes.jpa.Endereco;
+import allshoes.jpa.Estado;
+import allshoes.jpa.Pessoa;
 import allshoes.jpa.facade.ClienteFacadeRemote;
 import allshoes.web.model.Footer;
 import allshoes.web.model.Header;
@@ -61,8 +63,7 @@ public class Cadastrar extends HttpServlet {
             date = null;
         }
         cliente.setDataNascimento(date);
-        Sexo sexo = request.getParameter("rdSexo")=="Masculino" ? Sexo.Masculino : Sexo.Feminino;
-        cliente.setSexo(sexo);
+        cliente.setSexo(Sexo.valueOf(request.getParameter("rdSexo")));
         cliente.setTelefone(request.getParameter("txtTelefone"));
         cliente.setCelular(request.getParameter("txtCelular"));
         cliente.setEmail(request.getParameter("txtEmail"));
@@ -71,13 +72,13 @@ public class Cadastrar extends HttpServlet {
         
         Endereco endereco = new Endereco();
         endereco.setRua(request.getParameter("txtRua"));
-        endereco.setRua(request.getParameter("txtRua"));
         endereco.setNumero(request.getParameter("txtNumero"));
         endereco.setComplemento(request.getParameter("txtComplemento"));
         endereco.setCep(request.getParameter("txtCEP"));
         endereco.setBairro(request.getParameter("txtBairro"));
         endereco.setCidade(request.getParameter("txtCidade"));
-        endereco.setRua(request.getParameter("ddlEstado"));
+        endereco.setEstado(Estado.valueOf(request.getParameter("ddlEstado")));
+        //endereco.setPes((Pessoa)cliente);
         
         cliente.setEndereco(endereco);
 

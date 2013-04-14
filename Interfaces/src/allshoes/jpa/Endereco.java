@@ -2,6 +2,8 @@ package allshoes.jpa;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,19 +13,22 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @Entity
 public class Endereco implements Serializable {
     
+    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private int idEndereco;
+    
     private String rua;
     private String numero;
     private String bairro;
     private String complemento;
     private String cep;
     private String cidade;
+    @Enumerated (EnumType.STRING)
     private Estado estado;  
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private Pessoa pes;
+    //@OneToOne
+    //@PrimaryKeyJoinColumn
+    //private Pessoa pes;
 
     public int getIdEndereco() {
         return idEndereco;
@@ -34,7 +39,7 @@ public class Endereco implements Serializable {
     }
 
     public String getRua() {
-        return rua;
+        return rua != null ? rua : "";
     }
 
     public void setRua(String rua) {
@@ -42,7 +47,7 @@ public class Endereco implements Serializable {
     }
 
     public String getNumero() {
-        return numero;
+        return numero  != null ? numero : "";
     }
 
     public void setNumero(String numero) {
@@ -50,7 +55,7 @@ public class Endereco implements Serializable {
     }
 
     public String getBairro() {
-        return bairro;
+        return bairro  != null ? bairro : "";
     }
 
     public void setBairro(String bairro) {
@@ -58,7 +63,7 @@ public class Endereco implements Serializable {
     }
 
     public String getComplemento() {
-        return complemento;
+        return complemento  != null ? complemento : "";
     }
 
     public void setComplemento(String complemento) {
@@ -66,7 +71,7 @@ public class Endereco implements Serializable {
     }
 
     public String getCep() {
-        return cep;
+        return cep  != null ? cep : "";
     }
 
     public void setCep(String cep) {
@@ -74,7 +79,7 @@ public class Endereco implements Serializable {
     }
 
     public String getCidade() {
-        return cidade;
+        return cidade  != null ? cidade : "";
     }
 
     public void setCidade(String cidade) {
@@ -89,12 +94,12 @@ public class Endereco implements Serializable {
         this.estado = estado;
     }
 
-    public Pessoa getPes() {
+    /*public Pessoa getPes() {
         return pes;
     }
 
     public void setPes(Pessoa pes) {
         this.pes = pes;
-    }
+    }*/
     
 }
