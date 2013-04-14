@@ -1,6 +1,6 @@
 package allshoes.jpa.facade;
 
-import allshoes.jpa.Cliente;
+import allshoes.jpa.Funcionario;
 import allshoes.jpa.Endereco;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-@Stateless(mappedName = "ejb/ClienteFacade")
-public class ClienteFacade extends AbstractFacade<Cliente> implements ClienteFacadeRemote {
+@Stateless(mappedName = "ejb/FuncionarioFacade")
+public class FuncionarioFacade extends AbstractFacade<Funcionario> implements FuncionarioFacadeRemote {
 
     @PersistenceContext(unitName = "Enterprise_Application-ejbPU")
     private EntityManager em;
@@ -20,20 +20,20 @@ public class ClienteFacade extends AbstractFacade<Cliente> implements ClienteFac
         return em;
     }
 
-    public ClienteFacade() {
-        super(Cliente.class);
+    public FuncionarioFacade() {
+        super(Funcionario.class);
     }
     
     @Override
-    public Cliente find(String username) {
-        Query q1 = em.createQuery("SELECT c FROM Cliente c WHERE c.login = :login");
+    public Funcionario find(String username) {
+        Query q1 = em.createQuery("SELECT f FROM Funcionario f WHERE f.login = :login");
         q1.setParameter("login", username);
-        List<Cliente> clientes = q1.getResultList();
-        if (clientes.isEmpty()) {
+        List<Funcionario> funcionarios = q1.getResultList();
+        if (funcionarios.isEmpty()) {
             return null;
         }
         else {
-            return clientes.get(0);
+            return funcionarios.get(0);
         }
     }
 }

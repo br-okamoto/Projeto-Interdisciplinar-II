@@ -4,6 +4,16 @@
  */
 package matriz;
 
+import allshoes.jpa.Endereco;
+import allshoes.jpa.Estado;
+import allshoes.jpa.Funcionario;
+import allshoes.jpa.LocalDeTrabalho;
+import controller.MatrizController;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Lylo
@@ -257,6 +267,11 @@ public class CadastroUsuario extends javax.swing.JFrame {
         jLabel24.setText("SENHA");
 
         Salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matrizimg/Salvar.jpg"))); // NOI18N
+        Salvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalvarActionPerformed(evt);
+            }
+        });
 
         Cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matrizimg/Excluir.jpg"))); // NOI18N
 
@@ -264,7 +279,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
         jLabel26.setText("CANCELAR");
 
-        local.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Filial 1", "Filial 2", "Filial 3" }));
+        local.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Matriz", "Filial" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -455,6 +470,38 @@ public class CadastroUsuario extends javax.swing.JFrame {
         p.setVisible(true);
         p.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_PedidosActionPerformed
+
+    private void SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarActionPerformed
+        MatrizController controller = null;
+        try {
+            controller = new MatrizController();
+            
+            Funcionario funcionario = new Funcionario();
+            
+            funcionario.setNome(jTextField2.getText());
+            funcionario.setCpf(jTextField14.getText());
+            funcionario.setTelefone(jTextField6.getText());
+            funcionario.setCelular(jTextField13.getText());
+            funcionario.setLogin(jTextField9.getText());
+            funcionario.setSenha(jPasswordField1.getPassword());
+            funcionario.setLocalDeTrabalho(LocalDeTrabalho.valueOf(local.toString()));
+            funcionario.setCargo(jTextField8.getText());
+            
+            Endereco endereco = new Endereco();
+            endereco.setRua(jTextField3.getText());
+            endereco.setNumero(jTextField10.getText());
+            endereco.setBairro(jTextField4.getText());
+            endereco.setCep(jTextField11.getText());
+            endereco.setCidade(jTextField5.getText());
+            
+            funcionario.setEndereco(endereco);
+            
+            controller.create(funcionario);
+            
+        } catch (Exception ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_SalvarActionPerformed
 
     /**
      * @param args the command line arguments
