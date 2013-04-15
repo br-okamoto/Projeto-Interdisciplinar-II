@@ -4,6 +4,13 @@
  */
 package matriz;
 
+import allshoes.jpa.Funcionario;
+import controller.MatrizController;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Lylo
@@ -15,6 +22,34 @@ public class Usuario extends javax.swing.JFrame {
      */
     public Usuario() {
         initComponents();
+        MatrizController controller = null;
+        
+        try {
+            controller = new MatrizController();
+
+            List<Funcionario> funcionarios = controller.findAll();
+            
+            if (!funcionarios.isEmpty()) {
+                DefaultTableModel dtm = new DefaultTableModel();
+                Object[] tableColumnNames = new Object[4];
+                tableColumnNames[0] = "Código";
+                tableColumnNames[1] = "Nome";
+                tableColumnNames[2] = "Cargo";
+                tableColumnNames[3] = "Local de Trabalho";
+                dtm.setColumnIdentifiers(tableColumnNames);
+                Object[] objects = new Object[4];
+                for (Funcionario f : funcionarios) {
+                    objects[0] = f.getRegistro();
+                    objects[1] = f.getNome();
+                    objects[2] = f.getCargo();
+                    objects[3] = f.getLocalDeTrabalho();
+                    dtm.addRow(objects);
+                }
+                jTable1.setModel(dtm);
+            } 
+        } catch (Exception ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
