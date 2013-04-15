@@ -2,13 +2,11 @@
 package Filial;
 
 import allshoes.jpa.Usuario;
-import allshoes.jpa.facade.UsuarioFacadeRemote;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import controller.FilialController;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
     
