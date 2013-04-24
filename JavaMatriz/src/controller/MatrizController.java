@@ -2,7 +2,6 @@
 package controller;
 
 import allshoes.jpa.Funcionario;
-import allshoes.jpa.Usuario;
 import allshoes.jpa.facade.FuncionarioFacadeRemote;
 import java.util.List;
 import java.util.Properties;
@@ -23,8 +22,16 @@ public class MatrizController {
     public void create(Funcionario funcionario) {
         funcionarioFacade.create(funcionario);
     }
-
-    public Usuario find(String username){
+    
+    public void edit(Funcionario funcionario) {
+        funcionarioFacade.edit(funcionario);
+    }
+    
+    public void remove(Funcionario funcionario) {
+        funcionarioFacade.remove(funcionario);
+    }
+    
+    public Funcionario find(String username){
         return funcionarioFacade.find(username);
     }
             

@@ -4,6 +4,7 @@
  */
 package allshoes.jpa.facade;
 
+import allshoes.jpa.Marca;
 import allshoes.jpa.Produto;
 import java.util.List;
 import javax.ejb.Remote;
@@ -23,7 +24,11 @@ public interface ProdutoFacadeRemote {
 
     Produto find(Object id);
     
-    Produto find(String username);
+    Produto find(int cod_produto);
+    
+    List<Produto> find(String nome);
+    
+    List<Produto> find(Marca marca);
 
     List<Produto> findAll();
 

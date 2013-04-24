@@ -1,5 +1,6 @@
 package allshoes.jpa.facade;
 
+import allshoes.jpa.Marca;
 import allshoes.jpa.Produto;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +24,33 @@ public class ProdutoFacade extends AbstractFacade<Produto> implements ProdutoFac
         super(Produto.class);
     }
     
-    public Produto find(String username) {
-        Query q1 = em.createQuery("SELECT c FROM Produto c JOIN Usuario u WHERE c.idPessoa = u.idPEssoa AND u.login = :login");
-        q1.setParameter("login", username);
+    public Produto find(int cod_produto) {
+        Query q1 = em.createQuery("SELECT p FROM Produto p WHERE p.cod_produto = :cod_produto");
+        q1.setParameter("cod_produto", cod_produto);
         List<Produto> produtos = q1.getResultList();
         if (produtos.isEmpty())
             return null;
         else
             return produtos.get(0);
+    }
+    
+    public List<Produto> find(String nome) {
+        Query q1 = em.createQuery("SELECT p FROM Produto p WHERE UPPER(p.nome) LIKE :nome");
+        q1.setParameter("nome", nome.toUpperCase());
+        List<Produto> produtos = q1.getResultList();
+        if (produtos.isEmpty())
+            return null;
+        else
+            return produtos;
+    }
+    
+    public List<Produto> find(Marca marca) {
+        Query q1 = em.createQuery("SELECT p FROM Produto p WHERE p.marca = :marca");
+        q1.setParameter("marca", marca.toString());
+        List<Produto> produtos = q1.getResultList();
+        if (produtos.isEmpty())
+            return null;
+        else
+            return produtos;
     }
 }

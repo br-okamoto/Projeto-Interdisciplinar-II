@@ -1,6 +1,7 @@
 
 package matriz;
 
+import allshoes.jpa.Funcionario;
 import controller.MatrizController;
 import java.util.Arrays;
 import java.util.logging.Level;
@@ -29,7 +30,7 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         entrar = new javax.swing.JButton();
         usuario = new javax.swing.JTextField();
-        senha = new javax.swing.JPasswordField();
+        jPasswordField1 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,8 +91,8 @@ public class Login extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(senha))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPasswordField1))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,7 +104,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(entrar)
                 .addGap(31, 31, 31))
@@ -140,12 +141,12 @@ public class Login extends javax.swing.JFrame {
         try {
             controller = new MatrizController();
             String username = usuario.getText().toString();
-            char[] pass = senha.getText().toCharArray();
-            Usuario usuario = controller.find(username);
+            char[] pass = jPasswordField1.getPassword();
+            Funcionario funcionario = controller.find(username);
             
-            if (usuario == null) {
+            if (funcionario == null) {
                 JOptionPane.showMessageDialog(this, "Usuario incorreto ou inexistente!");
-            } else if(!Arrays.equals(usuario.getSenha(),pass)) {
+            } else if(!Arrays.equals(funcionario.getSenha(),pass)) {
                 JOptionPane.showMessageDialog(this, "Usuario/Senha incorreta!");
             } else {
                 Login l = new Login();
@@ -205,7 +206,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField senha;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables
 }

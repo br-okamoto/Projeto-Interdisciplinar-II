@@ -6,6 +6,9 @@
     <class>allshoes.jpa.Usuario</class>
     <class>allshoes.jpa.Pessoa</class>
     <class>allshoes.jpa.Cliente</class>
+    <class>allshoes.jpa.Departamento</class>
+    <class>allshoes.jpa.Estoque</class>
+    <class>allshoes.jpa.Filial</class>
     <class>allshoes.jpa.Funcionario</class>
     <class>allshoes.jpa.Endereco</class>
     <class>allshoes.jpa.Produto</class>

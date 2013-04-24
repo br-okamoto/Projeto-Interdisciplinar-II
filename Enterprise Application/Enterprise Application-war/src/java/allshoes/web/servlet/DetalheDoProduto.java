@@ -4,10 +4,13 @@
  */
 package allshoes.web.servlet;
 
+import allshoes.jpa.Produto;
+import allshoes.jpa.facade.ProdutoFacadeRemote;
 import allshoes.web.model.Footer;
 import allshoes.web.model.Header;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +21,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author Bruno
  */
 public class DetalheDoProduto extends HttpServlet {
+    
+    @EJB(mappedName = "ejb/ProdutoFacade")
+    ProdutoFacadeRemote ejb;
 
     /**
      * Processes requests for both HTTP
@@ -36,7 +42,13 @@ public class DetalheDoProduto extends HttpServlet {
         Header header = new Header(false, "Detalhe do Produto");
         Footer footer = new Footer(false);
         
+        
+        
         try {
+            
+            int cod_produto = Integer.parseInt(request.getParameter("cod_produto"));
+            Produto produto = ejb.find(cod_produto);
+        
             out.println(header.getHeaderPadrao());
             
             out.println("<div id='contentSemMenu'>");
@@ -49,19 +61,19 @@ public class DetalheDoProduto extends HttpServlet {
             out.println("Detalhe do Produto");
             out.println("</div>");
             
-            out.println("<img src='" + request.getContextPath() + "/images/produtos/adidas-g.jpg' alt='' class='imgDetalheProduto'/>");
+            out.println("<img src='" + request.getContextPath() + "/images/produtos/" + produto.getCod_produto() + ".jpg' alt='' class='imgDetalheProduto'/>");
             
             out.println("<div id='produtosInfo'>");
-            out.println("<h1>Tênis Adidas 4.3</h1>");
+            out.println("<h1>" + produto.getNome() + "</h1>");
             out.println("<form id='formProduto' action='AdicionarProduto' method='post'>");
             out.println("<table border='0' cellpadding='3' cellspacing='3' width='100%'>");
             out.println("<tr>");
             out.println("<td><b>Preço:</b></td>");
-            out.println("<td>R$ 159,90</td>");
+            out.println("<td>R$ " + produto.getPreco() + "</td>");
             out.println("</tr>");
             out.println("<tr>");
             out.println("<td>&nbsp;</td>");
-            out.println("<td>6 x R$ 26,65 sem juros</td>");
+            out.println("<td>6 x R$ xx sem juros</td>");
             out.println("</tr>");
             out.println("<tr>");
             out.println("<td>&nbsp;</td>");

@@ -4,6 +4,10 @@
  */
 package matriz;
 
+import controller.MatrizDepartamentoController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author 41083032
@@ -410,7 +414,17 @@ public class Departamento extends javax.swing.JFrame {
     }//GEN-LAST:event_relatoriosActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        //implementar
+        MatrizDepartamentoController controller = null;
+        try {
+            controller = new MatrizDepartamentoController();
+            allshoes.jpa.Departamento novoDepartamento = new allshoes.jpa.Departamento();
+            novoDepartamento.setCod_departamento(Integer.parseInt(jTextField1.getText()));
+            novoDepartamento.setNomeDepartamento(jTextField2.getText());
+            controller.create(novoDepartamento);
+        }
+        catch (Exception ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
