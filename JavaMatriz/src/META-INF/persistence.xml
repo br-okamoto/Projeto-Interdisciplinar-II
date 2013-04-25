@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
-  <persistence-unit name="samplePU" transaction-type="RESOURCE_LOCAL">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>allshoes.jpa.Funcionario</class>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="Enterprise_Application-ejbPU" transaction-type="JTA">
+    <jta-data-source>jdbc/sample</jta-data-source>
+      <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    
+    <class>allshoes.jpa.Usuario</class>
+    <class>allshoes.jpa.Pessoa</class>
+    <class>allshoes.jpa.Cliente</class>
     <class>allshoes.jpa.Departamento</class>
+    <class>allshoes.jpa.Estoque</class>
+    <class>allshoes.jpa.Filial</class>
+    <class>allshoes.jpa.Funcionario</class>
+    <class>allshoes.jpa.Endereco</class>
     <class>allshoes.jpa.Produto</class>
+    <class>allshoes.jpa.ListaDeDesejo</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/sample"/>
-      <property name="javax.persistence.jdbc.password" value="app"/>
-      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
-      <property name="javax.persistence.jdbc.user" value="app"/>
+
+      <property name="eclipselink.ddl-generation" value="create-tables"/>
+
+           <!-- <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" /> 
+            <property name="hibernate.hbm2ddl.auto" value="update" /> 
+            <property name="hibernate.show_sql" value="true" /> 
+            <property name="hibernate.format_sql" value="true" />  
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" /> 
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/test" /> 
+            <property name="javax.persistence.jdbc.user" value="root" /> 
+            <property name="javax.persistence.jdbc.password" value="administrador" />-->
     </properties>
   </persistence-unit>
 </persistence>
+

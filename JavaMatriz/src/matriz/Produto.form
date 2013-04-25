@@ -502,34 +502,6 @@
           <Properties>
             <Property name="rowHeight" type="int" value="20"/>
           </Properties>
-          <BindingProperties>
-            <BindingProperty name="elements" source="produtoList" target="jTable1" targetPath="elements" updateStrategy="0" immediately="true">
-              <Subbinding sourcePath="${cod_produto}">
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
-              </Subbinding>
-              <Subbinding sourcePath="${nome}">
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
-              </Subbinding>
-              <Subbinding sourcePath="${marca}">
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="allshoes.jpa.Marca.class"/>
-              </Subbinding>
-              <Subbinding sourcePath="${tamanho}">
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
-              </Subbinding>
-              <Subbinding sourcePath="${cor}">
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
-              </Subbinding>
-              <Subbinding sourcePath="${departamento}">
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="allshoes.jpa.Departamento.class"/>
-              </Subbinding>
-              <Subbinding sourcePath="${preco}">
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Double.class"/>
-              </Subbinding>
-              <Subbinding sourcePath="${descricao}">
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
-              </Subbinding>
-            </BindingProperty>
-          </BindingProperties>
         </Component>
       </SubComponents>
     </Container>
