@@ -518,9 +518,8 @@ public class Produto extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private java.util.List<allshoes.jpa.Produto> produtoList;
-    private javax.persistence.Query produtoQuery;
+    
     private javax.swing.JButton relatorios;
-    private javax.persistence.EntityManager samplePUEntityManager;
+    
     // End of variables declaration//GEN-END:variables
 }
