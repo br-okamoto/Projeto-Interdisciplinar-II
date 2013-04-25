@@ -5,6 +5,11 @@
 package Filial;
 
 import Validacao.teclasPermitidas;
+import allshoes.jpa.Funcionario;
+import allshoes.jpa.Produto;
+import controller.produtoController;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,7 +22,34 @@ public class Estoque extends javax.swing.JFrame {
      */
     public Estoque() {
         initComponents();
+        produtoController controller = null;
         jTextField7.setDocument(new teclasPermitidas());
+        
+        try{
+            controller = new produtoController();
+            List<Produto> produtos = controller.findAll();
+            if(!produtos.isEmpty()){
+                DefaultTableModel dtm = new DefaultTableModel();
+                Object[] tableColumnNames = new Object[4];
+                tableColumnNames[0] = "Código";
+                tableColumnNames[1] = "Nome";
+                tableColumnNames[2] = "Cor";
+                tableColumnNames[3] = "Descrição";
+                dtm.setColumnIdentifiers(tableColumnNames);
+                Object[] objects = new Object[4];
+                 for (Produto p : produtos) {
+                    objects[0] = p.getCod_produto();
+                    objects[1] = p.getNome();
+                    objects[2] = p.getCor();
+                    objects[3] = p.getDescricao();
+                    dtm.addRow(objects);
+                }
+                jTable1.setModel(dtm);
+            }
+        } catch(Exception ex){
+          System.out.println(ex);
+            
+        }
     }
 
     /**

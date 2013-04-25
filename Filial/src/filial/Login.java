@@ -2,7 +2,7 @@
 package Filial;
 
 import allshoes.jpa.Usuario;
-import controller.FilialController;
+import controller.funcionarioController;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -158,10 +158,10 @@ public class Login extends javax.swing.JFrame {
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
         Principal principal = new Principal();
-        FilialController controller = null;
+        funcionarioController controller = null;
         
         try {
-            controller = new FilialController();
+            controller = new funcionarioController();
             String username = JTextUsuario.getText().toString();
             char[] pass = JPassword.getText().toCharArray();
             Usuario usuario = controller.find(username);
