@@ -4,6 +4,10 @@
  */
 package matriz;
 
+import controller.MatrizProdutoController;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author 41083032
@@ -15,6 +19,39 @@ public class Produto extends javax.swing.JFrame {
      */
     public Produto() {
         initComponents();
+        try {
+            MatrizProdutoController controller = new MatrizProdutoController();
+            List<allshoes.jpa.Produto> lista = controller.findAll();
+            if (!lista.isEmpty()) {
+                DefaultTableModel dtm = new DefaultTableModel();
+                Object[] tableColumnNames = new Object[8];
+                tableColumnNames[0] = "ID";
+                tableColumnNames[1] = "Cod_Produto";
+                tableColumnNames[2] = "Nome";
+                tableColumnNames[3] = "Marca";
+                tableColumnNames[4] = "Tamanho";
+                tableColumnNames[5] = "Cor";
+                tableColumnNames[6] = "Departamento";
+                tableColumnNames[7] = "Preço";
+                dtm.setColumnIdentifiers(tableColumnNames);
+                Object[] objects = new Object[8];
+                for (allshoes.jpa.Produto p : lista) {
+                    objects[0] = p.getIdProduto();
+                    objects[1] = p.getCod_produto();
+                    objects[2] = p.getNome();
+                    objects[3] = p.getMarca();
+                    objects[4] = p.getTamanho();
+                    objects[5] = p.getCor();
+                    objects[6] = p.getDepartamento().getNomeDepartamento();
+                    objects[7] = p.getPreco();
+                    dtm.addRow(objects);
+                }
+                jTable1.setModel(dtm);
+            } 
+        }
+        catch(Exception e) {
+            
+        }
     }
 
     /**
@@ -25,11 +62,7 @@ public class Produto extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        samplePUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("samplePU").createEntityManager();
-        produtoQuery = java.beans.Beans.isDesignTime() ? null : samplePUEntityManager.createQuery("SELECT p FROM Produto p");
-        produtoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : produtoQuery.getResultList();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -245,34 +278,6 @@ public class Produto extends javax.swing.JFrame {
         jLabel12.setText("EXCLUIR");
 
         jTable1.setRowHeight(20);
-
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, produtoList, jTable1);
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cod_produto}"));
-        columnBinding.setColumnName("Cod_produto");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
-        columnBinding.setColumnName("Nome");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${marca}"));
-        columnBinding.setColumnName("Marca");
-        columnBinding.setColumnClass(allshoes.jpa.Marca.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${tamanho}"));
-        columnBinding.setColumnName("Tamanho");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cor}"));
-        columnBinding.setColumnName("Cor");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${departamento}"));
-        columnBinding.setColumnName("Departamento");
-        columnBinding.setColumnClass(allshoes.jpa.Departamento.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${preco}"));
-        columnBinding.setColumnName("Preco");
-        columnBinding.setColumnClass(Double.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${descricao}"));
-        columnBinding.setColumnName("Descricao");
-        columnBinding.setColumnClass(String.class);
-        bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -378,8 +383,6 @@ public class Produto extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(229, Short.MAX_VALUE))
         );
-
-        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -515,10 +518,8 @@ public class Produto extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private java.util.List<allshoes.jpa.Produto> produtoList;
-    private javax.persistence.Query produtoQuery;
+    
     private javax.swing.JButton relatorios;
-    private javax.persistence.EntityManager samplePUEntityManager;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
+    
     // End of variables declaration//GEN-END:variables
 }
