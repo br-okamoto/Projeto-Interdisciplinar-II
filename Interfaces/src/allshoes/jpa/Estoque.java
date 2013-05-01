@@ -20,8 +20,8 @@ public class Estoque implements Serializable, Cloneable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idEstoque;
     
-    @ManyToMany(cascade = CascadeType.PERSIST,fetch=FetchType.EAGER)
-    private List<Produto> produto;
+    //@ManyToMany(cascade = CascadeType.PERSIST,fetch=FetchType.EAGER)
+    //private List<Produto> produto;
 
     public int getIdEstoque() {
         return idEstoque;
@@ -31,13 +31,13 @@ public class Estoque implements Serializable, Cloneable {
         this.idEstoque = idEstoque;
     }
 
-    public List<Produto> getProduto() {
+    /*public List<Produto> getProduto() {
         return produto;
     }
 
     public void setProduto(List<Produto> produto) {
         this.produto = produto;
-    }
+    }*/
     
     
 }

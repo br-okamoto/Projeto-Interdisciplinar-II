@@ -61,7 +61,7 @@ public class DetalheDoProduto extends HttpServlet {
             out.println("Detalhe do Produto");
             out.println("</div>");
             
-            out.println("<img src='" + request.getContextPath() + "/images/produtos/" + produto.getCod_produto() + ".jpg' alt='' class='imgDetalheProduto'/>");
+            out.println("<img src='" + request.getContextPath() + "/images/produtos/" + produto.getIdProduto() + ".jpg' alt='' class='imgDetalheProduto'/>");
             
             out.println("<div id='produtosInfo'>");
             out.println("<h1>" + produto.getNome() + "</h1>");
