@@ -27,11 +27,16 @@ public class produtoController {
     public List<Produto> find(String username){
         return produtoFacade.find(username);
     }
-            
+          
+    public Produto find(int cod_produto) {
+        return produtoFacade.find(cod_produto);
+    }
             
     public List<Produto> findAll() {
         return (produtoFacade.findAll());
     }
     
-    
+    public List<Produto> findName(String nome) {
+        return produtoFacade.find(nome);
+    }
 }

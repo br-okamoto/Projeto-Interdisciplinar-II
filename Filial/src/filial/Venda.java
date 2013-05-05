@@ -1,20 +1,30 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Filial;
 
-/**
- *
- * @author rsakami
- */
+import controller.departamentoController;
+import allshoes.jpa.Departamento;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 public class Venda extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Venda
-     */
+    
     public Venda() {
         initComponents();
+        departamentoController controller = null;
+
+        try {
+            controller = new departamentoController();
+            List<Departamento> departamentos = controller.findAll();
+            for(Departamento d: departamentos){
+            jComboBox1.addItem(d.getNomeDepartamento());
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -89,6 +99,11 @@ public class Venda extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vendedor1", "Vendedor2" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -224,6 +239,10 @@ public class Venda extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     /**
      * @param args the command line arguments
