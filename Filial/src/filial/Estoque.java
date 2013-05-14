@@ -1,50 +1,66 @@
-
 package Filial;
 
+import Validacao.IntegerDocument;
 import Validacao.teclasPermitidas;
 import allshoes.jpa.Produto;
+import allshoes.jpa.Estoque_Produto;
+import controller.estoqueController;
 import controller.produtoController;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 
 public class Estoque extends javax.swing.JFrame {
 
-      public Estoque() {
+    public Estoque() {
         initComponents();
-        produtoController controller = null;
-        jTextField7.setDocument(new teclasPermitidas());
-        
-        try{
-            controller = new produtoController();
-            List<Produto> produtos = controller.findAll();
-            if(!produtos.isEmpty()){
+        produtoController controlaProduto = null;
+        estoqueController controlaEstoque = null;
+         
+    
+        //Campo aceita apenas letras
+        jTextField2.setDocument(new teclasPermitidas());
+        //Campo aceita apenas números com 4 dígitos
+        jTextField1.setDocument(new IntegerDocument(4));
+
+        try {
+            controlaProduto = new produtoController();
+            controlaEstoque = new estoqueController();
+            List<Produto> produtos = controlaProduto.findAll();
+            
+  
+            if (!produtos.isEmpty()) {
                 DefaultTableModel dtm = new DefaultTableModel();
-                Object[] tableColumnNames = new Object[4];
-                tableColumnNames[0] = "Codigo";
+                Object[] tableColumnNames = new Object[5];
+                tableColumnNames[0] = "Código";
                 tableColumnNames[1] = "Nome";
                 tableColumnNames[2] = "Descricao";
                 tableColumnNames[3] = "Preco";
-                dtm.setColumnIdentifiers(tableColumnNames);
-                Object[] objects = new Object[4];
-                 for (Produto p : produtos) {
-                    objects[0] = p.getCod_produto();
-                    objects[1] = p.getNome();
-                    objects[2] = p.getDescricao();
-                    objects[3] = p.getPreco();
+                tableColumnNames[4] = "Quantidade";
+                dtm.setColumnIdentifiers(tableColumnNames); 
+                
+                Object[] objects = new Object[5];
+                List<Estoque_Produto> e = controlaEstoque.findAll();
+                for(Estoque_Produto est : e){
+                    objects[0] = est.getProduto().getCod_produto();
+                    objects[1] = est.getProduto().getNome();
+                    objects[2] = est.getProduto().getDescricao();
+                    objects[3] = est.getProduto().getPreco();
+                    objects[4] = est.getQuantidade();
+
                     dtm.addRow(objects);
                 }
                 jTable1.setModel(dtm);
             }
-        } catch(Exception ex){
-          System.out.println(ex);
-            
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+
         }
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -61,17 +77,17 @@ public class Estoque extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jFormattedTextField2 = new javax.swing.JFormattedTextField();
         jFormattedTextField3 = new javax.swing.JFormattedTextField();
         jFormattedTextField4 = new javax.swing.JFormattedTextField();
         jFormattedTextField6 = new javax.swing.JFormattedTextField();
+        jTextField3 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jFormattedTextField5 = new javax.swing.JFormattedTextField();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,13 +114,10 @@ public class Estoque extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Item", "Código", "Descrição", "Quant. Estoque"
+                "Item", "Código", "Descrição", "Preco", "Quant. Estoque"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -124,12 +137,6 @@ public class Estoque extends javax.swing.JFrame {
         jButton2.setText("Entrada");
 
         jButton3.setText("Saída");
-
-        try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
 
         try {
             jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
@@ -161,15 +168,15 @@ public class Estoque extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField3)))
                 .addGap(84, 84, 84)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
@@ -183,7 +190,7 @@ public class Estoque extends javax.swing.JFrame {
                         .addGap(55, 55, 55)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(jFormattedTextField4)
+                        .addComponent(jFormattedTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                         .addGap(13, 13, 13))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(162, 162, 162)
@@ -200,9 +207,9 @@ public class Estoque extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -222,9 +229,9 @@ public class Estoque extends javax.swing.JFrame {
 
         jLabel8.setText("Produto:");
 
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                jTextField2ActionPerformed(evt);
             }
         });
 
@@ -235,12 +242,6 @@ public class Estoque extends javax.swing.JFrame {
             }
         });
 
-        try {
-            jFormattedTextField5.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -249,11 +250,11 @@ public class Estoque extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(48, 48, 48))
@@ -265,9 +266,9 @@ public class Estoque extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
@@ -279,9 +280,9 @@ public class Estoque extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -292,41 +293,80 @@ public class Estoque extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        produtoController controller = null;
         try {
-            if (jFormattedTextField5.getText() == null) {
-                controller = new produtoController();
-                String nome = jTextField7.getText();
-                List<Produto> produtos = controller.findName(nome);
-                System.out.println(produtos);
+            produtoController controller = new produtoController();
+            estoqueController controlaEstoque = new estoqueController();
+      
+            DefaultTableModel dtm = new DefaultTableModel();
+                Object[] tableColumnNames = new Object[5];
+                tableColumnNames[0] = "Código";
+                tableColumnNames[1] = "Nome";
+                tableColumnNames[2] = "Descricao";
+                tableColumnNames[3] = "Preco";
+                tableColumnNames[4] = "Quantidade";
+                dtm.setColumnIdentifiers(tableColumnNames); 
+            
+            //Pesquisa por nome
+            if (jTextField1.getText().isEmpty()) {
+                String prod = jTextField2.getText();
+                List<Produto> produtos = controller.findName(prod);
+
+                Object[] objects = new Object[5];
+                List<Estoque_Produto> e = controlaEstoque.findAll();
                 
+                for(Estoque_Produto est : e){
+                    objects[0] = est.getProduto().getCod_produto();
+                    objects[1] = est.getProduto().getNome();
+                    objects[2] = est.getProduto().getDescricao();
+                    objects[3] = est.getProduto().getPreco();
+                    objects[4] = est.getQuantidade();
+                    dtm.addRow(objects);
+                }
+
+            //Pesquisa pelo código
             } else {
-                controller = new produtoController();
-                int codigo = Integer.parseInt(jFormattedTextField5.getText());
+                int codigo = Integer.parseInt(jTextField1.getText());
                 Produto produtos = controller.find(codigo);
-                System.out.println(produtos);
+                List<Estoque_Produto> p = controlaEstoque.findAll();
+                int qtd = 0;
+                
+                for(Estoque_Produto ep: p){
+                    if(ep.getProduto().getIdProduto() == produtos.getIdProduto()){
+                        qtd = ep.getQuantidade();
+                    }
+                }
+                Object[] objects = new Object[5];
+                objects[0] = produtos.getCod_produto();
+                objects[1] = produtos.getNome();
+                objects[2] = produtos.getDescricao();
+                objects[3] = produtos.getPreco();
+                objects[4] = qtd;
+                dtm.addRow(objects); 
             }
+            jTable1.setModel(dtm);
+
         } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro!\n\n Produto não encontrado! \n "
+                    + "Tente pesquisar pelo código ou pelo nome do produto");
             Logger.getLogger(Estoque.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -362,11 +402,9 @@ public class Estoque extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JFormattedTextField jFormattedTextField3;
     private javax.swing.JFormattedTextField jFormattedTextField4;
-    private javax.swing.JFormattedTextField jFormattedTextField5;
     private javax.swing.JFormattedTextField jFormattedTextField6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -381,6 +419,8 @@ public class Estoque extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }
