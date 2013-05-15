@@ -14,12 +14,15 @@
     <class>allshoes.jpa.Endereco</class>
     <class>allshoes.jpa.Produto</class>
     <class>allshoes.jpa.ListaDeDesejo</class>
+    <class>exemplo.jpa.Contato</class>
+    <class>allshoes.jpa.HistoricoDoPedido</class>
+    <class>allshoes.jpa.ItemDoPedido</class>
+    <class>allshoes.jpa.Pedido</class>
+    <class>allshoes.jpa.StatusDoPedido</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
-
       <property name="eclipselink.ddl-generation" value="create-tables"/>
-
-           <!-- <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" /> 
+      <!-- <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" /> 
             <property name="hibernate.hbm2ddl.auto" value="update" /> 
             <property name="hibernate.show_sql" value="true" /> 
             <property name="hibernate.format_sql" value="true" />  
@@ -30,4 +33,3 @@
     </properties>
   </persistence-unit>
 </persistence>
-
