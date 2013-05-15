@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Venda extends javax.swing.JFrame {
-
+static double valorTotal;
     public Venda() {
         initComponents();
         filialController controlaFilial = null;
@@ -68,6 +68,8 @@ public class Venda extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jComboBox3 = new javax.swing.JComboBox();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -201,6 +203,8 @@ public class Venda extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setText("Preço Total: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -222,7 +226,11 @@ public class Venda extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(64, 64, 64)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel10)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -240,8 +248,14 @@ public class Venda extends javax.swing.JFrame {
                     .addComponent(jButton1))
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
+                        .addGap(5, 5, 5)))
                 .addGap(19, 19, 19))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -261,38 +275,47 @@ public class Venda extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    //Botão Adicionar Compras
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //Botão Adicionar compras
-        produtoController controlaProduto = null;
-    
         try {
+            produtoController controlaProduto = new produtoController();
             int codigo = Integer.parseInt(jTextField1.getText());
-            
             Produto prod = controlaProduto.find(codigo);
 
+            //checa loja
+            if (jComboBox1.getSelectedItem().equals("Selecione a Loja")) {
+                JOptionPane.showMessageDialog(null, "Selecione a Loja");
+            }                 
+            //checa vendedor
+            if (jComboBox2.getSelectedItem().equals("Selecione o Vendedor")) {
+                JOptionPane.showMessageDialog(null, "Selecione o Vendedor");
+            }
+                
+            //checa quantidade
             if (jComboBox3.getSelectedItem().equals("Qtd")) {
                 JOptionPane.showMessageDialog(null, "Selecione a Quantidade");
-            }
-           double total = prod.getPreco();
-           int qtd = Integer.valueOf((String) jComboBox3.getSelectedItem());
-           double precoTotal = total * qtd;
-          
-           DefaultTableModel dtm =(DefaultTableModel) jTable1.getModel(); 
-          
-            Object[] objects = new Object[7];
-            objects[0] = prod.getCod_produto();
-            objects[1] = prod.getNome();
-            objects[2] = prod.getCor();
-            objects[3] = prod.getTamanho();
-            objects[4] = jComboBox3.getSelectedItem();
-            objects[5] = prod.getPreco();
-            objects[6] = precoTotal;
-            dtm.addRow(objects);
-          
+            } 
+   
+                double subTotal = 0;
+                double total = prod.getPreco();
+                int qtd = Integer.valueOf((String) jComboBox3.getSelectedItem());
+                subTotal = total * qtd;
+                DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+                Object[] objects = new Object[7];
+                objects[0] = prod.getCod_produto();
+                objects[1] = prod.getNome();
+                objects[2] = prod.getCor();
+                objects[3] = prod.getTamanho();
+                objects[4] = jComboBox3.getSelectedItem();
+                objects[5] = prod.getPreco();
+                objects[6] = subTotal;
+                valorTotal = valorTotal + subTotal;
+                jLabel7.setText(String.valueOf(valorTotal));
+         
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro: Produto não localizado");
-            Logger.getLogger(Venda.class.getName()).log(Level.SEVERE, null, ex);
-        }
+             Logger.getLogger(Estoque.class.getName()).log(Level.SEVERE, null, ex);
+        } 
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -344,11 +367,13 @@ public class Venda extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

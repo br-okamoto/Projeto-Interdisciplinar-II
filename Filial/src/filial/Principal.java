@@ -181,11 +181,10 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
-        Login login = new Login();
         Principal principal = new Principal();
         principal.setVisible(false);
         dispose();
-        login.setVisible(true);
+        
     }//GEN-LAST:event_sairActionPerformed
 
     private void relatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relatorioActionPerformed

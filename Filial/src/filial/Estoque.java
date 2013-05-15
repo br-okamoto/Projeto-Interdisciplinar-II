@@ -18,8 +18,8 @@ public class Estoque extends javax.swing.JFrame {
         initComponents();
         produtoController controlaProduto = null;
         estoqueController controlaEstoque = null;
-         
-    
+
+
         //Campo aceita apenas letras
         jTextField2.setDocument(new teclasPermitidas());
         //Campo aceita apenas números com 4 dígitos
@@ -29,8 +29,9 @@ public class Estoque extends javax.swing.JFrame {
             controlaProduto = new produtoController();
             controlaEstoque = new estoqueController();
             List<Produto> produtos = controlaProduto.findAll();
-            
-  
+            List<Estoque_Produto> e = controlaEstoque.findAll();
+
+
             if (!produtos.isEmpty()) {
                 DefaultTableModel dtm = new DefaultTableModel();
                 Object[] tableColumnNames = new Object[5];
@@ -39,19 +40,19 @@ public class Estoque extends javax.swing.JFrame {
                 tableColumnNames[2] = "Descricao";
                 tableColumnNames[3] = "Preco";
                 tableColumnNames[4] = "Quantidade";
-                dtm.setColumnIdentifiers(tableColumnNames); 
-                
+                dtm.setColumnIdentifiers(tableColumnNames);
+
                 Object[] objects = new Object[5];
-                List<Estoque_Produto> e = controlaEstoque.findAll();
-                for(Estoque_Produto est : e){
+
+                for (Estoque_Produto est : e) {
                     objects[0] = est.getProduto().getCod_produto();
                     objects[1] = est.getProduto().getNome();
                     objects[2] = est.getProduto().getDescricao();
                     objects[3] = est.getProduto().getPreco();
                     objects[4] = est.getQuantidade();
-
                     dtm.addRow(objects);
                 }
+                
                 jTable1.setModel(dtm);
             }
 
@@ -307,44 +308,44 @@ public class Estoque extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            produtoController controller = new produtoController();
+            produtoController controlaProduto = new produtoController();
             estoqueController controlaEstoque = new estoqueController();
-      
+
             DefaultTableModel dtm = new DefaultTableModel();
-                Object[] tableColumnNames = new Object[5];
-                tableColumnNames[0] = "Código";
-                tableColumnNames[1] = "Nome";
-                tableColumnNames[2] = "Descricao";
-                tableColumnNames[3] = "Preco";
-                tableColumnNames[4] = "Quantidade";
-                dtm.setColumnIdentifiers(tableColumnNames); 
-            
+            Object[] tableColumnNames = new Object[5];
+            tableColumnNames[0] = "Código";
+            tableColumnNames[1] = "Nome";
+            tableColumnNames[2] = "Descricao";
+            tableColumnNames[3] = "Preco";
+            tableColumnNames[4] = "Quantidade";
+            dtm.setColumnIdentifiers(tableColumnNames);
+
             //Pesquisa por nome
             if (jTextField1.getText().isEmpty()) {
                 String prod = jTextField2.getText();
-                List<Produto> produtos = controller.findName(prod);
-
-                Object[] objects = new Object[5];
+                List<Produto> produtos = controlaProduto.findName(prod);
                 List<Estoque_Produto> e = controlaEstoque.findAll();
-                
-                for(Estoque_Produto est : e){
-                    objects[0] = est.getProduto().getCod_produto();
-                    objects[1] = est.getProduto().getNome();
-                    objects[2] = est.getProduto().getDescricao();
-                    objects[3] = est.getProduto().getPreco();
-                    objects[4] = est.getQuantidade();
-                    dtm.addRow(objects);
+                Object[] objects = new Object[5];
+                for (Estoque_Produto est : e) {
+                    if (prod.equalsIgnoreCase(est.getProduto().getNome())) {
+                        objects[0] = est.getProduto().getCod_produto();
+                        objects[1] = est.getProduto().getNome();
+                        objects[2] = est.getProduto().getDescricao();
+                        objects[3] = est.getProduto().getPreco();
+                        objects[4] = est.getQuantidade();
+                        dtm.addRow(objects);
+                    }
                 }
 
-            //Pesquisa pelo código
+                //Pesquisa pelo código
             } else {
                 int codigo = Integer.parseInt(jTextField1.getText());
-                Produto produtos = controller.find(codigo);
+                Produto produtos = controlaProduto.find(codigo);
                 List<Estoque_Produto> p = controlaEstoque.findAll();
+
                 int qtd = 0;
-                
-                for(Estoque_Produto ep: p){
-                    if(ep.getProduto().getIdProduto() == produtos.getIdProduto()){
+                for (Estoque_Produto ep : p) {
+                    if (ep.getProduto().getIdProduto() == produtos.getIdProduto()) {
                         qtd = ep.getQuantidade();
                     }
                 }
@@ -354,7 +355,8 @@ public class Estoque extends javax.swing.JFrame {
                 objects[2] = produtos.getDescricao();
                 objects[3] = produtos.getPreco();
                 objects[4] = qtd;
-                dtm.addRow(objects); 
+                dtm.addRow(objects);
+
             }
             jTable1.setModel(dtm);
 

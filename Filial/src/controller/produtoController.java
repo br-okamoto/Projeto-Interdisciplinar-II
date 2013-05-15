@@ -36,7 +36,7 @@ public class produtoController {
         return (produtoFacade.findAll());
     }
     
-    public List<Produto> findName(String nome) {
+    public List <Produto> findName(String nome) {
         return produtoFacade.find(nome);
     }
 }
