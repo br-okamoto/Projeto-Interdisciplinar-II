@@ -4,6 +4,8 @@
  */
 package matriz;
 
+import Validacao.IntegerDocument;
+import Validacao.teclasPermitidas;
 import controller.MatrizProdutoController;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -19,6 +21,11 @@ public class Produto extends javax.swing.JFrame {
      */
     public Produto() {
         initComponents();
+        //Permite Campo com apenas 4 números
+        jTextField1.setDocument(new IntegerDocument(4));
+        //Campo aceita apenas letras
+        jTextField2.setDocument(new teclasPermitidas());
+        
         try {
             MatrizProdutoController controller = new MatrizProdutoController();
             List<allshoes.jpa.Produto> lista = controller.findAll();

@@ -4,6 +4,8 @@
  */
 package matriz;
 
+import Validacao.IntegerDocument;
+import Validacao.teclasPermitidas;
 import allshoes.jpa.Endereco;
 import allshoes.jpa.Estado;
 import allshoes.jpa.Estoque;
@@ -25,6 +27,18 @@ public class CadastroFilial extends javax.swing.JFrame {
      */
     public CadastroFilial() {
         initComponents();
+        //Permite Campo com apenas 4 números                
+        jTextField1.setDocument(new IntegerDocument(4));
+        jTextField4.setDocument(new IntegerDocument(4));
+        jTextField7.setDocument(new IntegerDocument(8));      
+        
+        //Campo aceita apenas letras
+        jTextField2.setDocument(new teclasPermitidas());
+        jTextField3.setDocument(new teclasPermitidas());
+        jTextField5.setDocument(new teclasPermitidas());
+        jTextField6.setDocument(new teclasPermitidas());
+        jTextField8.setDocument(new teclasPermitidas());
+        
         jComboBox1.setModel(new DefaultComboBoxModel<>(Estado.values()));
     }
 

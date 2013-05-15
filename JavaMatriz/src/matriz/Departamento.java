@@ -4,6 +4,8 @@
  */
 package matriz;
 
+import Validacao.IntegerDocument;
+import Validacao.teclasPermitidas;
 import controller.MatrizDepartamentoController;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +21,10 @@ public class Departamento extends javax.swing.JFrame {
      */
     public Departamento() {
         initComponents();
+        //Permite Campo com apenas 4 números
+        jTextField1.setDocument(new IntegerDocument(4));
+        //Campo aceita apenas letras
+        jTextField2.setDocument(new teclasPermitidas());
     }
 
     /**

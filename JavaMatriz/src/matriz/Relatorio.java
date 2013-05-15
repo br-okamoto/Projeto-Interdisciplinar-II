@@ -4,6 +4,9 @@
  */
 package matriz;
 
+import Validacao.IntegerDocument;
+import Validacao.teclasPermitidas;
+
 /**
  *
  * @author Lylo
@@ -15,6 +18,7 @@ public class Relatorio extends javax.swing.JFrame {
      */
     public Relatorio() {
         initComponents();
+    
     }
 
     /**

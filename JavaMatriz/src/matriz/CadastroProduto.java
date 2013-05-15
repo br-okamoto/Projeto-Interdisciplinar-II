@@ -6,6 +6,9 @@ package matriz;
 
 import allshoes.jpa.Marca;
 import controller.MatrizController;
+import Validacao.FixedLengthDocument;
+import Validacao.IntegerDocument;
+import Validacao.teclasPermitidas;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import allshoes.jpa.Produto;
@@ -27,6 +30,13 @@ public class CadastroProduto extends javax.swing.JFrame {
      */
     public CadastroProduto() {
         initComponents();
+        //Permite Campo com apenas 4 números
+        jTextField1.setDocument(new IntegerDocument(4));
+        jTextField4.setDocument(new IntegerDocument(2));
+        //Campo aceita apenas letras
+        jTextField2.setDocument(new teclasPermitidas());
+        jTextField5.setDocument(new teclasPermitidas());
+        
         jComboBox1.setModel(new DefaultComboBoxModel<>(Marca.values()));
         try {
             MatrizDepartamentoController controller = new MatrizDepartamentoController();

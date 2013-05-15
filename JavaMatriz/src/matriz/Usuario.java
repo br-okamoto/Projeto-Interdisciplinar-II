@@ -467,11 +467,8 @@ public class Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_SairActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        CadastroProduto cp= new CadastroProduto();
-        Usuario u = new Usuario();
-        u.setVisible(false);
-        dispose();
-        cp.setVisible(true);
+       CadastroUsuario c = new CadastroUsuario();
+       c.setVisible(true);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     /**

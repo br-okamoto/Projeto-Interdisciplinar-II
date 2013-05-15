@@ -4,6 +4,9 @@
  */
 package matriz;
 
+import Validacao.IntegerDocument;
+import Validacao.teclasPermitidas;
+
 /**
  *
  * @author Lylo
@@ -15,6 +18,10 @@ public class Pedido extends javax.swing.JFrame {
      */
     public Pedido() {
         initComponents();
+        //Permite Campo com apenas 4 números
+        jTextField1.setDocument(new IntegerDocument(4));
+        //Campo aceita apenas letras
+        
     }
 
     /**
