@@ -27,10 +27,12 @@ public interface EstoqueProdutoFacadeRemote {
     
     //find estoque de um produto em uma filial
     List<Estoque_Produto> find(Produto produto, Filial filial);
-
+    
     List<Estoque_Produto> findAll();
-
+    
     List<Estoque_Produto> findRange(int[] range);
+    
+    List<Produto> findAllUnique();
 
     int count();
     

@@ -20,8 +20,8 @@ public class HistoricoDoPedido implements Serializable {
      @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idHistorico;
-    @OneToMany(fetch = FetchType.EAGER)
-    private Pedido idPedido;
+    @OneToOne(fetch = FetchType.EAGER)
+    private Pedido pedido;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataPedido;
     private String observacao;
@@ -32,8 +32,8 @@ public class HistoricoDoPedido implements Serializable {
         return idHistorico;
     }
 
-    public Pedido getIdPedido() {
-        return idPedido;
+    public Pedido getPedido() {
+        return pedido;
     }
 
     public Date getDataPedido() {
@@ -52,8 +52,8 @@ public class HistoricoDoPedido implements Serializable {
         this.idHistorico = idHistorico;
     }
 
-    public void setIdPedido(Pedido idPedido) {
-        this.idPedido = idPedido;
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
     public void setDataPedido(Date dataPedido) {
