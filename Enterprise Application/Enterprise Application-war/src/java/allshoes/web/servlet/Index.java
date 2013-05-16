@@ -4,6 +4,8 @@
  */
 package allshoes.web.servlet;
 
+import allshoes.jpa.Produto;
+import allshoes.jpa.facade.EstoqueProdutoFacadeRemote;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import allshoes.web.model.*;
+import java.util.List;
+import javax.ejb.EJB;
 
 /**
  *
@@ -19,6 +23,9 @@ import allshoes.web.model.*;
  */
 @WebServlet(name = "Index", urlPatterns = {"/"})
 public class Index extends HttpServlet {
+    
+    @EJB(mappedName = "ejb/Estoque_ProdutoFacade")
+    private EstoqueProdutoFacadeRemote ejb;
 
     /**
      * Processes requests for both HTTP
@@ -42,20 +49,37 @@ public class Index extends HttpServlet {
             out.println(header.getHeaderPadrao());
             
             out.println("<div id='contentSemMenu'>");
-            out.println("<div id='gallery'>");
-            out.println("<div id='slides'>");
-            out.println("<div class='slide'><a href='DetalheDoProduto?pid=111'><img src='"+request.getContextPath()+"/images/adidas.jpg' width='992' height='298' alt='side' /></a></div>");
-            out.println("<div class='slide'><a href='DetalheDoProduto?pid=222'><img src='"+request.getContextPath()+"/images/mizuno.jpg' width='992' height='298' alt='side' /></a></div>");
-            out.println("<div class='slide'><a href='DetalheDoProduto?pid=333'><img src='"+request.getContextPath()+"/images/nike.jpg' width='992' height='298' alt='side' /></a></div>");
-            out.println("</div>");
-            out.println("<div id='menu'>");
-            out.println("<ul>");
-            out.println("<li class='fbar'>&nbsp;</li>");
-            out.println("<li class='menuItem'><a><img src='"+request.getContextPath()+"/images/thumb_adidas.jpg' alt='thumbnail' /></a></li>");
-            out.println("<li class='menuItem'><a><img src='"+request.getContextPath()+"/images/thumb_mizuno.jpg' alt='thumbnail' /></a></li>");
-            out.println("<li class='menuItem'><a><img src='"+request.getContextPath()+"/images/thumb_nike.jpg' alt='thumbnail' /></a></li>");
-            out.println("</ul>");
-            out.println("</div>");
+            
+                out.println("<div id='gallery'>");
+            
+                    out.println("<div id='slides'>");
+                        out.println("<div class='slide'><a href='DetalheDoProduto?pid=111'><img src='"+request.getContextPath()+"/images/adidas.jpg' width='992' height='298' alt='side' /></a></div>");
+                        out.println("<div class='slide'><a href='DetalheDoProduto?pid=222'><img src='"+request.getContextPath()+"/images/mizuno.jpg' width='992' height='298' alt='side' /></a></div>");
+                        out.println("<div class='slide'><a href='DetalheDoProduto?pid=333'><img src='"+request.getContextPath()+"/images/nike.jpg' width='992' height='298' alt='side' /></a></div>");
+                    out.println("</div>");
+            
+                    out.println("<div id='menu'>");
+                        out.println("<ul>");
+                            out.println("<li class='fbar'>&nbsp;</li>");
+                            out.println("<li class='menuItem'><a><img src='"+request.getContextPath()+"/images/thumb_adidas.jpg' alt='thumbnail' /></a></li>");
+                            out.println("<li class='menuItem'><a><img src='"+request.getContextPath()+"/images/thumb_mizuno.jpg' alt='thumbnail' /></a></li>");
+                            out.println("<li class='menuItem'><a><img src='"+request.getContextPath()+"/images/thumb_nike.jpg' alt='thumbnail' /></a></li>");
+                        out.println("</ul>");
+                    out.println("</div>");
+            
+                out.println("</div>");
+                
+                out.println("<div id='home-listagem'");
+                List<Produto> produtos = ejb.findAllUnique();
+                for (Produto p : produtos) {
+                    out.println("<div class='box-produto'>");
+                    out.println("<a href='"+request.getContextPath()+"/DetalheDoProduto?cod_produto="+p.getCod_produto()+"'><img src='"+request.getContextPath()+"/images/produtos/"+p.getCod_produto()+"' /></a>");
+                    out.println("<a href='"+request.getContextPath()+"/DetalheDoProduto?cod_produto="+p.getCod_produto()+"'>"+p.getNome()+"</a><br/>");
+                    out.println(p.getPreco());
+                    out.println("</div>");
+                }
+                out.println("</div>");
+                
             out.println("</div>");
 
             

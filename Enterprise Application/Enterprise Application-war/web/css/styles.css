@@ -387,3 +387,10 @@ img {
     text-align: center;
     margin: 10px 0 0 90px;
 }
+.box-produto {
+    width:241px;
+    float:left;
+}
+.box-produto img {
+    width:241px;
+}

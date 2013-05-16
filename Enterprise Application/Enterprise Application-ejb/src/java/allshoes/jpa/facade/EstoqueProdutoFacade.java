@@ -99,9 +99,39 @@ public class EstoqueProdutoFacade extends AbstractFacade<Estoque_Produto> implem
         }
         else {
             int novaQuantidade = eps.get(0).getQuantidade() - quantidade;
-            eps.get(0).setQuantidade(novaQuantidade);
-            edit(eps.get(0));
+            if (novaQuantidade > 0) {
+                eps.get(0).setQuantidade(novaQuantidade);
+                edit(eps.get(0));
+            } 
+            else {
+                remove(eps.get(0));
+            }
             return true;
         }        
     }
+    
+    @Override
+    public List<Produto> findAllUnique(){
+        Query q1 = em.createQuery("SELECT p FROM Produto p WHERE p.idProduto in (SELECT ep.produto.idProduto FROM Estoque_Produto ep GROUP BY ep.produto.idProduto)");
+        List<Produto> ps = q1.getResultList();
+        if (ps.isEmpty()) {
+            return null;
+        }
+        else {
+            return ps;
+        } 
+    }
+    
+    @Override
+    public List<Estoque_Produto> findAll() {
+        Query q = em.createQuery("SELECT ep FROM Estoque_Produto ep");
+        List<Estoque_Produto> ep = q.getResultList();
+        if(ep.isEmpty()) {
+            return null;
+        }
+        else {
+            return ep;
+        }
+    }
+    
 }
