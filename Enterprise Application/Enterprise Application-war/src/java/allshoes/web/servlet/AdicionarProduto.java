@@ -4,13 +4,24 @@
  */
 package allshoes.web.servlet;
 
+import allshoes.facade.CartBean;
+import allshoes.facade.CartBeanRemote;
+import allshoes.jpa.ItemDoPedido;
+import allshoes.jpa.Pedido;
+import allshoes.jpa.Produto;
+import allshoes.jpa.facade.PedidoFacadeRemote;
+import allshoes.jpa.facade.ProdutoFacadeRemote;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -18,6 +29,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class AdicionarProduto extends HttpServlet {
 
+    private static final String STATEFUL_BEAN_KEY = "STATEFUL_BEAN_KEY";
+    
+    @EJB
+    ProdutoFacadeRemote prodEjb;
+    
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -33,6 +49,11 @@ public class AdicionarProduto extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
+        int cod_produto = Integer.parseInt(request.getParameter("cod_produto"));
+        Produto produto = prodEjb.find(cod_produto);
+        
+        CartBeanRemote carrinho = getCartBean(request);
+        
         String action = request.getParameter("action");
 
         if ("Adicionar a Lista de Desejos".equals(action)) {
@@ -41,7 +62,8 @@ public class AdicionarProduto extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("ListaDeDesejos");
             rd.forward(request, response);
         } else if ("Comprar".equals(action)) {
-            // instruções para adicionar o produto no carrinho
+
+            carrinho.addItem(produto);
             
             RequestDispatcher rd = request.getRequestDispatcher("MeuCarrinho");
             rd.forward(request, response);
@@ -102,4 +124,19 @@ public class AdicionarProduto extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private CartBeanRemote getCartBean(HttpServletRequest request) throws ServletException {
+        HttpSession httpSession = request.getSession(true);
+        CartBeanRemote carrinho = (CartBeanRemote) httpSession.getAttribute(STATEFUL_BEAN_KEY);
+        if (carrinho == null) {
+            try {
+                InitialContext ic = new InitialContext();
+                carrinho = (CartBeanRemote) ic.lookup("ejb/CartBean");
+                httpSession.setAttribute(STATEFUL_BEAN_KEY, carrinho);
+            } catch (NamingException e) {
+                throw new ServletException(e);
+            }
+        }
+        return carrinho;
+    }
 }

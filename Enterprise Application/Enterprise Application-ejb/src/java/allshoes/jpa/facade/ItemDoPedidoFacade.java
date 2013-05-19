@@ -23,35 +23,5 @@ public class ItemDoPedidoFacade extends AbstractFacade<ItemDoPedido> implements 
         super(ItemDoPedido.class);
     }
     
-    @Override
-    public void create(ItemDoPedido itemDoPedido) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void edit(ItemDoPedido itemDoPedido) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void remove(ItemDoPedido itemDoPedido) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public ItemDoPedido find(Object id) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public List<ItemDoPedido> findAll() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public List<ItemDoPedido> findRange(int[] range) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-    
     
 }

@@ -22,16 +22,18 @@ public class ItemDoPedido implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idItemDoPedido;
     @ManyToOne(fetch = FetchType.EAGER)
-    private Pedido idPedido;
+    private Pedido pedido;
     private int quantidade;
     private double subTotal;
+    @OneToOne(fetch = FetchType.EAGER)
+    private Produto produto;
 
     public int getIdItemDoPedido() {
         return idItemDoPedido;
     }
 
-    public Pedido getIdPedido() {
-        return idPedido;
+    public Pedido getPedido() {
+        return pedido;
     }
 
     public int getQuantidade() {
@@ -46,8 +48,8 @@ public class ItemDoPedido implements Serializable {
         this.idItemDoPedido = idItemDoPedido;
     }
 
-    public void setIdPedido(Pedido idPedido) {
-        this.idPedido = idPedido;
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
     public void setQuantidade(int quantidade) {
@@ -56,6 +58,14 @@ public class ItemDoPedido implements Serializable {
 
     public void setSubTotal(double subTotal) {
         this.subTotal = subTotal;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
     
     

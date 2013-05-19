@@ -94,6 +94,10 @@
         <servlet-name>MeuCadastroAlterar</servlet-name>
         <servlet-class>allshoes.web.servlet.MeuCadastroAlterar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ConfirmarEndereco</servlet-name>
+        <servlet-class>allshoes.web.servlet.ConfirmarEndereco</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern>/index.html</url-pattern>
@@ -185,6 +189,10 @@
     <servlet-mapping>
         <servlet-name>MeuCadastroAlterar</servlet-name>
         <url-pattern>/MeuCadastroAlterar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmarEndereco</servlet-name>
+        <url-pattern>/ConfirmarEndereco</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>  

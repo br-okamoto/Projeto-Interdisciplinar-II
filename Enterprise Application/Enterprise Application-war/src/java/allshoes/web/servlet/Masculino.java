@@ -65,9 +65,9 @@ public class Masculino extends HttpServlet {
             out.println("</div>");
             
             out.println("<div class='departamentoProduto'>");
-            out.println("<a href='DetalheDoProduto?pid=111'><img src='" + request.getContextPath() + "/images/adidas-galeria.jpg' alt='' /></a>");
-            out.println("<h2><a href='DetalheDoProduto?pid=111'>Adidas 4.3</a></h2>");
-            out.println("<div class='precoProduto'>R$ 159,90</div>");
+            out.println("<a href='DetalheDoProduto?cod_produto=1'><img src='" + request.getContextPath() + "/images/adidas-galeria.jpg' alt='' /></a>");
+            out.println("<h2><a href='DetalheDoProduto?cod_produto=1'>Adidas 4.3</a></h2>");
+            out.println("<div class='precoProduto'>R$ 111,00</div>");
             out.println("<div class='precoProduto'>6 x R$ 26,65 sem juros</div>");
             out.println("</div>");
             

@@ -388,9 +388,13 @@ img {
     margin: 10px 0 0 90px;
 }
 .box-produto {
-    width:241px;
+    width:231px;
     float:left;
+    margin-right:10px;
 }
 .box-produto img {
-    width:241px;
+    width:231px;
+}
+#home-listagem {
+    margin:10px 0 50px 0;
 }

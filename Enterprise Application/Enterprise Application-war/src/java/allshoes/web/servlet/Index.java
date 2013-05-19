@@ -6,6 +6,7 @@ package allshoes.web.servlet;
 
 import allshoes.jpa.Produto;
 import allshoes.jpa.facade.EstoqueProdutoFacadeRemote;
+import allshoes.jpa.facade.ProdutoFacadeRemote;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -24,8 +25,8 @@ import javax.ejb.EJB;
 @WebServlet(name = "Index", urlPatterns = {"/"})
 public class Index extends HttpServlet {
     
-    @EJB(mappedName = "ejb/Estoque_ProdutoFacade")
-    private EstoqueProdutoFacadeRemote ejb;
+    @EJB(mappedName = "ejb/ProdutoFacade")
+    private ProdutoFacadeRemote ejb;
 
     /**
      * Processes requests for both HTTP
@@ -53,9 +54,9 @@ public class Index extends HttpServlet {
                 out.println("<div id='gallery'>");
             
                     out.println("<div id='slides'>");
-                        out.println("<div class='slide'><a href='DetalheDoProduto?pid=111'><img src='"+request.getContextPath()+"/images/adidas.jpg' width='992' height='298' alt='side' /></a></div>");
-                        out.println("<div class='slide'><a href='DetalheDoProduto?pid=222'><img src='"+request.getContextPath()+"/images/mizuno.jpg' width='992' height='298' alt='side' /></a></div>");
-                        out.println("<div class='slide'><a href='DetalheDoProduto?pid=333'><img src='"+request.getContextPath()+"/images/nike.jpg' width='992' height='298' alt='side' /></a></div>");
+                        out.println("<div class='slide'><a href='DetalheDoProduto?cod_produto=1'><img src='"+request.getContextPath()+"/images/adidas.jpg' width='992' height='298' alt='side' /></a></div>");
+                        out.println("<div class='slide'><a href='DetalheDoProduto?cod_produto=2'><img src='"+request.getContextPath()+"/images/mizuno.jpg' width='992' height='298' alt='side' /></a></div>");
+                        out.println("<div class='slide'><a href='DetalheDoProduto?cod_produto=3'><img src='"+request.getContextPath()+"/images/nike.jpg' width='992' height='298' alt='side' /></a></div>");
                     out.println("</div>");
             
                     out.println("<div id='menu'>");
@@ -70,12 +71,12 @@ public class Index extends HttpServlet {
                 out.println("</div>");
                 
                 out.println("<div id='home-listagem'");
-                List<Produto> produtos = ejb.findAllUnique();
+                List<Produto> produtos = ejb.findAll();
                 for (Produto p : produtos) {
                     out.println("<div class='box-produto'>");
-                    out.println("<a href='"+request.getContextPath()+"/DetalheDoProduto?cod_produto="+p.getCod_produto()+"'><img src='"+request.getContextPath()+"/images/produtos/"+p.getCod_produto()+"' /></a>");
+                    out.println("<a href='"+request.getContextPath()+"/DetalheDoProduto?cod_produto="+p.getCod_produto()+"'><img src='"+request.getContextPath()+"/images/produtos/"+p.getCod_produto()+".jpg' /></a>");
                     out.println("<a href='"+request.getContextPath()+"/DetalheDoProduto?cod_produto="+p.getCod_produto()+"'>"+p.getNome()+"</a><br/>");
-                    out.println(p.getPreco());
+                    out.println("R$ " + p.getPreco());
                     out.println("</div>");
                 }
                 out.println("</div>");

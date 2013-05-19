@@ -4,15 +4,21 @@
  */
 package allshoes.web.servlet;
 
+import allshoes.jpa.Cliente;
+import allshoes.jpa.Pedido;
+import allshoes.jpa.StatusDoPedido;
+import allshoes.jpa.facade.ClienteFacadeRemote;
 import allshoes.web.model.Footer;
 import allshoes.web.model.Header;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -20,6 +26,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class RealizarPagamento extends HttpServlet {
 
+    @EJB(mappedName = "ejb/ClienteFacade")
+    private ClienteFacadeRemote ejb;
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -33,37 +41,26 @@ public class RealizarPagamento extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        Header header = new Header(false, "Realizar Pagamento");
-        Footer footer = new Footer(false);
-        //Lógica: se o pagamento for feito com sucesso, finalizar o pedido. 
-        //Caso contrário, mostrar mensagem de erro
+
+        boolean pagamentoRealizado = false;
+        
+        HttpSession session = request.getSession();
+        
+        Pedido pedido = (Pedido)session.getAttribute("pedido");
+        
+        //INTEGRAÇÃO com a operadora do cartão para realizar a transação - set pagamentoRealizado = true se realizado com sucesso!
+        pedido.setPagamentoRealizado(pagamentoRealizado);
+        
+        session.setAttribute("pedido", pedido);
+        pedido.setStatus(StatusDoPedido.AguardandoPagamento);
+        
+        if (pagamentoRealizado) {
+            pedido.setStatus(StatusDoPedido.AguardandoMatriz);
+        }
+        
         RequestDispatcher rd = request.getRequestDispatcher("FinalizacaoDoPedido");
         rd.forward(request, response);
             
-        try {
-
-            out.println(header.getHeaderPadrao());
-            
-            out.println("<div id='contentSemMenu'>");
-            out.println("<h1>Pagamento</h1>");
-            out.println("<div id='breadcrumb'>Você está em: ");
-            out.println("<a href='" + request.getContextPath() + "'>Home</a>");
-            out.println(" > ");
-            out.println("<a href='" + request.getContextPath() + "/MeuCarrinho'>Meu Carrinho</a>");
-            out.println(" > ");
-            out.println("Pagamento");
-            out.println("</div>");
-            
-            
-            
-            out.println("</div>");
-            
-            out.println(footer.getFooterPadrao());
-
-        } finally {            
-            out.close();
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

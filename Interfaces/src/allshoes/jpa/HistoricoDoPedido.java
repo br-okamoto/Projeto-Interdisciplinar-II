@@ -7,6 +7,7 @@ package allshoes.jpa;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,8 +26,7 @@ public class HistoricoDoPedido implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataPedido;
     private String observacao;
-    @OneToOne(fetch = FetchType.EAGER)
-    private StatusDoPedido idStatus;
+    private StatusDoPedido status;
 
     public int getIdHistorico() {
         return idHistorico;
@@ -44,8 +44,8 @@ public class HistoricoDoPedido implements Serializable {
         return observacao;
     }
 
-    public StatusDoPedido getIdStatus() {
-        return idStatus;
+    public StatusDoPedido getStatus() {
+        return status;
     }
 
     public void setIdHistorico(int idHistorico) {
@@ -64,8 +64,8 @@ public class HistoricoDoPedido implements Serializable {
         this.observacao = observacao;
     }
 
-    public void setIdStatus(StatusDoPedido idStatus) {
-        this.idStatus = idStatus;
+    public void setStatus(StatusDoPedido status) {
+        this.status = status;
     }
     
     

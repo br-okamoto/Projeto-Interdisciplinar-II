@@ -4,20 +4,34 @@
  */
 package allshoes.web.servlet;
 
+import allshoes.jpa.ItemDoPedido;
+import allshoes.jpa.Pedido;
+import allshoes.jpa.StatusDoPedido;
+import allshoes.jpa.facade.ItemDoPedidoFacadeRemote;
+import allshoes.jpa.facade.PedidoFacadeRemote;
 import allshoes.web.model.Footer;
 import allshoes.web.model.Header;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Bruno
  */
 public class FinalizacaoDoPedido extends HttpServlet {
+    
+    @EJB
+    PedidoFacadeRemote pedidoEjb;
+    
+    @EJB
+    ItemDoPedidoFacadeRemote itemPedidoEjb;
 
     /**
      * Processes requests for both HTTP
@@ -36,6 +50,18 @@ public class FinalizacaoDoPedido extends HttpServlet {
         Header header = new Header(false, "Finalização do Pedido");
         Footer footer = new Footer(false);
         
+        HttpSession session = request.getSession();
+        Pedido pedido = (Pedido)session.getAttribute("pedido");
+        ArrayList<ItemDoPedido> itens = (ArrayList<ItemDoPedido>)session.getAttribute("itensDoPedido");
+        
+        pedidoEjb.create(pedido);
+        
+        for (ItemDoPedido i : itens) {
+            i.setPedido(pedido);
+            itemPedidoEjb.create(i);
+        }
+        
+        
         try {
 
             out.println(header.getHeaderPadrao());
@@ -51,6 +77,32 @@ public class FinalizacaoDoPedido extends HttpServlet {
             out.println(" > ");
             out.println("Finalização do Pedido");
             out.println("</div>");
+            
+            out.println("<h1>Pedido Realizado</h1>");
+            out.println("<h2>Informações gerais do pedido</h2>");
+            out.println("<table border='0'>");
+            out.println("<tr>");
+            out.println("<td>Número do Pedido:</td>");
+            out.println("<td>"+pedido.getIdPedido()+"</td>");
+            out.println("</tr>");
+            out.println("<tr>");
+            out.println("<td>Status do Pedido:</td>");
+            String statusPedido = pedido.getStatus() == StatusDoPedido.AguardandoPagamento ? "Aguardando Pagamento" : "Processando pedido";
+            out.println("<td>"+statusPedido+"</td>");
+            out.println("</tr>");
+            out.println("<tr>");
+            out.println("<td>Data do Pedido:</td>");
+            out.println("<td>"+pedido.getDataPedido()+"</td>");
+            out.println("</tr>");
+            out.println("</table>");
+            
+            out.println("<h2>Detalhes do Pedido</h2>");
+            out.println("");
+            out.println("<h2>Forma de Pagamento</h2>");
+            out.println("");
+            out.println("<h2>Endereco de Entrega</h2>");
+            out.println("");
+            
             out.println("</div>");
             
             out.println(footer.getFooterPadrao());

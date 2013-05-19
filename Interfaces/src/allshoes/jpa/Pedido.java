@@ -3,6 +3,8 @@ package allshoes.jpa;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,54 +20,71 @@ public class Pedido implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idPedido;
     @ManyToOne(fetch = FetchType.EAGER)
-    private Cliente idCliente;
+    private Cliente cliente;
     @OneToOne(fetch = FetchType.EAGER)
-    private Endereco idEndereco;
+    private Endereco endereco;
     @ManyToOne(fetch = FetchType.EAGER)
-    private Filial idFilial;
+    private Filial filial;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataPedido;
+    private boolean pagamentoRealizado;
+    @Enumerated (EnumType.STRING)
+    private StatusDoPedido status;
 
     public int getIdPedido() {
         return idPedido;
-    }
-
-    public Cliente getIdCliente() {
-        return idCliente;
-    }
-
-    public Endereco getIdEndereco() {
-        return idEndereco;
-    }
-
-    public Filial getIdFilial() {
-        return idFilial;
-    }
-
-    public Date getDataPedido() {
-        return dataPedido;
     }
 
     public void setIdPedido(int idPedido) {
         this.idPedido = idPedido;
     }
 
-    public void setIdCliente(Cliente idCliente) {
-        this.idCliente = idCliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setIdEndereco(Endereco idEndereco) {
-        this.idEndereco = idEndereco;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
-    public void setIdFilial(Filial idFilial) {
-        this.idFilial = idFilial;
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public Filial getFilial() {
+        return filial;
+    }
+
+    public void setFilial(Filial filial) {
+        this.filial = filial;
+    }
+
+    public Date getDataPedido() {
+        return dataPedido;
     }
 
     public void setDataPedido(Date dataPedido) {
         this.dataPedido = dataPedido;
     }
-    
-    
+
+    public boolean isPagamentoRealizado() {
+        return pagamentoRealizado;
+    }
+
+    public void setPagamentoRealizado(boolean pagamentoRealizado) {
+        this.pagamentoRealizado = pagamentoRealizado;
+    }
+
+    public StatusDoPedido getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusDoPedido status) {
+        this.status = status;
+    }
     
 }

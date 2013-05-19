@@ -34,7 +34,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         jTextField1.setDocument(new IntegerDocument(4));
         jTextField4.setDocument(new IntegerDocument(2));
         //Campo aceita apenas letras
-        jTextField2.setDocument(new teclasPermitidas());
+        //jTextField2.setDocument(new teclasPermitidas());
         jTextField5.setDocument(new teclasPermitidas());
         
         jComboBox1.setModel(new DefaultComboBoxModel<>(Marca.values()));

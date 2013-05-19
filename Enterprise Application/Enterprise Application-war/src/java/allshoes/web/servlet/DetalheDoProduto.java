@@ -61,7 +61,7 @@ public class DetalheDoProduto extends HttpServlet {
             out.println("Detalhe do Produto");
             out.println("</div>");
             
-            out.println("<img src='" + request.getContextPath() + "/images/produtos/" + produto.getIdProduto() + ".jpg' alt='' class='imgDetalheProduto'/>");
+            out.println("<img src='" + request.getContextPath() + "/images/produtos/" + produto.getCod_produto() + ".jpg' alt='' class='imgDetalheProduto'/>");
             
             out.println("<div id='produtosInfo'>");
             out.println("<h1>" + produto.getNome() + "</h1>");
@@ -115,10 +115,11 @@ public class DetalheDoProduto extends HttpServlet {
             out.println("<td>&nbsp;</td>");
             out.println("</tr>");
             out.println("<tr>");
-            out.println("<tr>");
             out.println("<td colspan='2' align='right'><input type='submit' name='action' value='Adicionar a Lista de Desejos' />&nbsp;&nbsp;&nbsp;<input type='submit' name='action' value='Comprar' /></td>");
             out.println("</tr>");
+            out.println("<td style='display:none'><input type='hidden' name='cod_produto' value='"+produto.getCod_produto()+"' /></td>");
             out.println("<tr>");
+            out.println("</tr>");
             out.println("</table>");
             out.println("</form>");
             out.println("</div>");

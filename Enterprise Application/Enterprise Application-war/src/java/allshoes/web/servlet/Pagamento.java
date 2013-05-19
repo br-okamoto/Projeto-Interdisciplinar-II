@@ -4,21 +4,38 @@
  */
 package allshoes.web.servlet;
 
+import allshoes.facade.CartBeanRemote;
+import allshoes.jpa.Cliente;
+import allshoes.jpa.Endereco;
+import allshoes.jpa.Estado;
+import allshoes.jpa.ItemDoPedido;
+import allshoes.jpa.Pedido;
+import allshoes.jpa.StatusDoPedido;
+import allshoes.jpa.facade.ClienteFacadeRemote;
 import allshoes.web.model.Footer;
 import allshoes.web.model.Header;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.ejb.EJB;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Bruno
  */
 public class Pagamento extends HttpServlet {
+    private static final String STATEFUL_BEAN_KEY = "STATEFUL_BEAN_KEY";
 
+    @EJB(mappedName = "ejb/ClienteFacade")
+    private ClienteFacadeRemote ejb;
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -35,6 +52,50 @@ public class Pagamento extends HttpServlet {
         PrintWriter out = response.getWriter();
         Header header = new Header(false, "Pagamento");
         Footer footer = new Footer(false);
+        
+        String username = null;
+        HttpSession session = request.getSession();
+        try {
+           username = session.getAttribute("username").toString();
+        }
+        catch (NullPointerException ex) {
+            RequestDispatcher rd = request.getRequestDispatcher("Login?returnURL=/Enterprise_Application-war/Pagamento");
+            rd.forward(request, response);
+        }
+        
+        Cliente cliente = ejb.find(username);
+        Endereco enderecoPedido;
+        
+        if (request.getParameter("rdEndereco").toString().equals("enderecoCadastrado")) {
+            enderecoPedido = cliente.getEndereco();
+        } else {
+            Endereco novoEndereco = new Endereco();
+            novoEndereco.setRua(request.getParameter("txtRua"));
+            novoEndereco.setNumero(request.getParameter("txtNumero"));
+            novoEndereco.setComplemento(request.getParameter("txtComplemento"));
+            novoEndereco.setCep(request.getParameter("txtCEP"));
+            novoEndereco.setBairro(request.getParameter("txtBairro"));
+            novoEndereco.setCidade(request.getParameter("txtCidade"));
+            novoEndereco.setEstado(Estado.valueOf(request.getParameter("ddlEstado")));
+            enderecoPedido = novoEndereco;
+        }
+        
+        CartBeanRemote carrinho = getCartBean(request);
+        double total = 0;
+        ArrayList<ItemDoPedido> itens = new ArrayList<ItemDoPedido>();
+        itens = (ArrayList<ItemDoPedido>)carrinho.getItems();
+        for (ItemDoPedido i : itens) {
+            total += i.getSubTotal();
+        }
+        
+        Pedido pedido = new Pedido();
+        pedido.setCliente(cliente);
+        pedido.setDataPedido(new java.util.Date());
+        pedido.setEndereco(enderecoPedido);
+        pedido.setStatus(StatusDoPedido.Aberto);
+        
+        session.setAttribute("pedido", pedido);
+        session.setAttribute("itensDoPedido",itens);
         
         try {
 
@@ -58,12 +119,12 @@ public class Pagamento extends HttpServlet {
             out.println("<form action='RealizarPagamento' method='post'>");
             out.println("<input type='hidden' value='visa' />");
             out.println("<div class='ckbsPgto'>");
-            out.println("<input type='radio' name='ckbParcelas' value='1' >1 x R$ 159,90</input><br/>");
-            out.println("<input type='radio' name='ckbParcelas' value='2' >2 x R$ 79,95</input><br/>");
-            out.println("<input type='radio' name='ckbParcelas' value='3' >3 x R$ 53,30</input><br/>");
-            out.println("<input type='radio' name='ckbParcelas' value='4' >4 x R$ 39,98</input><br/>");
-            out.println("<input type='radio' name='ckbParcelas' value='5' >5 x R$ 31,98</input><br/>");
-            out.println("<input type='radio' name='ckbParcelas' value='6' >6 x R$ 26,65</input>");
+            out.println("<input type='radio' name='ckbParcelas' value='1' >1 x R$ "+total+"</input><br/>");
+            out.println("<input type='radio' name='ckbParcelas' value='2' >2 x R$ "+(total/2)+"</input><br/>");
+            out.println("<input type='radio' name='ckbParcelas' value='3' >3 x R$ "+(total/3)+"</input><br/>");
+            out.println("<input type='radio' name='ckbParcelas' value='4' >4 x R$ "+(total/4)+"</input><br/>");
+            out.println("<input type='radio' name='ckbParcelas' value='5' >5 x R$ "+(total/5)+"</input><br/>");
+            out.println("<input type='radio' name='ckbParcelas' value='6' >6 x R$ "+(total/6)+"</input>");
             out.println("</div>");
             out.println("<div class='dadosPgto'>");
             out.println("<table border='0' cellpadding='3' cellspacing='3'>");
@@ -124,6 +185,21 @@ public class Pagamento extends HttpServlet {
         } finally {            
             out.close();
         }
+    }
+    
+    private CartBeanRemote getCartBean(HttpServletRequest request) throws ServletException {
+        HttpSession httpSession = request.getSession(true);
+        CartBeanRemote carrinho = (CartBeanRemote) httpSession.getAttribute(STATEFUL_BEAN_KEY);
+        if (carrinho == null) {
+            try {
+                InitialContext ic = new InitialContext();
+                carrinho = (CartBeanRemote) ic.lookup("ejb/CartBean");
+                httpSession.setAttribute(STATEFUL_BEAN_KEY, carrinho);
+            } catch (NamingException e) {
+                throw new ServletException(e);
+            }
+        }
+        return carrinho;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
