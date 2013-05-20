@@ -8,12 +8,12 @@ package matriz;
  *
  * @author Lylo
  */
-public class MatrizMain extends javax.swing.JFrame {
+public class TelaPrincipal extends javax.swing.JFrame {
 
     /**
-     * Creates new form MatrizMain
+     * Creates new form TelaPrincipal
      */
-    public MatrizMain() {
+    public TelaPrincipal() {
         initComponents();
     }
 
@@ -181,9 +181,8 @@ public class MatrizMain extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel7))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6)
                             .addComponent(jLabel8))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
@@ -214,7 +213,7 @@ public class MatrizMain extends javax.swing.JFrame {
 
     private void UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioActionPerformed
         Usuario u = new Usuario();
-        MatrizMain principal = new MatrizMain();
+        TelaPrincipal principal = new TelaPrincipal();
         principal.setVisible(false);
         dispose();
         u.setVisible(true);
@@ -223,7 +222,7 @@ public class MatrizMain extends javax.swing.JFrame {
 
     private void DepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepartamentoActionPerformed
         Departamento d = new Departamento();
-        MatrizMain principal = new MatrizMain();
+        TelaPrincipal principal = new TelaPrincipal();
         principal.setVisible(false);
         dispose();
         d.setVisible(true);
@@ -232,7 +231,7 @@ public class MatrizMain extends javax.swing.JFrame {
 
     private void SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairActionPerformed
         Login login = new Login();
-        MatrizMain principal = new MatrizMain();
+        TelaPrincipal principal = new TelaPrincipal();
         principal.setVisible(false);
         dispose();
         login.setVisible(true);
@@ -240,7 +239,7 @@ public class MatrizMain extends javax.swing.JFrame {
 
     private void ProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProdutosActionPerformed
         Produto p = new Produto();
-        MatrizMain principal = new MatrizMain();
+        TelaPrincipal principal = new TelaPrincipal();
         principal.setVisible(false);
         dispose();
         p.setVisible(true);
@@ -248,8 +247,8 @@ public class MatrizMain extends javax.swing.JFrame {
     }//GEN-LAST:event_ProdutosActionPerformed
 
     private void PedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PedidosActionPerformed
-        Pedido p = new Pedido();
-        MatrizMain principal = new MatrizMain();
+        TelaPedidos p = new TelaPedidos();
+        TelaPrincipal principal = new TelaPrincipal();
         principal.setVisible(false);
         dispose();
         p.setVisible(true);
@@ -258,7 +257,7 @@ public class MatrizMain extends javax.swing.JFrame {
 
     private void relatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relatoriosActionPerformed
         Relatorio r = new Relatorio();
-        MatrizMain principal = new MatrizMain();
+        TelaPrincipal principal = new TelaPrincipal();
         principal.setVisible(false);
         dispose();
         r.setVisible(true);
@@ -281,20 +280,20 @@ public class MatrizMain extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MatrizMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MatrizMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MatrizMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MatrizMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MatrizMain().setVisible(true);
+                new TelaPrincipal().setVisible(true);
             }
         });
     }

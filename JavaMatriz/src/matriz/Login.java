@@ -136,7 +136,7 @@ public class Login extends javax.swing.JFrame {
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
         MatrizController controller = null;
-        MatrizMain principal = new MatrizMain();
+        TelaPrincipal principal = new TelaPrincipal();
         
         try {
             controller = new MatrizController();

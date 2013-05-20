@@ -26,13 +26,13 @@ public class CadastroUsuario extends javax.swing.JFrame {
         jTextField13.setDocument(new IntegerDocument(8));
         jTextField14.setDocument(new IntegerDocument(11));
         //Campo aceita apenas letras
-        jTextField2.setDocument(new teclasPermitidas());
-        jTextField3.setDocument(new teclasPermitidas());
-        jTextField4.setDocument(new teclasPermitidas());
-        jTextField5.setDocument(new teclasPermitidas());
-        jTextField8.setDocument(new teclasPermitidas());
-        jTextField9.setDocument(new teclasPermitidas());
-        jTextField12.setDocument(new teclasPermitidas());
+        //jTextField2.setDocument(new teclasPermitidas());
+        //jTextField3.setDocument(new teclasPermitidas());
+        //jTextField4.setDocument(new teclasPermitidas());
+        //jTextField5.setDocument(new teclasPermitidas());
+        //jTextField8.setDocument(new teclasPermitidas());
+        //jTextField9.setDocument(new teclasPermitidas());
+        //jTextField12.setDocument(new teclasPermitidas());
         
         
     }
@@ -428,7 +428,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeActionPerformed
-        MatrizMain m = new MatrizMain();
+        TelaPrincipal m = new TelaPrincipal();
         CadastroUsuario user = new CadastroUsuario();
         user.setVisible(false);
         dispose();
@@ -468,7 +468,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_RelatoriosActionPerformed
 
     private void PedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PedidosActionPerformed
-        Pedido p = new Pedido();
+        TelaPedidos p = new TelaPedidos();
         CadastroUsuario user = new CadastroUsuario();
         user.setVisible(false);
         dispose();

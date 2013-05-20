@@ -18,6 +18,8 @@ public interface ItemDoPedidoFacadeRemote {
     ItemDoPedido find(Object id);
 
     List<ItemDoPedido> findAll();
+    
+    List<ItemDoPedido> findAll(int idPedido);
 
     List<ItemDoPedido> findRange(int[] range);
 

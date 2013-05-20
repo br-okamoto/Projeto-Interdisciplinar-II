@@ -377,7 +377,7 @@ public class Relatorio extends javax.swing.JFrame {
     }//GEN-LAST:event_UsuarioActionPerformed
 
     private void HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeActionPerformed
-        MatrizMain m = new MatrizMain();
+        TelaPrincipal m = new TelaPrincipal();
         Usuario u = new Usuario();
         u.setVisible(false);
         dispose();
@@ -386,7 +386,7 @@ public class Relatorio extends javax.swing.JFrame {
     }//GEN-LAST:event_HomeActionPerformed
 
     private void PedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PedidosActionPerformed
-        Pedido p = new Pedido();
+        TelaPedidos p = new TelaPedidos();
         Usuario u = new Usuario();
         u.setVisible(false);
         dispose();

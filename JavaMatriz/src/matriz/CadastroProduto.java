@@ -400,7 +400,7 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeActionPerformed
-        MatrizMain m = new MatrizMain();
+        TelaPrincipal m = new TelaPrincipal();
         CadastroProduto p = new CadastroProduto();
         p.setVisible(false);
         dispose();
@@ -418,7 +418,7 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_RelatoriosActionPerformed
 
     private void PedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PedidosActionPerformed
-        Pedido p = new Pedido();
+        TelaPedidos p = new TelaPedidos();
         CadastroProduto cp = new CadastroProduto();
         cp.setVisible(false);
         dispose();

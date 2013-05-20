@@ -67,7 +67,14 @@ public class Pagamento extends HttpServlet {
         Endereco enderecoPedido;
         
         if (request.getParameter("rdEndereco").toString().equals("enderecoCadastrado")) {
-            enderecoPedido = cliente.getEndereco();
+            enderecoPedido = new Endereco();
+            enderecoPedido.setRua(cliente.getEndereco().getRua());
+            enderecoPedido.setNumero(cliente.getEndereco().getNumero());
+            enderecoPedido.setComplemento(cliente.getEndereco().getComplemento());
+            enderecoPedido.setCep(cliente.getEndereco().getCep());
+            enderecoPedido.setBairro(cliente.getEndereco().getBairro());
+            enderecoPedido.setCidade(cliente.getEndereco().getCidade());
+            enderecoPedido.setEstado(cliente.getEndereco().getEstado());
         } else {
             Endereco novoEndereco = new Endereco();
             novoEndereco.setRua(request.getParameter("txtRua"));

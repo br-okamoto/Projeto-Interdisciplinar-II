@@ -6,21 +6,85 @@ package matriz;
 
 import Validacao.IntegerDocument;
 import Validacao.teclasPermitidas;
+import allshoes.jpa.ItemDoPedido;
+import allshoes.jpa.Pedido;
+import controller.MatrizItemPedidoController;
+import controller.MatrizPedidoController;
+import controller.MatrizProdutoController;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Lylo
  */
-public class Pedido extends javax.swing.JFrame {
+public class TelaPedidos extends javax.swing.JFrame {
 
     /**
-     * Creates new form Pedido
+     * Creates new form TelaPedidos
      */
-    public Pedido() {
+    public TelaPedidos() {
         initComponents();
+        MatrizPedidoController controller = null;
+        MatrizItemPedidoController itemController = null;
+        
         //Permite Campo com apenas 4 números
         jTextField1.setDocument(new IntegerDocument(4));
         //Campo aceita apenas letras
+        try {
+            controller = new MatrizPedidoController();
+            itemController = new MatrizItemPedidoController();
+            
+            List<Pedido> pedidos = controller.findAll();
+            
+        
+            if (!pedidos.isEmpty()) {
+                DefaultTableModel dtm = new DefaultTableModel();
+                    Object[] tableColumnNames = new Object[13];
+                    tableColumnNames[0] = "ID do Pedido";
+                    tableColumnNames[1] = "Data do Pedido";
+                    tableColumnNames[2] = "Status";
+                    tableColumnNames[3] = "Valor";
+                    tableColumnNames[4] = "ID do Cliente";
+                    tableColumnNames[5] = "Nome do Cliente";
+                    tableColumnNames[6] = "Rua";
+                    tableColumnNames[7] = "Numero";
+                    tableColumnNames[8] = "Complemento";
+                    tableColumnNames[9] = "Bairro";
+                    tableColumnNames[10] = "CEP";
+                    tableColumnNames[11] = "Cidade";
+                    tableColumnNames[12] = "Estado";
+                    dtm.setColumnIdentifiers(tableColumnNames);
+                    Object[] objects = new Object[13];
+                    for(Pedido p : pedidos) {
+                        /*List<ItemDoPedido> itens = itemController.findAll(p.getIdPedido());
+                        double total = 0;
+                        if (!itens.isEmpty()) {
+                            for (ItemDoPedido idp : itens) {
+                                total += idp.getSubTotal();
+                            }
+                        }*/
+                        objects[0] = p.getIdPedido();
+                        objects[1] = p.getDataPedido();
+                        objects[2] = p.getStatus();
+                        objects[3] = "0";
+                        objects[4] = p.getCliente().getIdPessoa();
+                        objects[5] = p.getCliente().getNome();
+                        objects[6] = p.getEndereco().getRua();
+                        objects[7] = p.getEndereco().getNumero();
+                        objects[8] = p.getEndereco().getComplemento();
+                        objects[9] = p.getEndereco().getBairro();
+                        objects[10] = p.getEndereco().getCep();
+                        objects[11] = p.getEndereco().getCidade();
+                        objects[12] = p.getEndereco().getEstado();
+                        dtm.addRow(objects);
+                    }
+                    jTable1.setModel(dtm);
+            }
+        }
+        catch (Exception e) {
+            
+        }
         
     }
 
@@ -245,6 +309,7 @@ public class Pedido extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable1.setRowHeight(20);
         jScrollPane1.setViewportView(jTable1);
 
@@ -265,9 +330,9 @@ public class Pedido extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,10 +365,9 @@ public class Pedido extends javax.swing.JFrame {
                             .addComponent(Limpar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(19, 19, 19)
-                                .addComponent(jLabel12))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 861, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel12)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -345,8 +409,8 @@ public class Pedido extends javax.swing.JFrame {
                                     .addComponent(jLabel13)))
                             .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(54, 54, 54)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -383,7 +447,7 @@ public class Pedido extends javax.swing.JFrame {
     }//GEN-LAST:event_UsuarioActionPerformed
 
     private void HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeActionPerformed
-        MatrizMain m = new MatrizMain();
+        TelaPrincipal m = new TelaPrincipal();
         Usuario u = new Usuario();
         u.setVisible(false);
         dispose();
@@ -422,20 +486,20 @@ public class Pedido extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Pedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Pedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Pedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Pedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Pedido().setVisible(true);
+                new TelaPedidos().setVisible(true);
             }
         });
     }

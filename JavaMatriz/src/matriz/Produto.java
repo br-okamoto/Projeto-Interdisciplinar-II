@@ -413,7 +413,7 @@ public class Produto extends javax.swing.JFrame {
     }//GEN-LAST:event_UsuarioActionPerformed
 
     private void HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeActionPerformed
-        MatrizMain m = new MatrizMain();
+        TelaPrincipal m = new TelaPrincipal();
         Produto p = new Produto();
         p.setVisible(false);
         dispose();
@@ -422,7 +422,7 @@ public class Produto extends javax.swing.JFrame {
     }//GEN-LAST:event_HomeActionPerformed
 
     private void PedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PedidosActionPerformed
-        Pedido pe = new Pedido();
+        TelaPedidos pe = new TelaPedidos();
         Produto p = new Produto();
         p.setVisible(false);
         dispose();

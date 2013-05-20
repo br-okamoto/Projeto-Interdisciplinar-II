@@ -387,7 +387,7 @@ public class EditarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeActionPerformed
-        MatrizMain m = new MatrizMain();
+        TelaPrincipal m = new TelaPrincipal();
         EditarProduto p = new EditarProduto();
         p.setVisible(false);
         dispose();
@@ -405,7 +405,7 @@ public class EditarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_RelatoriosActionPerformed
 
     private void PedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PedidosActionPerformed
-        Pedido p = new Pedido();
+        TelaPedidos p = new TelaPedidos();
         EditarProduto cp = new EditarProduto();
         cp.setVisible(false);
         dispose();

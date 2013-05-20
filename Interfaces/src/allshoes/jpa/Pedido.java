@@ -2,6 +2,7 @@ package allshoes.jpa;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
@@ -21,7 +23,7 @@ public class Pedido implements Serializable {
     private int idPedido;
     @ManyToOne(fetch = FetchType.EAGER)
     private Cliente cliente;
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
     private Endereco endereco;
     @ManyToOne(fetch = FetchType.EAGER)
     private Filial filial;
