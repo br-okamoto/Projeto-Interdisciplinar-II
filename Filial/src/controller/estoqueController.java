@@ -24,6 +24,10 @@ public class estoqueController {
     public void create(Estoque_Produto estoque_produto) {
         estoqueFacade.create(estoque_produto);
     }
+    
+    public void edit(Estoque_Produto estoque_produto) {
+        estoqueFacade.edit(estoque_produto);
+    } 
 
     public List<Estoque_Produto> find(Produto produto){
         return estoqueFacade.find(produto);
@@ -37,11 +41,11 @@ public class estoqueController {
         return estoqueFacade.find(produto, filial);
     }
     
-    boolean aumentarEstoque(Filial filial, Produto produto, int quantidade){
+    public boolean aumentarEstoque(Filial filial, Produto produto, int quantidade){
         return estoqueFacade.aumentarEstoque(filial, produto, quantidade);
     }
     
-    boolean reduzirEstoque(Filial filial, Produto produto, int quantidade){
+    public boolean reduzirEstoque(Filial filial, Produto produto, int quantidade){
         return estoqueFacade.reduzirEstoque(filial, produto, quantidade);
     }
     
