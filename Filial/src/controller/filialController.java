@@ -26,8 +26,11 @@ public class filialController {
     public Filial find(String name){
         return filialFacade.find(name);
     }
-            
-            
+    
+    public Filial find(int codFilial){
+        return filialFacade.find(codFilial);
+    }
+
     public List<Filial> findAll() {
         return (filialFacade.findAll());
     }
