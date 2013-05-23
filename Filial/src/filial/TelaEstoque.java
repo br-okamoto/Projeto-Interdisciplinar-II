@@ -364,7 +364,7 @@ public class TelaEstoque extends javax.swing.JFrame {
     // Saída de Produtos do Estoque
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         
-        int codigo = Integer.parseInt(campoCodigo.getText());
+          int codigo = Integer.parseInt(campoCodigo.getText());
         int quantidade = Integer.parseInt(campoQuantidade.getText());
 
         try {
@@ -373,28 +373,53 @@ public class TelaEstoque extends javax.swing.JFrame {
             Estoque estoque = new Estoque();
             Filial filial = new Filial();
             estoqueController controlaEstoque = new estoqueController();
+            produtoController controlaProduto = new produtoController();
+            filialController controlaFilial = new filialController();
 
-            estoque.setIdEstoque(1);
-            prod.setIdProduto(13);
+            Produto produtos = controlaProduto.find(codigo);
+                      
+            campoProduto.setText(produtos.getNome());
+            
+            //Pega o Id do Produto
+            String nomeFilial = (String) jComboBox1.getSelectedItem();
+            char letra = nomeFilial.charAt(0); 
+            int idFilial = Integer.parseInt(String.valueOf(letra));
+            int idProduto = produtos.getIdProduto();
+     
+            int idEstoqueProduto = 0;
+            int quantidadeEstoque = 0;
+            
+            //Verifica o idProduto com idFilial para alterar a quantidade
+            List<Estoque_Produto> estoqueProduto = controlaEstoque.findAll();
+            for (Estoque_Produto e : estoqueProduto) {
+                if ((e.getProduto().getIdProduto() == idProduto) && (e.getEstoque().getIdEstoque() == idFilial)) {
+                    idEstoqueProduto = e.getIdEstoque_Produto();
+                    quantidadeEstoque = e.getQuantidade();
+                }
+            }   
+            
+            produtos.setIdProduto(idProduto);
+            estoque.setIdEstoque(idFilial);
 
-            ep.setIdEstoque_Produto(1);
-            ep.setQuantidade(quantidade);
+            ep.setIdEstoque_Produto(idEstoqueProduto);
+            ep.setQuantidade(quantidadeEstoque - quantidade);
             ep.setEstoque(estoque);
-            ep.setProduto(prod);
-
-            int novaQuantidade = ep.getQuantidade();
+            ep.setProduto(produtos);
 
             controlaEstoque.edit(ep);
+     
             listaTabela();
-            JOptionPane.showMessageDialog(null, "Saida de Produtos");
+
+            JOptionPane.showMessageDialog(null, "Efetuada a Saída de produtos no Estoque");
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro: ");
             Logger.getLogger(TelaEstoque.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
-
+ // entrada de produtos no estoque
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // entrada de produtos no estoque
+       
         int codigo = Integer.parseInt(campoCodigo.getText());
         int quantidade = Integer.parseInt(campoQuantidade.getText());
 
@@ -429,8 +454,7 @@ public class TelaEstoque extends javax.swing.JFrame {
             
             produtos.setIdProduto(idProduto);
             estoque.setIdEstoque(idFilial);
-            
-            
+
             ep.setIdEstoque_Produto(idEstoqueProduto);
             ep.setQuantidade(quantidadeEstoque + quantidade);
             ep.setEstoque(estoque);
@@ -440,7 +464,7 @@ public class TelaEstoque extends javax.swing.JFrame {
      
             listaTabela();
 
-            JOptionPane.showMessageDialog(null, "Estoque alterado");
+            JOptionPane.showMessageDialog(null, "Efetuada a Entrada de produtos no Estoque");
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro: ");
@@ -456,9 +480,7 @@ public class TelaEstoque extends javax.swing.JFrame {
             filialController controlaFilial = new filialController();
             
             List<Produto> produtos = controlaProduto.findAll();
-            List<Estoque_Produto> e = controlaEstoque.findAll();
-            
-            
+            List<Estoque_Produto> e = controlaEstoque.findAll();           
             
             if (!produtos.isEmpty()) {
                 DefaultTableModel dtm = new DefaultTableModel();
