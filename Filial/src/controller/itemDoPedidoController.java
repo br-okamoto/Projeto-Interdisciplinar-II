@@ -1,7 +1,6 @@
 package controller;
 
 import allshoes.jpa.ItemDoPedido;
-import allshoes.jpa.Funcionario;
 import allshoes.jpa.facade.ItemDoPedidoFacadeRemote;
 import java.util.List;
 import java.util.Properties;
