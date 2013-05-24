@@ -2,6 +2,7 @@ package Filial;
 
 import Validacao.IntegerDocument;
 import Validacao.teclasPermitidas;
+import allshoes.jpa.Estoque;
 import allshoes.jpa.Estoque_Produto;
 import controller.filialController;
 import controller.funcionarioController;
@@ -13,6 +14,8 @@ import allshoes.jpa.Pedido;
 import allshoes.jpa.Produto;
 import allshoes.jpa.StatusDoPedido;
 import controller.estoqueController;
+import controller.historicoDoPedidoController;
+import controller.itemDoPedidoController;
 import controller.pedidoController;
 import controller.produtoController;
 import java.text.SimpleDateFormat;
@@ -337,11 +340,18 @@ public class TelaVenda extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             pedidoController controlaPedido = new pedidoController();
+            produtoController controlaProduto = new produtoController();
+            itemDoPedidoController controlaItemDoPedido = new itemDoPedidoController();
+            historicoDoPedidoController controlaHistoricoDoPedido = new historicoDoPedidoController();
+            estoqueController controlaEstoque = new estoqueController();
             DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
             Pedido pedidos = new Pedido();
             Filial filial = new Filial();
+            Produto produtos = new Produto();
             ItemDoPedido item = new ItemDoPedido();
             HistoricoDoPedido historico = new HistoricoDoPedido();
+            Estoque estoques = new Estoque();
+            Estoque_Produto estoqueProduto = new Estoque_Produto();
             Date data = new Date();
             //String dataFormatada = new SimpleDateFormat("yyyy-MM-dd").format(data);
 
@@ -351,54 +361,66 @@ public class TelaVenda extends javax.swing.JFrame {
             int idFilial = Integer.parseInt(String.valueOf(letra));
 
             int totalLinhas = jTable1.getModel().getRowCount();
-            int totalColunas = jTable1.getModel().getColumnCount();
-            int linha = 0;
-            int coluna = 0;
-
             Object[] objects = new Object[7];
 
-            //for (linha = 0; linha < totalLinhas; linha++) {
-                
-                    objects[0] = jTable1.getValueAt(linha, 0); //codigo
-                    objects[1] = jTable1.getValueAt(linha, 1); //nome
-                    objects[2] = jTable1.getValueAt(linha, 2); //cor
-                    objects[3] = jTable1.getValueAt(linha, 3); //tamanho
-                    objects[4] = jTable1.getValueAt(linha, 4); //quantidade
-                    objects[5] = jTable1.getValueAt(linha, 5); //preço
-                    objects[6] = jTable1.getValueAt(linha, 6); //total
-               
-            int codigo = (Integer) objects[0];
-            String nome = (String) objects[1];
-            String cor = (String) objects[2];
-            int tamanho = (Integer) objects[3];
-            
-            String qtd = (String) objects[4];
-            int quantidade = Integer.parseInt(qtd);
-            double preco = (Double) objects[5];
-            double totalo = (Double) objects[6];
+             //Adiciona dados na tabela Pedido
+             filial.setIdFilial(idFilial);
+             pedidos.setDataPedido(data);
+             pedidos.setPagamentoRealizado(true);
+             pedidos.setStatus(StatusDoPedido.Finalizado);
+             pedidos.setFilial(filial);
+             controlaPedido.create(pedidos);
 
+            //IdPedido
             List<Pedido> ped = controlaPedido.findAll();
-            int id = 0;
+            int idPedido = 0;
             for (Pedido p : ped) {
-                if (id < p.getIdPedido()) {
-                    id = p.getIdPedido();
+                if (idPedido < p.getIdPedido()) {
+                    idPedido = p.getIdPedido();
                 }
             }
 
-            filial.setIdFilial(idFilial);
+            //Adiciona dados na tabela Historico do Pedido
+            pedidos.setIdPedido(idPedido);
+            historico.setDataPedido(data);
+            historico.setObservacao(null);
+            historico.setStatus(StatusDoPedido.Finalizado);
+            historico.setPedido(pedidos);
+            controlaHistoricoDoPedido.create(historico);
+      
+            for (int linha = 0; linha < totalLinhas; linha++) {
+                objects[0] = jTable1.getValueAt(linha, 0); //codigo do Produto
+                objects[1] = jTable1.getValueAt(linha, 1); //nome
+                objects[2] = jTable1.getValueAt(linha, 2); //cor
+                objects[3] = jTable1.getValueAt(linha, 3); //tamanho
+                objects[4] = jTable1.getValueAt(linha, 4); //quantidade
+                objects[5] = jTable1.getValueAt(linha, 5); //preço
+                objects[6] = jTable1.getValueAt(linha, 6); //subTotal
 
-            pedidos.setIdPedido(id + 1);
-            pedidos.setDataPedido(data);
-            pedidos.setPagamentoRealizado(true);
-            pedidos.setStatus(StatusDoPedido.Finalizado);
-            pedidos.setFilial(filial);
+                //Codigo do produto
+                int codigoProduto = (Integer) objects[0];
+                //quantidade
+                String qtd = (String) objects[4];
+                int quantidade = Integer.parseInt(qtd);
+                //SubTotal
+                double subTotal = (Double) objects[6];
 
-            controlaPedido.create(pedidos); 
-                
-          //  }
-            
-
-            
+                //Adiciona na tabela Item do Pedido
+                pedidos.setIdPedido(idPedido);
+                produtos.setIdProduto(codigoProduto);
+                item.setQuantidade(quantidade);
+                item.setSubTotal(subTotal);
+                item.setPedido(pedidos);
+                item.setProduto(produtos);
+                controlaItemDoPedido.create(item);
+      
+                diminuiEstoque(quantidade, idFilial, codigoProduto);
+            }
+       
+            String nome = (String) objects[1];
+            String cor = (String) objects[2];
+            int tamanho = (Integer) objects[3];
+            double preco = (Double) objects[5];
 
             JOptionPane.showMessageDialog(null, "Compra Finalizada");
 
@@ -408,9 +430,39 @@ public class TelaVenda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    public static void diminuiEstoque(int quantidade, int idFilial, int codigoProduto) throws Exception{
+        estoqueController controlaEstoque = new estoqueController();
+        produtoController controlaProduto = new produtoController();
+        Produto produto = new Produto();
+        Filial filial = new Filial();
+        Estoque_Produto estoqueProduto = new Estoque_Produto();
+        Estoque estoque = new Estoque();
+        
+        Produto produtos = controlaProduto.find(codigoProduto);
+        int idProduto = produtos.getIdProduto();
+        
+        int idEstoqueProduto = 0;
+            int quantidadeEstoque = 0;
+            List<Estoque_Produto> eProduto = controlaEstoque.findAll();
+            for(Estoque_Produto estoques : eProduto){
+            if((estoques.getProduto().getIdProduto() == idProduto) && (estoques.getEstoque().getIdEstoque() == idFilial)){
+                idEstoqueProduto = estoques.getIdEstoque_Produto();
+                quantidadeEstoque = estoques.getQuantidade();
+            }
+        }
+                        
+        //idFilial = idEstoque
+        estoque.setIdEstoque(idFilial);
+        produto.setIdProduto(idProduto);
+        
+        estoqueProduto.setIdEstoque_Produto(idEstoqueProduto);
+        estoqueProduto.setQuantidade(estoqueProduto.getQuantidade() - quantidade);
+        estoqueProduto.setEstoque(estoque);
+        estoqueProduto.setProduto(produto);
+        controlaEstoque.edit(estoqueProduto);
+        JOptionPane.showMessageDialog(null, "Qtd alterado");
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

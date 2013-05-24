@@ -11,6 +11,7 @@ import allshoes.jpa.Produto;
 import allshoes.jpa.StatusDoPedido;
 import controller.estoqueController;
 import controller.filialController;
+import controller.itemDoPedidoController;
 import controller.pedidoController;
 import controller.produtoController;
 import java.text.SimpleDateFormat;
@@ -28,39 +29,32 @@ public class Teste {
         estoqueController controlaEstoque = new estoqueController();
         pedidoController controlaPedido = new pedidoController();
         filialController controlaFilial = new filialController();
+        itemDoPedidoController controlaItemDoPedido = new itemDoPedidoController();
 
-        Date data = new Date();
-        String dataFormatada = new SimpleDateFormat("yyyy-MM-dd").format(data);
-
-        Endereco endereco = new Endereco();
-        Filial filial = new Filial();
-        Produto produto = new Produto();
-        Estoque estoque = new Estoque();
-        Estoque_Produto ep = new Estoque_Produto();
-        Pedido pedido = new Pedido();
+        Pedido pedidos = new Pedido();
         ItemDoPedido item = new ItemDoPedido();
-        HistoricoDoPedido historico = new HistoricoDoPedido();
-
-        filial.setIdFilial(1);
-        endereco.setIdEndereco(1);
-
-        List<Pedido> ped = controlaPedido.findAll();
-        int id = 0;
-        for(Pedido p : ped){
-            if(id < p.getIdPedido()){
-            id = p.getIdPedido();
+        Produto produtos = new Produto();
+        Estoque_Produto ep = new Estoque_Produto();
+        Estoque estoques = new Estoque();
+        
+        int idEstoqueProduto = 0;
+        int quantidade = 0;
+        List <Estoque_Produto> estoqueProduto = controlaEstoque.findAll();
+        for(Estoque_Produto estoque : estoqueProduto){
+            if((estoque.getProduto().getIdProduto() == 1) && (estoque.getEstoque().getIdEstoque() == 1)){
+                idEstoqueProduto = estoque.getIdEstoque_Produto();
+                quantidade = estoque.getQuantidade();
             }
         }
-
-        JOptionPane.showMessageDialog(null, id);
-
-         pedido.setIdPedido(id + 1);
-         pedido.setDataPedido(data);
-         pedido.setPagamentoRealizado(true);
-         pedido.setStatus(StatusDoPedido.Finalizado);
-         pedido.setFilial(filial);
-
-         
-         controlaPedido.create(pedido);  
+        
+        estoques.setIdEstoque(1);
+        produtos.setIdProduto(1);
+        ep.setIdEstoque_Produto(idEstoqueProduto);
+        ep.setQuantidade(quantidade - 3);
+        ep.setEstoque(estoques);
+        ep.setProduto(produtos);
+        controlaEstoque.edit(ep);
+     
+        JOptionPane.showMessageDialog(null, "Item adicionado");
     }
 }

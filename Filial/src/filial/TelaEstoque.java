@@ -340,14 +340,7 @@ public class TelaEstoque extends javax.swing.JFrame {
                 objects[3] = produtos.getPreco();
                 objects[4] = qtd;
                 objects[5] = filial;
-                
-                /*objects[0] = produtos.getCod_produto();
-                objects[1] = produtos.getNome();
-                objects[2] = produtos.getDescricao();
-                objects[3] = produtos.getPreco();
-                objects[4] = qtd;
-                objects[5] = filial;
-     */
+
                 dtm.addRow(objects);    
             }
             
