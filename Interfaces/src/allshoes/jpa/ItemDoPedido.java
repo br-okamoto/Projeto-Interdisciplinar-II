@@ -19,7 +19,7 @@ import javax.persistence.Temporal;
 public class ItemDoPedido implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idItemDoPedido;
     
     @OneToOne(fetch = FetchType.EAGER)

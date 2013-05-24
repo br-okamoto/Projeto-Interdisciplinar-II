@@ -19,7 +19,7 @@ import javax.persistence.Temporal;
 public class Pedido implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPedido;
     @ManyToOne(fetch = FetchType.EAGER)
     private Cliente cliente;
