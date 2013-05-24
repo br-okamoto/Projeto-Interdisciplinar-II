@@ -413,9 +413,33 @@ public class TelaVenda extends javax.swing.JFrame {
                 item.setPedido(pedidos);
                 item.setProduto(produtos);
                 controlaItemDoPedido.create(item);
-      
-                diminuiEstoque(quantidade, idFilial, codigoProduto);
-            }
+
+                //Reduz a quantidade do produto na tabela Estoque_prodtuo
+                
+                //Pega o idProduto
+                Produto prod = controlaProduto.find(codigoProduto);
+                int idProduto = prod.getIdProduto();
+           
+                int idEstoqueProduto = 0;
+                int quantidadeEstoque = 0;
+                List<Estoque_Produto> eProduto = controlaEstoque.findAll();
+                for (Estoque_Produto e : eProduto) {
+                    if ((e.getProduto().getIdProduto() == idProduto) && (e.getEstoque().getIdEstoque() == idFilial)) {
+                        idEstoqueProduto = e.getIdEstoque_Produto();
+                        quantidadeEstoque = e.getQuantidade();
+                    }
+                }
+                //idFilial = idEstoque
+                estoques.setIdEstoque(idFilial);
+                produtos.setIdProduto(idProduto);
+
+                estoqueProduto.setIdEstoque_Produto(idEstoqueProduto);
+                estoqueProduto.setQuantidade(quantidadeEstoque - quantidade);
+                estoqueProduto.setEstoque(estoques);
+                estoqueProduto.setProduto(produtos);
+                controlaEstoque.edit(estoqueProduto);
+            
+             }
        
             String nome = (String) objects[1];
             String cor = (String) objects[2];
@@ -430,39 +454,7 @@ public class TelaVenda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public static void diminuiEstoque(int quantidade, int idFilial, int codigoProduto) throws Exception{
-        estoqueController controlaEstoque = new estoqueController();
-        produtoController controlaProduto = new produtoController();
-        Produto produto = new Produto();
-        Filial filial = new Filial();
-        Estoque_Produto estoqueProduto = new Estoque_Produto();
-        Estoque estoque = new Estoque();
-        
-        Produto produtos = controlaProduto.find(codigoProduto);
-        int idProduto = produtos.getIdProduto();
-        
-        int idEstoqueProduto = 0;
-            int quantidadeEstoque = 0;
-            List<Estoque_Produto> eProduto = controlaEstoque.findAll();
-            for(Estoque_Produto estoques : eProduto){
-            if((estoques.getProduto().getIdProduto() == idProduto) && (estoques.getEstoque().getIdEstoque() == idFilial)){
-                idEstoqueProduto = estoques.getIdEstoque_Produto();
-                quantidadeEstoque = estoques.getQuantidade();
-            }
-        }
-                        
-        //idFilial = idEstoque
-        estoque.setIdEstoque(idFilial);
-        produto.setIdProduto(idProduto);
-        
-        estoqueProduto.setIdEstoque_Produto(idEstoqueProduto);
-        estoqueProduto.setQuantidade(estoqueProduto.getQuantidade() - quantidade);
-        estoqueProduto.setEstoque(estoque);
-        estoqueProduto.setProduto(produto);
-        controlaEstoque.edit(estoqueProduto);
-        JOptionPane.showMessageDialog(null, "Qtd alterado");
-    }
-    
+   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
