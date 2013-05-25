@@ -22,5 +22,6 @@ public class PedidoFacade extends AbstractFacade<Pedido> implements PedidoFacade
     public PedidoFacade() {
         super(Pedido.class);
     }
+
     
 }

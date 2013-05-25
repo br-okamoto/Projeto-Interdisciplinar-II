@@ -9,17 +9,18 @@ import Validacao.teclasPermitidas;
 import controller.MatrizDepartamentoController;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author 41083032
  */
-public class Departamento extends javax.swing.JFrame {
+public class TelaDepartamento extends javax.swing.JFrame {
 
     /**
-     * Creates new form Departamento
+     * Creates new form TelaDepartamento
      */
-    public Departamento() {
+    public TelaDepartamento() {
         initComponents();
         //Permite Campo com apenas 4 números
         jTextField1.setDocument(new IntegerDocument(4));
@@ -358,16 +359,16 @@ public class Departamento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Sair2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Sair2ActionPerformed
-        Login login = new Login();
-        Usuario u = new Usuario();
+        TelaLoginMatriz login = new TelaLoginMatriz();
+        TelaUsuarios u = new TelaUsuarios();
         u.setVisible(false);
         dispose();
         login.setVisible(true);
     }//GEN-LAST:event_Sair2ActionPerformed
 
     private void DepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepartamentoActionPerformed
-        Departamento d = new Departamento();
-        Usuario u = new Usuario();
+        TelaDepartamento d = new TelaDepartamento();
+        TelaUsuarios u = new TelaUsuarios();
         u.setVisible(false);
         dispose();
         d.setVisible(true);
@@ -375,8 +376,8 @@ public class Departamento extends javax.swing.JFrame {
     }//GEN-LAST:event_DepartamentoActionPerformed
 
     private void ProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProdutosActionPerformed
-        Produto p = new Produto();
-        Usuario u = new Usuario();
+        TelaProduto p = new TelaProduto();
+        TelaUsuarios u = new TelaUsuarios();
         u.setVisible(false);
         dispose();
         p.setVisible(true);
@@ -384,8 +385,8 @@ public class Departamento extends javax.swing.JFrame {
     }//GEN-LAST:event_ProdutosActionPerformed
 
     private void UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioActionPerformed
-        Usuario u = new Usuario();
-        Departamento d = new Departamento();
+        TelaUsuarios u = new TelaUsuarios();
+        TelaDepartamento d = new TelaDepartamento();
         d.setVisible(false);
         dispose();
         u.setVisible(true);
@@ -394,7 +395,7 @@ public class Departamento extends javax.swing.JFrame {
 
     private void HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeActionPerformed
         TelaPrincipal m = new TelaPrincipal();
-        Usuario u = new Usuario();
+        TelaUsuarios u = new TelaUsuarios();
         u.setVisible(false);
         dispose();
         m.setVisible(true);
@@ -403,7 +404,7 @@ public class Departamento extends javax.swing.JFrame {
 
     private void PedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PedidosActionPerformed
         TelaPedidos p = new TelaPedidos();
-        Usuario u = new Usuario();
+        TelaUsuarios u = new TelaUsuarios();
         u.setVisible(false);
         dispose();
         p.setVisible(true);
@@ -412,8 +413,8 @@ public class Departamento extends javax.swing.JFrame {
     }//GEN-LAST:event_PedidosActionPerformed
 
     private void relatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relatoriosActionPerformed
-        Relatorio r = new Relatorio();
-        Usuario u = new Usuario();
+        TelaRelatorio r = new TelaRelatorio();
+        TelaUsuarios u = new TelaUsuarios();
         u.setVisible(false);
         dispose();
         r.setVisible(true);
@@ -427,9 +428,11 @@ public class Departamento extends javax.swing.JFrame {
             novoDepartamento.setCod_departamento(Integer.parseInt(jTextField1.getText()));
             novoDepartamento.setNomeDepartamento(jTextField2.getText());
             controller.create(novoDepartamento);
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
         }
         catch (Exception ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaLoginMatriz.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro!\n\nCadastro não realizado. Por favor, tente novamente.");
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -450,20 +453,20 @@ public class Departamento extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Departamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaDepartamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Departamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaDepartamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Departamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaDepartamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Departamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaDepartamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Departamento().setVisible(true);
+                new TelaDepartamento().setVisible(true);
             }
         });
     }

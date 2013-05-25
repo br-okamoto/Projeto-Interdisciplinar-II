@@ -11,10 +11,10 @@ import allshoes.jpa.Usuario;
 import allshoes.jpa.facade.UsuarioFacadeRemote;
 
 
-public class Login extends javax.swing.JFrame {
+public class TelaLoginMatriz extends javax.swing.JFrame {
 
     
-    public Login() {
+    public TelaLoginMatriz() {
         initComponents();
     }
 
@@ -149,13 +149,13 @@ public class Login extends javax.swing.JFrame {
             } else if(!Arrays.equals(funcionario.getSenha(),pass)) {
                 JOptionPane.showMessageDialog(this, "Usuario/Senha incorreta!");
             } else {
-                Login l = new Login();
+                TelaLoginMatriz l = new TelaLoginMatriz();
                 l.setVisible(false);
                 dispose();
                 principal.setVisible(true);
             }
         } catch (Exception ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaLoginMatriz.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
@@ -182,20 +182,20 @@ public class Login extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLoginMatriz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLoginMatriz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLoginMatriz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLoginMatriz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new TelaLoginMatriz().setVisible(true);
             }
         });
     }

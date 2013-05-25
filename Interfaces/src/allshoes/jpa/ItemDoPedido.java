@@ -17,7 +17,7 @@ import javax.persistence.Temporal;
 
 @Entity
 public class ItemDoPedido implements Serializable {
-
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idItemDoPedido;
@@ -28,7 +28,7 @@ public class ItemDoPedido implements Serializable {
     private int quantidade;
     private double subTotal;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     private Produto produto;
 
     public int getIdItemDoPedido() {

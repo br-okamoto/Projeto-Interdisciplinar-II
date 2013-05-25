@@ -8,10 +8,12 @@ import allshoes.facade.CartBeanRemote;
 import allshoes.jpa.Cliente;
 import allshoes.jpa.Endereco;
 import allshoes.jpa.Estado;
+import allshoes.jpa.Filial;
 import allshoes.jpa.ItemDoPedido;
 import allshoes.jpa.Pedido;
 import allshoes.jpa.StatusDoPedido;
 import allshoes.jpa.facade.ClienteFacadeRemote;
+import allshoes.jpa.facade.FilialFacadeRemote;
 import allshoes.web.model.Footer;
 import allshoes.web.model.Header;
 import java.io.IOException;
@@ -36,6 +38,9 @@ public class Pagamento extends HttpServlet {
 
     @EJB(mappedName = "ejb/ClienteFacade")
     private ClienteFacadeRemote ejb;
+    
+    @EJB
+    private FilialFacadeRemote filiaEjb;
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -63,29 +68,7 @@ public class Pagamento extends HttpServlet {
             rd.forward(request, response);
         }
         
-        Cliente cliente = ejb.find(username);
-        Endereco enderecoPedido;
         
-        if (request.getParameter("rdEndereco").toString().equals("enderecoCadastrado")) {
-            enderecoPedido = new Endereco();
-            enderecoPedido.setRua(cliente.getEndereco().getRua());
-            enderecoPedido.setNumero(cliente.getEndereco().getNumero());
-            enderecoPedido.setComplemento(cliente.getEndereco().getComplemento());
-            enderecoPedido.setCep(cliente.getEndereco().getCep());
-            enderecoPedido.setBairro(cliente.getEndereco().getBairro());
-            enderecoPedido.setCidade(cliente.getEndereco().getCidade());
-            enderecoPedido.setEstado(cliente.getEndereco().getEstado());
-        } else {
-            Endereco novoEndereco = new Endereco();
-            novoEndereco.setRua(request.getParameter("txtRua"));
-            novoEndereco.setNumero(request.getParameter("txtNumero"));
-            novoEndereco.setComplemento(request.getParameter("txtComplemento"));
-            novoEndereco.setCep(request.getParameter("txtCEP"));
-            novoEndereco.setBairro(request.getParameter("txtBairro"));
-            novoEndereco.setCidade(request.getParameter("txtCidade"));
-            novoEndereco.setEstado(Estado.valueOf(request.getParameter("ddlEstado")));
-            enderecoPedido = novoEndereco;
-        }
         
         CartBeanRemote carrinho = getCartBean(request);
         double total = 0;
@@ -95,14 +78,23 @@ public class Pagamento extends HttpServlet {
             total += i.getSubTotal();
         }
         
-        Pedido pedido = new Pedido();
-        pedido.setCliente(cliente);
-        pedido.setDataPedido(new java.util.Date());
-        pedido.setEndereco(enderecoPedido);
-        pedido.setStatus(StatusDoPedido.Aberto);
+
         
-        session.setAttribute("pedido", pedido);
-        session.setAttribute("itensDoPedido",itens);
+        if (!request.getParameter("rdEndereco").toString().equals("enderecoCadastrado")) {
+            
+            Endereco novoEndereco = new Endereco();
+            novoEndereco.setRua(request.getParameter("txtRua"));
+            novoEndereco.setNumero(request.getParameter("txtNumero"));
+            novoEndereco.setComplemento(request.getParameter("txtComplemento"));
+            novoEndereco.setCep(request.getParameter("txtCEP"));
+            novoEndereco.setBairro(request.getParameter("txtBairro"));
+            novoEndereco.setCidade(request.getParameter("txtCidade"));
+            novoEndereco.setEstado(Estado.valueOf(request.getParameter("ddlEstado")));
+            session.setAttribute("endereco", novoEndereco);
+
+        }
+        
+        
         
         try {
 

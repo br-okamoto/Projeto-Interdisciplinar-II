@@ -8,12 +8,12 @@ package matriz;
  *
  * @author Lylo
  */
-public class RelatorioProduto extends javax.swing.JFrame {
+public class TelaRelatorioProduto extends javax.swing.JFrame {
 
     /**
-     * Creates new form RelatorioProduto
+     * Creates new form TelaRelatorioProduto
      */
-    public RelatorioProduto() {
+    public TelaRelatorioProduto() {
         initComponents();
     }
 
@@ -243,8 +243,8 @@ public class RelatorioProduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepartamentoActionPerformed
-        Departamento d = new Departamento();
-        Produto p = new Produto();
+        TelaDepartamento d = new TelaDepartamento();
+        TelaProduto p = new TelaProduto();
         p.setVisible(false);
         dispose();
         d.setVisible(true);
@@ -252,16 +252,16 @@ public class RelatorioProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_DepartamentoActionPerformed
 
     private void ProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProdutosActionPerformed
-        Produto p = new Produto();
-        RelatorioProduto rp = new RelatorioProduto();
+        TelaProduto p = new TelaProduto();
+        TelaRelatorioProduto rp = new TelaRelatorioProduto();
         rp.setVisible(false);
         dispose();
         p.setVisible(true);
     }//GEN-LAST:event_ProdutosActionPerformed
 
     private void UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioActionPerformed
-        Usuario u = new Usuario();
-        Produto p = new Produto();
+        TelaUsuarios u = new TelaUsuarios();
+        TelaProduto p = new TelaProduto();
         p.setVisible(false);
         dispose();
         u.setVisible(true);
@@ -270,7 +270,7 @@ public class RelatorioProduto extends javax.swing.JFrame {
 
     private void HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeActionPerformed
         TelaPrincipal m = new TelaPrincipal();
-        Produto p = new Produto();
+        TelaProduto p = new TelaProduto();
         p.setVisible(false);
         dispose();
         m.setVisible(true);
@@ -279,7 +279,7 @@ public class RelatorioProduto extends javax.swing.JFrame {
 
     private void PedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PedidosActionPerformed
         TelaPedidos pe = new TelaPedidos();
-        Produto p = new Produto();
+        TelaProduto p = new TelaProduto();
         p.setVisible(false);
         dispose();
         pe.setVisible(true);
@@ -288,7 +288,7 @@ public class RelatorioProduto extends javax.swing.JFrame {
 
     private void relatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relatoriosActionPerformed
         //Relatorio pe = new Relatorio();
-        Produto p = new Produto();
+        TelaProduto p = new TelaProduto();
         p.setVisible(false);
         dispose();
         //r.setVisible(true);
@@ -312,20 +312,20 @@ public class RelatorioProduto extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RelatorioProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaRelatorioProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RelatorioProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaRelatorioProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RelatorioProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaRelatorioProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RelatorioProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaRelatorioProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RelatorioProduto().setVisible(true);
+                new TelaRelatorioProduto().setVisible(true);
             }
         });
     }

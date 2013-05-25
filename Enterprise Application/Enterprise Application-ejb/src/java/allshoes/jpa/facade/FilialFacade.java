@@ -26,8 +26,8 @@ public class FilialFacade extends AbstractFacade<Filial> implements FilialFacade
     
     @Override
     public Filial find(String nome) {
-        Query q1 = em.createQuery("SELECT c FROM Filial c WHERE c.login = :login");
-        q1.setParameter("login", nome);
+        Query q1 = em.createQuery("SELECT f FROM Filial f WHERE f.nome = :nome");
+        q1.setParameter("nome", nome);
         List<Filial> filials = q1.getResultList();
         if (filials.isEmpty()) {
             return null;

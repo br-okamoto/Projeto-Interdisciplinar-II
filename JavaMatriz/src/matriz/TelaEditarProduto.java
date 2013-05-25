@@ -6,9 +6,6 @@ package matriz;
 
 import allshoes.jpa.Marca;
 import controller.MatrizController;
-import Validacao.FixedLengthDocument;
-import Validacao.IntegerDocument;
-import Validacao.teclasPermitidas;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import allshoes.jpa.Produto;
@@ -19,24 +16,14 @@ import controller.MatrizProdutoController;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author 41083032
- */
-public class CadastroProduto extends javax.swing.JFrame {
+
+public class TelaEditarProduto extends javax.swing.JFrame {
 
     /**
      * Creates new form CadastroProduto
      */
-    public CadastroProduto() {
+    public TelaEditarProduto() {
         initComponents();
-        //Permite Campo com apenas 4 números
-        jTextField1.setDocument(new IntegerDocument(4));
-        jTextField4.setDocument(new IntegerDocument(2));
-        //Campo aceita apenas letras
-        //jTextField2.setDocument(new teclasPermitidas());
-        jTextField5.setDocument(new teclasPermitidas());
-        
         jComboBox1.setModel(new DefaultComboBoxModel<>(Marca.values()));
         try {
             MatrizDepartamentoController controller = new MatrizDepartamentoController();
@@ -46,7 +33,7 @@ public class CadastroProduto extends javax.swing.JFrame {
             }
         }
         catch (Exception ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaLoginMatriz.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -401,7 +388,7 @@ public class CadastroProduto extends javax.swing.JFrame {
 
     private void HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeActionPerformed
         TelaPrincipal m = new TelaPrincipal();
-        CadastroProduto p = new CadastroProduto();
+        TelaEditarProduto p = new TelaEditarProduto();
         p.setVisible(false);
         dispose();
         m.setVisible(true);
@@ -409,8 +396,8 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_HomeActionPerformed
 
     private void RelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RelatoriosActionPerformed
-        Relatorio r = new Relatorio();
-        CadastroProduto p = new CadastroProduto();
+        TelaRelatorio r = new TelaRelatorio();
+        TelaEditarProduto p = new TelaEditarProduto();
         p.setVisible(false);
         dispose();  
         r.setVisible(true);
@@ -419,7 +406,7 @@ public class CadastroProduto extends javax.swing.JFrame {
 
     private void PedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PedidosActionPerformed
         TelaPedidos p = new TelaPedidos();
-        CadastroProduto cp = new CadastroProduto();
+        TelaEditarProduto cp = new TelaEditarProduto();
         cp.setVisible(false);
         dispose();
         p.setVisible(true);
@@ -429,8 +416,8 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_PedidosActionPerformed
 
     private void UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioActionPerformed
-        Usuario u = new Usuario();
-        CadastroProduto p = new CadastroProduto();
+        TelaUsuarios u = new TelaUsuarios();
+        TelaEditarProduto p = new TelaEditarProduto();
         p.setVisible(false);
         dispose();
         u.setVisible(true);
@@ -465,29 +452,29 @@ public class CadastroProduto extends javax.swing.JFrame {
         }
         catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro!\n\nCadastro não realizado. Por favor, tente novamente.");
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaLoginMatriz.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_SalvarActionPerformed
 
     private void SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairActionPerformed
-        Login login = new Login();
-        CadastroProduto p = new CadastroProduto();
+        TelaLoginMatriz login = new TelaLoginMatriz();
+        TelaEditarProduto p = new TelaEditarProduto();
         p.setVisible(false);
         dispose();
         login.setVisible(true);
     }//GEN-LAST:event_SairActionPerformed
 
     private void ProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProdutosActionPerformed
-        matriz.Produto p = new matriz.Produto();
-        CadastroProduto cp = new CadastroProduto();
+        matriz.TelaProduto p = new matriz.TelaProduto();
+        TelaEditarProduto cp = new TelaEditarProduto();
         cp.setVisible(false);
         dispose();
         p.setVisible(true);
     }//GEN-LAST:event_ProdutosActionPerformed
 
     private void DepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepartamentoActionPerformed
-        Departamento d = new Departamento();
-        CadastroProduto cp = new CadastroProduto();
+        TelaDepartamento d = new TelaDepartamento();
+        TelaEditarProduto cp = new TelaEditarProduto();
         cp.setVisible(false);
         dispose();
         d.setVisible(true);
@@ -511,20 +498,20 @@ public class CadastroProduto extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaEditarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaEditarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaEditarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaEditarProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroProduto().setVisible(true);
+                new TelaEditarProduto().setVisible(true);
             }
         });
     }

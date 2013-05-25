@@ -4,9 +4,16 @@
  */
 package allshoes.web.servlet;
 
+import allshoes.facade.CartBeanRemote;
+import allshoes.jpa.Cliente;
+import allshoes.jpa.Endereco;
+import allshoes.jpa.Estado;
+import allshoes.jpa.Filial;
 import allshoes.jpa.ItemDoPedido;
 import allshoes.jpa.Pedido;
 import allshoes.jpa.StatusDoPedido;
+import allshoes.jpa.facade.ClienteFacadeRemote;
+import allshoes.jpa.facade.FilialFacadeRemote;
 import allshoes.jpa.facade.ItemDoPedidoFacadeRemote;
 import allshoes.jpa.facade.PedidoFacadeRemote;
 import allshoes.web.model.Footer;
@@ -14,7 +21,11 @@ import allshoes.web.model.Header;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.EJB;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,12 +37,18 @@ import javax.servlet.http.HttpSession;
  * @author Bruno
  */
 public class FinalizacaoDoPedido extends HttpServlet {
-    
+
     @EJB
     PedidoFacadeRemote pedidoEjb;
     
     @EJB
     ItemDoPedidoFacadeRemote itemPedidoEjb;
+    
+    @EJB(mappedName = "ejb/ClienteFacade")
+    private ClienteFacadeRemote ejb;
+    
+    @EJB
+    private FilialFacadeRemote filiaEjb;
 
     /**
      * Processes requests for both HTTP
@@ -51,15 +68,9 @@ public class FinalizacaoDoPedido extends HttpServlet {
         Footer footer = new Footer(false);
         
         HttpSession session = request.getSession();
+        
         Pedido pedido = (Pedido)session.getAttribute("pedido");
-        ArrayList<ItemDoPedido> itens = (ArrayList<ItemDoPedido>)session.getAttribute("itensDoPedido");
         
-        pedidoEjb.create(pedido);
-        
-        for (ItemDoPedido i : itens) {
-            i.setPedido(pedido);
-            itemPedidoEjb.create(i);
-        }
         
         
         try {
@@ -103,6 +114,15 @@ public class FinalizacaoDoPedido extends HttpServlet {
             out.println("<h2>Endereco de Entrega</h2>");
             out.println("");
             
+            
+            List<ItemDoPedido> itensP = new ArrayList<ItemDoPedido>();
+            itensP = (ArrayList<ItemDoPedido>)session.getAttribute("itens");
+            for (ItemDoPedido i : itensP) {
+                out.println("<div>" + i.getPedido().getCliente().getIdPessoa() + " - " + i.getQuantidade() + " - " + pedido.getIdPedido() + " - " + i.getProduto().getIdProduto());
+                out.println("</div>");
+            }
+            
+            
             out.println("</div>");
             
             out.println(footer.getFooterPadrao());
@@ -111,6 +131,7 @@ public class FinalizacaoDoPedido extends HttpServlet {
             out.close();
         }
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -152,4 +173,6 @@ public class FinalizacaoDoPedido extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    
 }

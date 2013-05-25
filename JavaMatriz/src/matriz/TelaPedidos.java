@@ -417,16 +417,16 @@ public class TelaPedidos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairActionPerformed
-        Login login = new Login();
-        Usuario u = new Usuario();
+        TelaLoginMatriz login = new TelaLoginMatriz();
+        TelaUsuarios u = new TelaUsuarios();
         u.setVisible(false);
         dispose();
         login.setVisible(true);
     }//GEN-LAST:event_SairActionPerformed
 
     private void DepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepartamentoActionPerformed
-        Departamento d = new Departamento();
-        Usuario u = new Usuario();
+        TelaDepartamento d = new TelaDepartamento();
+        TelaUsuarios u = new TelaUsuarios();
         u.setVisible(false);
         dispose();
         d.setVisible(true);
@@ -434,8 +434,8 @@ public class TelaPedidos extends javax.swing.JFrame {
     }//GEN-LAST:event_DepartamentoActionPerformed
 
     private void ProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProdutosActionPerformed
-        Produto p = new Produto();
-        Usuario u = new Usuario();
+        TelaProduto p = new TelaProduto();
+        TelaUsuarios u = new TelaUsuarios();
         u.setVisible(false);
         dispose();
         p.setVisible(true);
@@ -448,7 +448,7 @@ public class TelaPedidos extends javax.swing.JFrame {
 
     private void HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeActionPerformed
         TelaPrincipal m = new TelaPrincipal();
-        Usuario u = new Usuario();
+        TelaUsuarios u = new TelaUsuarios();
         u.setVisible(false);
         dispose();
         m.setVisible(true);
@@ -456,14 +456,14 @@ public class TelaPedidos extends javax.swing.JFrame {
     }//GEN-LAST:event_HomeActionPerformed
 
     private void PedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PedidosActionPerformed
-        Usuario u = new Usuario();
+        TelaUsuarios u = new TelaUsuarios();
         u.setVisible(false);
         dispose();
     }//GEN-LAST:event_PedidosActionPerformed
 
     private void relatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relatoriosActionPerformed
-        Relatorio r = new Relatorio();
-        Usuario u = new Usuario();
+        TelaRelatorio r = new TelaRelatorio();
+        TelaUsuarios u = new TelaUsuarios();
         u.setVisible(false);
         dispose();
         r.setVisible(true);

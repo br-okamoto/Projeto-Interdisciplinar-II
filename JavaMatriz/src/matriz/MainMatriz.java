@@ -14,6 +14,6 @@ public class MainMatriz {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new matriz.Login().setVisible(true);
+        new matriz.TelaLoginMatriz().setVisible(true);
     }
 }

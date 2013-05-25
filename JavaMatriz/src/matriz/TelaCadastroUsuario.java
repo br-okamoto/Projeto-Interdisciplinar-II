@@ -12,10 +12,10 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
-public class CadastroUsuario extends javax.swing.JFrame {
+public class TelaCadastroUsuario extends javax.swing.JFrame {
 
    
-    public CadastroUsuario() {
+    public TelaCadastroUsuario() {
         initComponents();
         //Permite Campo com apenas 4 números
         jTextField1.setDocument(new IntegerDocument(4));
@@ -429,7 +429,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
     private void HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeActionPerformed
         TelaPrincipal m = new TelaPrincipal();
-        CadastroUsuario user = new CadastroUsuario();
+        TelaCadastroUsuario user = new TelaCadastroUsuario();
         user.setVisible(false);
         dispose();
         m.setVisible(true);
@@ -437,8 +437,8 @@ public class CadastroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_HomeActionPerformed
 
     private void UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioActionPerformed
-        Usuario u = new Usuario();
-        CadastroUsuario user = new CadastroUsuario();
+        TelaUsuarios u = new TelaUsuarios();
+        TelaCadastroUsuario user = new TelaCadastroUsuario();
         user.setVisible(false);
         dispose();
         u.setVisible(true);
@@ -446,22 +446,22 @@ public class CadastroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_UsuarioActionPerformed
 
     private void ProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProdutosActionPerformed
-        CadastroUsuario user = new CadastroUsuario();
+        TelaCadastroUsuario user = new TelaCadastroUsuario();
         user.setVisible(false);
         dispose();
     }//GEN-LAST:event_ProdutosActionPerformed
 
     private void SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairActionPerformed
-        Login login = new Login();
-        CadastroUsuario user = new CadastroUsuario();
+        TelaLoginMatriz login = new TelaLoginMatriz();
+        TelaCadastroUsuario user = new TelaCadastroUsuario();
         user.setVisible(false);
         dispose();
         login.setVisible(true);
     }//GEN-LAST:event_SairActionPerformed
 
     private void RelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RelatoriosActionPerformed
-        Relatorio r = new Relatorio();        
-        CadastroUsuario user = new CadastroUsuario();
+        TelaRelatorio r = new TelaRelatorio();        
+        TelaCadastroUsuario user = new TelaCadastroUsuario();
         user.setVisible(false);
         dispose();
         r.setVisible(true);
@@ -469,7 +469,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
     private void PedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PedidosActionPerformed
         TelaPedidos p = new TelaPedidos();
-        CadastroUsuario user = new CadastroUsuario();
+        TelaCadastroUsuario user = new TelaCadastroUsuario();
         user.setVisible(false);
         dispose();
         p.setVisible(true);
@@ -507,7 +507,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
             
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro!\n\nCadastro não realizado. Por favor, tente novamente.");
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaLoginMatriz.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_SalvarActionPerformed
 
@@ -528,20 +528,20 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroUsuario().setVisible(true);
+                new TelaCadastroUsuario().setVisible(true);
             }
         });
     }

@@ -212,7 +212,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_HomeActionPerformed
 
     private void UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioActionPerformed
-        Usuario u = new Usuario();
+        TelaUsuarios u = new TelaUsuarios();
         TelaPrincipal principal = new TelaPrincipal();
         principal.setVisible(false);
         dispose();
@@ -221,7 +221,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_UsuarioActionPerformed
 
     private void DepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepartamentoActionPerformed
-        Departamento d = new Departamento();
+        TelaDepartamento d = new TelaDepartamento();
         TelaPrincipal principal = new TelaPrincipal();
         principal.setVisible(false);
         dispose();
@@ -230,7 +230,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_DepartamentoActionPerformed
 
     private void SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairActionPerformed
-        Login login = new Login();
+        TelaLoginMatriz login = new TelaLoginMatriz();
         TelaPrincipal principal = new TelaPrincipal();
         principal.setVisible(false);
         dispose();
@@ -238,7 +238,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_SairActionPerformed
 
     private void ProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProdutosActionPerformed
-        Produto p = new Produto();
+        TelaProduto p = new TelaProduto();
         TelaPrincipal principal = new TelaPrincipal();
         principal.setVisible(false);
         dispose();
@@ -256,7 +256,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_PedidosActionPerformed
 
     private void relatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relatoriosActionPerformed
-        Relatorio r = new Relatorio();
+        TelaRelatorio r = new TelaRelatorio();
         TelaPrincipal principal = new TelaPrincipal();
         principal.setVisible(false);
         dispose();

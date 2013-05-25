@@ -20,12 +20,12 @@ import javax.swing.JOptionPane;
  *
  * @author Bruno
  */
-public class CadastroFilial extends javax.swing.JFrame {
+public class TelaCadastroFilial extends javax.swing.JFrame {
 
     /**
-     * Creates new form CadastroFilial
+     * Creates new form TelaCadastroFilial
      */
-    public CadastroFilial() {
+    public TelaCadastroFilial() {
         initComponents();
         //Permite Campo com apenas 4 números                
         jTextField1.setDocument(new IntegerDocument(4));
@@ -357,7 +357,7 @@ public class CadastroFilial extends javax.swing.JFrame {
 
     private void Home3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Home3ActionPerformed
         TelaPrincipal m = new TelaPrincipal();
-        CadastroProduto p = new CadastroProduto();
+        TelaCadastroProduto p = new TelaCadastroProduto();
         p.setVisible(false);
         dispose();
         m.setVisible(true);
@@ -365,8 +365,8 @@ public class CadastroFilial extends javax.swing.JFrame {
     }//GEN-LAST:event_Home3ActionPerformed
 
     private void Usuario3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Usuario3ActionPerformed
-        Usuario u = new Usuario();
-        CadastroProduto p = new CadastroProduto();
+        TelaUsuarios u = new TelaUsuarios();
+        TelaCadastroProduto p = new TelaCadastroProduto();
         p.setVisible(false);
         dispose();
         u.setVisible(true);
@@ -374,16 +374,16 @@ public class CadastroFilial extends javax.swing.JFrame {
     }//GEN-LAST:event_Usuario3ActionPerformed
 
     private void Produtos3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Produtos3ActionPerformed
-        matriz.Produto p = new matriz.Produto();
-        CadastroProduto cp = new CadastroProduto();
+        matriz.TelaProduto p = new matriz.TelaProduto();
+        TelaCadastroProduto cp = new TelaCadastroProduto();
         cp.setVisible(false);
         dispose();
         p.setVisible(true);
     }//GEN-LAST:event_Produtos3ActionPerformed
 
     private void Departamento3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Departamento3ActionPerformed
-        Departamento d = new Departamento();
-        CadastroProduto cp = new CadastroProduto();
+        TelaDepartamento d = new TelaDepartamento();
+        TelaCadastroProduto cp = new TelaCadastroProduto();
         cp.setVisible(false);
         dispose();
         d.setVisible(true);
@@ -391,8 +391,8 @@ public class CadastroFilial extends javax.swing.JFrame {
     }//GEN-LAST:event_Departamento3ActionPerformed
 
     private void Relatorios3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Relatorios3ActionPerformed
-        Relatorio r = new Relatorio();
-        CadastroProduto p = new CadastroProduto();
+        TelaRelatorio r = new TelaRelatorio();
+        TelaCadastroProduto p = new TelaCadastroProduto();
         p.setVisible(false);
         dispose();
         r.setVisible(true);
@@ -401,7 +401,7 @@ public class CadastroFilial extends javax.swing.JFrame {
 
     private void Pedidos3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pedidos3ActionPerformed
         TelaPedidos p = new TelaPedidos();
-        CadastroProduto cp = new CadastroProduto();
+        TelaCadastroProduto cp = new TelaCadastroProduto();
         cp.setVisible(false);
         dispose();
         p.setVisible(true);
@@ -410,8 +410,8 @@ public class CadastroFilial extends javax.swing.JFrame {
     }//GEN-LAST:event_Pedidos3ActionPerformed
 
     private void Sair3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Sair3ActionPerformed
-        Login login = new Login();
-        CadastroProduto p = new CadastroProduto();
+        TelaLoginMatriz login = new TelaLoginMatriz();
+        TelaCadastroProduto p = new TelaCadastroProduto();
         p.setVisible(false);
         dispose();
         login.setVisible(true);
@@ -437,7 +437,8 @@ public class CadastroFilial extends javax.swing.JFrame {
             controller.create(novaFilial);
             JOptionPane.showMessageDialog(null, "Filial cadastrada com sucesso!");
         } catch (Exception ex) {
-            Logger.getLogger(CadastroFilial.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaCadastroFilial.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro!\n\nCadastro não realizado. Por favor, tente novamente.");
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -459,69 +460,34 @@ public class CadastroFilial extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroFilial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroFilial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroFilial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroFilial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroFilial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroFilial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroFilial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroFilial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroFilial().setVisible(true);
+                new TelaCadastroFilial().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Departamento;
-    private javax.swing.JButton Departamento1;
-    private javax.swing.JButton Departamento2;
     private javax.swing.JButton Departamento3;
-    private javax.swing.JButton Home;
-    private javax.swing.JButton Home1;
-    private javax.swing.JButton Home2;
     private javax.swing.JButton Home3;
-    private javax.swing.JButton Pedidos;
-    private javax.swing.JButton Pedidos1;
-    private javax.swing.JButton Pedidos2;
     private javax.swing.JButton Pedidos3;
-    private javax.swing.JButton Produtos;
-    private javax.swing.JButton Produtos1;
-    private javax.swing.JButton Produtos2;
     private javax.swing.JButton Produtos3;
-    private javax.swing.JButton Relatorios;
-    private javax.swing.JButton Relatorios1;
-    private javax.swing.JButton Relatorios2;
     private javax.swing.JButton Relatorios3;
-    private javax.swing.JButton Sair;
-    private javax.swing.JButton Sair1;
-    private javax.swing.JButton Sair2;
     private javax.swing.JButton Sair3;
-    private javax.swing.JButton Usuario;
-    private javax.swing.JButton Usuario1;
-    private javax.swing.JButton Usuario2;
     private javax.swing.JButton Usuario3;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -529,7 +495,6 @@ public class CadastroFilial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
@@ -540,15 +505,6 @@ public class CadastroFilial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
