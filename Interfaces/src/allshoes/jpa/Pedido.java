@@ -32,6 +32,9 @@ public class Pedido implements Serializable {
     private boolean pagamentoRealizado;
     @Enumerated (EnumType.STRING)
     private StatusDoPedido status;
+    @Enumerated (EnumType.STRING)
+    private FormasDePagamento formaDePagamento;
+    private int numeroParcelas;
 
     public int getIdPedido() {
         return idPedido;
@@ -87,6 +90,22 @@ public class Pedido implements Serializable {
 
     public void setStatus(StatusDoPedido status) {
         this.status = status;
+    }
+
+    public FormasDePagamento getFormaDePagamento() {
+        return formaDePagamento;
+    }
+
+    public void setFormaDePagamento(FormasDePagamento formaDePagamento) {
+        this.formaDePagamento = formaDePagamento;
+    }
+
+    public int getNumeroParcelas() {
+        return numeroParcelas;
+    }
+
+    public void setNumeroParcelas(int numeroParcelas) {
+        this.numeroParcelas = numeroParcelas;
     }
     
 }

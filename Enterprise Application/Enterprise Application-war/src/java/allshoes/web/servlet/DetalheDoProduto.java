@@ -84,9 +84,7 @@ public class DetalheDoProduto extends HttpServlet {
             out.println("</tr>");
             out.println("<tr>");
             out.println("<td colspan='2'>");
-            out.println("<input type='radio' name='rdCor' value='cor1'>Cor 1</input>");
-            out.println("<input type='radio' name='rdCor' value='cor2'>Cor 2</input>");
-            out.println("<input type='radio' name='rdCor' value='cor2'>Cor 3</input>");
+            out.println("<input type='radio' name='rdCor' value='" + produto.getCor() + "'>" + produto.getCor() + "</input>");
             out.println("</td>");
             out.println("</tr>");
             out.println("<tr>");
@@ -98,16 +96,7 @@ public class DetalheDoProduto extends HttpServlet {
             out.println("</tr>");
             out.println("<tr>");
             out.println("<td colspan='2'>");
-            out.println("<input type='radio' name='rdTamanho' value='35'>35</input>");
-            out.println("<input type='radio' name='rdTamanho' value='36'>36</input>");
-            out.println("<input type='radio' name='rdTamanho' value='37'>37</input>");
-            out.println("<input type='radio' name='rdTamanho' value='38'>38</input>");
-            out.println("<input type='radio' name='rdTamanho' value='39'>39</input>");
-            out.println("<input type='radio' name='rdTamanho' value='40'>40</input>");
-            out.println("<input type='radio' name='rdTamanho' value='41'>41</input>");
-            out.println("<input type='radio' name='rdTamanho' value='42'>42</input>");
-            out.println("<input type='radio' name='rdTamanho' value='43'>43</input>");
-            out.println("<input type='radio' name='rdTamanho' value='44'>44</input>");
+            out.println("<input type='radio' name='rdTamanho' value='" + produto.getTamanho() + "'>" + produto.getTamanho() + "</input>");
             out.println("</td>");
             out.println("</tr>");
             out.println("<tr>");

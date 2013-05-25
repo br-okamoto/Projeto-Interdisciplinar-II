@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class Departamento implements Serializable, Cloneable{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idDepartamento;
     
     private int cod_departamento;

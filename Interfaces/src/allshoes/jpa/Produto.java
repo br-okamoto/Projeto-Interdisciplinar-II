@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 public class Produto implements Serializable{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idProduto;
     
     private int cod_produto;

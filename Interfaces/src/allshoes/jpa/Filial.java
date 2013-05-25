@@ -15,7 +15,7 @@ public class Filial implements Serializable, Cloneable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idFilial;
     
     private String nome;

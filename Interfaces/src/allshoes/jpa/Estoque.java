@@ -17,7 +17,7 @@ public class Estoque implements Serializable, Cloneable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idEstoque;
     
     //@ManyToMany(cascade = CascadeType.PERSIST,fetch=FetchType.EAGER)

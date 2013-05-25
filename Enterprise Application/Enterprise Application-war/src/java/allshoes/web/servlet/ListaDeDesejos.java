@@ -4,20 +4,38 @@
  */
 package allshoes.web.servlet;
 
+import allshoes.jpa.Cliente;
+import allshoes.jpa.ListaDeDesejo;
+import allshoes.jpa.facade.ClienteFacadeRemote;
+import allshoes.jpa.facade.ListaDeDesejoFacadeRemote;
+import allshoes.jpa.facade.ProdutoFacadeRemote;
 import allshoes.web.model.Footer;
 import allshoes.web.model.Header;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Bruno
  */
 public class ListaDeDesejos extends HttpServlet {
+    
+    @EJB
+    private ListaDeDesejoFacadeRemote listaEjb;
+    
+    @EJB
+    private ClienteFacadeRemote clienteEjb;
+    
+    @EJB
+    private ProdutoFacadeRemote produtoEjb;
 
     /**
      * Processes requests for both HTTP
@@ -36,6 +54,19 @@ public class ListaDeDesejos extends HttpServlet {
         Header header = new Header(false, "Lista de Desejos");
         Footer footer = new Footer(false);
         
+        String username = null;
+        HttpSession session = request.getSession();
+        try {
+           username = session.getAttribute("username").toString();
+        }
+        catch (NullPointerException ex) {
+            RequestDispatcher rd = request.getRequestDispatcher("Login?returnURL=/Enterprise_Application-war/ListaDeDesejos");
+            rd.forward(request, response);
+        }
+        
+        Cliente cliente = clienteEjb.find(username);
+        List<ListaDeDesejo> lista = listaEjb.findAll();
+        
         try {
 
             out.println(header.getHeaderPadrao());
@@ -48,16 +79,17 @@ public class ListaDeDesejos extends HttpServlet {
             out.println("Lista de Desejos");
             out.println("</div>");
             
-            out.println("<div class='departamentoProduto'>");
-            out.println("<form action='RemoverProduto' method='post'>");
-            out.println("<img src='" + request.getContextPath() + "/images/adidas-galeria.jpg' alt='' />");
-            out.println("<h2>Tênis Adidas 4.3</h2>");
-            out.println("<div class='precoProduto'>R$ 159,90</div>");
-            out.println("<div class='precoProduto'>6 x R$ 26,65 sem juros</div>");
-            out.println("<input type='hidden' value='RemoverListaDesejos' />");
-            out.println("<input type='submit' id='removerLista' value=' Remover ' />");
-            out.println("</form>");
-            out.println("</div>");
+            for (ListaDeDesejo l : lista) {
+                out.println("<div class='departamentoProduto'>");
+                out.println("<form action='RemoverProduto' method='post'>");
+                out.println("<img src='" + request.getContextPath() + "/images/produtos/"+l.getProduto().getCod_produto()+".jpg' alt='' />");
+                out.println("<h2>"+l.getProduto().getNome()+"</h2>");
+                out.println("<div class='precoProduto'>"+l.getProduto().getPreco()+"</div>");
+                out.println("<input type='hidden' value='RemoverListaDesejos' />");
+                out.println("<input type='submit' id='removerLista' value=' Remover ' />");
+                out.println("</form>");
+                out.println("</div>");
+            }
             
             out.println("</div>");
             

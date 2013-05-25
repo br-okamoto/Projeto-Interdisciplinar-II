@@ -108,19 +108,75 @@ public class FinalizacaoDoPedido extends HttpServlet {
             out.println("</table>");
             
             out.println("<h2>Detalhes do Pedido</h2>");
+            out.println("<table id='tbCarrinho' border='0' cellpadding='3' cellspacing='3' width='1000'>");
+            out.println("<tr>");
+            out.println("<th colspan='2' align='left'>Produto</th>");
+            out.println("<th colspan='2' align='center'>Quantidade</th>");
+            out.println("<th align='center'>Preço</th>");
+            out.println("</tr>");
+            List<ItemDoPedido> itens = new ArrayList<ItemDoPedido>();
+            itens = (ArrayList<ItemDoPedido>)session.getAttribute("itens");
+            for (ItemDoPedido i : itens) {
+                out.println("<tr>");
+                out.println("<td width='130' align='left'>");
+                out.println("<a href='DetalheDoProduto?cod_produto="+i.getProduto().getCod_produto()+"'><img src='" + request.getContextPath() + "/images/produtos/"+i.getProduto().getCod_produto()+".jpg' alt='' width='120' height='120'/></a>");
+                out.println("</td>");
+                out.println("<td valign='top'>");
+                out.println("<a href='DetalheDoProduto?cod_produto="+i.getProduto().getCod_produto()+"'><h2>"+i.getProduto().getNome()+"</h2></a>");
+                out.println("<span><b>Cor:</b> "+i.getProduto().getCor()+"</span><br/>");
+                out.println("<span><b>Tamanho:</b> "+i.getProduto().getTamanho()+"</span>");
+                out.println("</td>");
+                out.println("<td width='50' align='center'>");
+                out.println("<span>"+i.getQuantidade()+"</span>");
+                out.println("</td>");
+                out.println("<td width='50' align='center'>");
+
+                out.println("</td>");
+                out.println("<td width='150' align='center'><b>R$ "+i.getSubTotal()+"</b></td>");
+                out.println("</tr>");
+            }
+
+            out.println("</table>");
+            
             out.println("");
             out.println("<h2>Forma de Pagamento</h2>");
             out.println("");
             out.println("<h2>Endereco de Entrega</h2>");
+            out.println("<table cellpadding='3' cellspacing='3' border='0' >");
+            out.println("<tr>");
+            out.println("<td class='lbl_cadastro'>Rua</td>");
+            out.println("<td style='width:310px;'>"+pedido.getEndereco().getRua()+"</td>");
+            out.println("<td class='lbl_cadastro2'>Número</td>");
+            out.println("<td>"+pedido.getEndereco().getNumero()+"</td>");
+            out.println("</tr>");
+            out.println("<tr>");
+            out.println("<td class='lbl_cadastro'>Complemento</td>");
+            out.println("<td colspan='3'>"+pedido.getEndereco().getComplemento()+"</td>");
+            out.println("</tr>");
+            out.println("<tr>");
+            out.println("<td class='lbl_cadastro'>CEP</td>");
+            out.println("<td colspan='3'>"+pedido.getEndereco().getCep()+"</td>");
+            out.println("</tr>");
+            out.println("</tr>");
+            out.println("<tr>");
+            out.println("<td class='lbl_cadastro'>Bairro</td>");
+            out.println("<td colspan='3'>"+pedido.getEndereco().getBairro()+"</td>");
+            out.println("</tr>");
+            out.println("<tr>");
+            out.println("<td class='lbl_cadastro'>Cidade</td>");
+            out.println("<td colspan='3'>"+pedido.getEndereco().getCidade()+"</td>");
+            out.println("</tr>");
+            out.println("<tr>");
+            out.println("<td class='lbl_cadastro'>Estado</td>");
+            out.println("<td colspan='3'>");
+            out.println(pedido.getEndereco().getEstado());
+            out.println("</td>");
+            out.println("</tr>");
+            out.println("</table>");
             out.println("");
             
             
-            List<ItemDoPedido> itensP = new ArrayList<ItemDoPedido>();
-            itensP = (ArrayList<ItemDoPedido>)session.getAttribute("itens");
-            for (ItemDoPedido i : itensP) {
-                out.println("<div>" + i.getPedido().getCliente().getIdPessoa() + " - " + i.getQuantidade() + " - " + pedido.getIdPedido() + " - " + i.getProduto().getIdProduto());
-                out.println("</div>");
-            }
+            
             
             
             out.println("</div>");

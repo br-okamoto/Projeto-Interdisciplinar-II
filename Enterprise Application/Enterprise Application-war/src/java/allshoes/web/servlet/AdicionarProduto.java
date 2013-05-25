@@ -6,13 +6,18 @@ package allshoes.web.servlet;
 
 import allshoes.facade.CartBean;
 import allshoes.facade.CartBeanRemote;
+import allshoes.jpa.Cliente;
 import allshoes.jpa.ItemDoPedido;
+import allshoes.jpa.ListaDeDesejo;
 import allshoes.jpa.Pedido;
 import allshoes.jpa.Produto;
+import allshoes.jpa.facade.ClienteFacadeRemote;
+import allshoes.jpa.facade.ListaDeDesejoFacadeRemote;
 import allshoes.jpa.facade.PedidoFacadeRemote;
 import allshoes.jpa.facade.ProdutoFacadeRemote;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -33,6 +38,12 @@ public class AdicionarProduto extends HttpServlet {
     
     @EJB
     ProdutoFacadeRemote prodEjb;
+    
+    @EJB
+    ListaDeDesejoFacadeRemote listaEjb;
+    
+    @EJB
+    ClienteFacadeRemote clienteEjb;
     
     /**
      * Processes requests for both HTTP
@@ -57,7 +68,31 @@ public class AdicionarProduto extends HttpServlet {
         String action = request.getParameter("action");
 
         if ("Adicionar a Lista de Desejos".equals(action)) {
-            // instruções para adicionar o produto na lista de desejos
+            HttpSession session = request.getSession();
+        
+            String username = null;
+
+            try {
+               username = session.getAttribute("username").toString();
+            }
+            catch (NullPointerException ex) {
+                RequestDispatcher rd = request.getRequestDispatcher("Login?returnURL=/Enterprise_Application-war/ListaDeDesejos");
+                rd.forward(request, response);
+            }
+            Cliente cliente = clienteEjb.find(username);
+            
+            List<ListaDeDesejo> listaDesejos = listaEjb.findAll();
+            boolean isOnTheList = false;
+            for (ListaDeDesejo l : listaDesejos) {
+                if (l.getProduto().getIdProduto() == produto.getIdProduto() && l.getCliente().getIdPessoa() == cliente.getIdPessoa())
+                    isOnTheList = true;
+            }
+            if (!isOnTheList) {
+            ListaDeDesejo item = new ListaDeDesejo();
+                item.setCliente(cliente);
+                item.setProduto(produto);
+                listaEjb.create(item);
+            }
             
             RequestDispatcher rd = request.getRequestDispatcher("ListaDeDesejos");
             rd.forward(request, response);
