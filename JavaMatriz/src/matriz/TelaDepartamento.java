@@ -6,10 +6,13 @@ package matriz;
 
 import Validacao.IntegerDocument;
 import Validacao.teclasPermitidas;
+import allshoes.jpa.Departamento;
 import controller.MatrizDepartamentoController;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,8 +27,31 @@ public class TelaDepartamento extends javax.swing.JFrame {
         initComponents();
         //Permite Campo com apenas 4 números
         jTextField1.setDocument(new IntegerDocument(4));
-        //Campo aceita apenas letras
-        jTextField2.setDocument(new teclasPermitidas());
+        try {
+            MatrizDepartamentoController controller = new MatrizDepartamentoController();
+            List<Departamento> lista = controller.findAll();
+            if (!lista.isEmpty()) {
+                DefaultTableModel dtm = new DefaultTableModel();
+                Object[] tableColumnNames = new Object[3];
+                tableColumnNames[0] = "ID do Departamento";
+                tableColumnNames[1] = "Codigo";
+                tableColumnNames[2] = "Nome";
+                dtm.setColumnIdentifiers(tableColumnNames);
+                Object[] objects = new Object[3];
+                for (Departamento p : lista) {
+                    objects[0] = p.getIdDepartamento();
+                    objects[1] = p.getCod_departamento();
+                    objects[2] = p.getNomeDepartamento();
+                    
+                    dtm.addRow(objects);
+                }
+                jTable1.setModel(dtm);
+            } 
+        }
+        catch(Exception e) {
+            
+        }
+
     }
 
     /**

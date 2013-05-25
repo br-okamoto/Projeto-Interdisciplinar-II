@@ -23,8 +23,6 @@ public class TelaProduto extends javax.swing.JFrame {
         initComponents();
         //Permite Campo com apenas 4 números
         jTextField1.setDocument(new IntegerDocument(4));
-        //Campo aceita apenas letras
-        jTextField2.setDocument(new teclasPermitidas());
         
         try {
             MatrizProdutoController controller = new MatrizProdutoController();
