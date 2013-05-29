@@ -7,6 +7,7 @@ import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 @Stateful(mappedName = "ejb/PedidoFacade")
 public class PedidoFacade extends AbstractFacade<Pedido> implements PedidoFacadeRemote {
@@ -23,5 +24,16 @@ public class PedidoFacade extends AbstractFacade<Pedido> implements PedidoFacade
         super(Pedido.class);
     }
 
-    
+    @Override
+    public Pedido find(int idPedido) {
+        Query q1 = em.createQuery("SELECT p FROM Pedido p WHERE p.idPedido = :idPedido");
+        q1.setParameter("idPedido", idPedido);
+        List<Pedido> pedidos = q1.getResultList();
+        if (pedidos.isEmpty()) {
+            return null;
+        }
+        else {
+            return pedidos.get(0);
+        }
+    }
 }

@@ -62,25 +62,27 @@ public class TelaPedidos extends javax.swing.JFrame {
                     dtm.setColumnIdentifiers(tableColumnNames);
                     Object[] objects = new Object[13];
                     for(Pedido p : pedidos) {
-                        double valor = 0;
-                        for (ItemDoPedido idp : itensDoPedido) {
-                            if (idp.getPedido().getIdPedido() == p.getIdPedido())
-                                valor += idp.getSubTotal();
+                        if (p.getFilial() == null) {
+                            double valor = 0;
+                            for (ItemDoPedido idp : itensDoPedido) {
+                                if (idp.getPedido().getIdPedido() == p.getIdPedido())
+                                    valor += idp.getSubTotal();
+                            }
+                            objects[0] = p.getIdPedido();
+                            objects[1] = p.getDataPedido();
+                            objects[2] = p.getStatus();
+                            objects[3] = valor;
+                            objects[4] = p.getCliente().getIdPessoa();
+                            objects[5] = p.getCliente().getNome();
+                            objects[6] = p.getEndereco().getRua();
+                            objects[7] = p.getEndereco().getNumero();
+                            objects[8] = p.getEndereco().getComplemento();
+                            objects[9] = p.getEndereco().getBairro();
+                            objects[10] = p.getEndereco().getCep();
+                            objects[11] = p.getEndereco().getCidade();
+                            objects[12] = p.getEndereco().getEstado();
+                            dtm.addRow(objects);
                         }
-                        objects[0] = p.getIdPedido();
-                        objects[1] = p.getDataPedido();
-                        objects[2] = p.getStatus();
-                        objects[3] = valor;
-                        objects[4] = p.getCliente().getIdPessoa();
-                        objects[5] = p.getCliente().getNome();
-                        objects[6] = p.getEndereco().getRua();
-                        objects[7] = p.getEndereco().getNumero();
-                        objects[8] = p.getEndereco().getComplemento();
-                        objects[9] = p.getEndereco().getBairro();
-                        objects[10] = p.getEndereco().getCep();
-                        objects[11] = p.getEndereco().getCidade();
-                        objects[12] = p.getEndereco().getEstado();
-                        dtm.addRow(objects);
                     }
                     jTable1.setModel(dtm);
             }

@@ -31,10 +31,6 @@ public class MatrizItemPedidoController {
         itemDoPedidoFacade.remove(itemDoPedido);
     }
     
-    public ItemDoPedido find(String username){
-        return itemDoPedidoFacade.find(username);
-    }
-    
     public List<ItemDoPedido> findAll(int idPedido) {
         return (itemDoPedidoFacade.findAll(idPedido));
     }      

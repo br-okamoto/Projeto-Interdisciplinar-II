@@ -31,8 +31,12 @@ public class MatrizPedidoController {
         pedidoFacade.remove(pedido);
     }
     
-    public Pedido find(String username){
-        return pedidoFacade.find(username);
+    public Pedido find(Object id){
+        return pedidoFacade.find(id);
+    }
+    
+    public Pedido find(int idPedido) {
+        return pedidoFacade.find(idPedido);
     }
             
             

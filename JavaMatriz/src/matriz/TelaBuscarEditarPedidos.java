@@ -18,6 +18,7 @@ import controller.MatrizProdutoController;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,16 +33,15 @@ public class TelaBuscarEditarPedidos extends javax.swing.JFrame {
     public TelaBuscarEditarPedidos(int idPedido) {
         initComponents();
         MatrizPedidoController controller = null;
-        MatrizClienteController clienteController = null;
         MatrizItemPedidoController itemPedidoController = null;
         MatrizFilialController filialController = null;
         
         try {
             filialController = new MatrizFilialController();
             List<Filial> filiais = filialController.findAll();
+            jComboBox1.removeAllItems();
             for (Filial f : filiais) {
-                jComboBox1.addItem(f.getIdFilial() + " - " + f.getNome());
-                
+                jComboBox1.addItem(f.getNome());
             }
         } catch (Exception ex) {
             Logger.getLogger(TelaBuscarEditarPedidos.class.getName()).log(Level.SEVERE, null, ex);
@@ -50,60 +50,56 @@ public class TelaBuscarEditarPedidos extends javax.swing.JFrame {
 
         try {
             controller = new MatrizPedidoController();
-            clienteController = new MatrizClienteController();
+            itemPedidoController = new MatrizItemPedidoController();
             
-            List<Pedido> pedidos = controller.findAll();
-            List<Cliente> clientes = clienteController.findAll();
-            List<ItemDoPedido> itensDoPedido = itemPedidoController.findAll();
-        
-            if (!pedidos.isEmpty()) {
-                    for(Pedido p : pedidos) {
-                        if (p.getIdPedido() == idPedido) {
-                            double valor = 0;
-                            DefaultTableModel dtm = new DefaultTableModel();
-                            Object[] tableColumnNames = new Object[7];
-                            tableColumnNames[0] = "ID_ItemDoPedido";
-                            tableColumnNames[1] = "ID do Produto";
-                            tableColumnNames[2] = "Marca";
-                            tableColumnNames[3] = "Produto";
-                            tableColumnNames[4] = "Preço";
-                            tableColumnNames[5] = "Quantidade";
-                            tableColumnNames[6] = "Subtotal";
-                            dtm.setColumnIdentifiers(tableColumnNames);
-                            for (ItemDoPedido idp : itensDoPedido) {
-                                if (idp.getPedido().getIdPedido() == p.getIdPedido()) {
-                                    valor += idp.getSubTotal();
-                                    Object[] objects = new Object[7];
-                                    objects[0] = idp.getIdItemDoPedido();
-                                    objects[1] = idp.getProduto().getIdProduto();
-                                    objects[2] = idp.getProduto().getMarca();
-                                    objects[3] = idp.getProduto().getNome();
-                                    objects[4] = idp.getProduto().getPreco();
-                                    objects[5] = idp.getQuantidade();
-                                    objects[6] = idp.getSubTotal();
-                                    dtm.addRow(objects);
-                                }
-
-                            }
-                            jTable1.setModel(dtm);
-                            jTextField1.setText(String.valueOf(p.getIdPedido()));
-                            jTextField3.setText(p.getDataPedido().toString());
-                            jTextField2.setText(p.getStatus().toString());
-                            jTextField4.setText(String.valueOf(valor));
-                            jTextField8.setText(String.valueOf(p.getCliente().getIdPessoa()));
-                            jTextField6.setText(p.getCliente().getNome());
-                            jTextField7.setText(p.getEndereco().getRua());
-                            jTextField9.setText(p.getEndereco().getNumero());
-                            jTextField11.setText(p.getEndereco().getComplemento());
-                            jTextField10.setText(p.getEndereco().getCep());
-                            jTextField13.setText(p.getEndereco().getBairro());
-                            jTextField12.setText(p.getEndereco().getCidade());
-                            jTextField5.setText(p.getEndereco().getEstado().toString());
-                        }
-
+            Pedido pedidoP = controller.find(idPedido);
+            List<ItemDoPedido> itensDoPedido = itemPedidoController.findAll(idPedido);
+            JOptionPane.showMessageDialog(null, itensDoPedido.size());
+            if (pedidoP != null) {
+                double valor = 0;
+                DefaultTableModel dtm = new DefaultTableModel();
+                Object[] tableColumnNames = new Object[7];
+                tableColumnNames[0] = "ID_ItemDoPedido";
+                tableColumnNames[1] = "ID do Produto";
+                tableColumnNames[2] = "Marca";
+                tableColumnNames[3] = "Produto";
+                tableColumnNames[4] = "Preço";
+                tableColumnNames[5] = "Quantidade";
+                tableColumnNames[6] = "Subtotal";
+                dtm.setColumnIdentifiers(tableColumnNames);
+                for (ItemDoPedido idp : itensDoPedido) {
+                    JOptionPane.showMessageDialog(null, idp.getIdItemDoPedido());
+                    if (idp.getPedido().getIdPedido() == pedidoP.getIdPedido()) {
+                        valor += idp.getSubTotal();
+                        Object[] objects = new Object[7];
+                        objects[0] = idp.getIdItemDoPedido();
+                        objects[1] = idp.getProduto().getIdProduto();
+                        objects[2] = idp.getProduto().getMarca();
+                        objects[3] = idp.getProduto().getNome();
+                        objects[4] = idp.getProduto().getPreco();
+                        objects[5] = idp.getQuantidade();
+                        objects[6] = idp.getSubTotal();
+                        dtm.addRow(objects);
                     }
 
+                }
+                jTable1.setModel(dtm);
+                jTextField1.setText(String.valueOf(pedidoP.getIdPedido()));
+                jTextField3.setText(pedidoP.getDataPedido().toString());
+                jTextField2.setText(pedidoP.getStatus().toString());
+                jTextField4.setText(String.valueOf(valor));
+                jTextField8.setText(String.valueOf(pedidoP.getCliente().getIdPessoa()));
+                jTextField6.setText(pedidoP.getCliente().getNome());
+                jTextField7.setText(pedidoP.getEndereco().getRua());
+                jTextField9.setText(pedidoP.getEndereco().getNumero());
+                jTextField11.setText(pedidoP.getEndereco().getComplemento());
+                jTextField10.setText(pedidoP.getEndereco().getCep());
+                jTextField13.setText(pedidoP.getEndereco().getBairro());
+                jTextField12.setText(pedidoP.getEndereco().getCidade());
+                jTextField5.setText(pedidoP.getEndereco().getEstado().toString());
+                JOptionPane.showMessageDialog(null, pedidoP.getIdPedido());
             }
+
         }
         catch (Exception e) {
             
@@ -456,6 +452,11 @@ public class TelaBuscarEditarPedidos extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matrizimg/Salvar.jpg"))); // NOI18N
         jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel27.setText("ENCAMINHAR");
@@ -774,6 +775,25 @@ public class TelaBuscarEditarPedidos extends javax.swing.JFrame {
         pe.setVisible(true);
         pe.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        MatrizPedidoController pedidoController = null;
+        MatrizFilialController filialController = null;
+        try {
+            pedidoController = new MatrizPedidoController();
+            filialController = new MatrizFilialController();
+            String filialSelecionada = jComboBox1.getSelectedItem().toString();
+            Filial filial = filialController.find(filialSelecionada);
+            int idPedido = Integer.parseInt(jTextField1.getText());
+            Pedido pedido = pedidoController.find(idPedido);
+            pedido.setFilial(filial);
+            pedidoController.edit(pedido);
+            JOptionPane.showMessageDialog(null, "Pedido encaminhado com sucesso!");
+        }
+        catch(Exception e) {
+            Logger.getLogger(TelaBuscarEditarPedidos.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

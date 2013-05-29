@@ -14,6 +14,8 @@ public interface PedidoFacadeRemote {
     void remove(Pedido pedido);
 
     Pedido find(Object id);
+    
+    Pedido find(int idPedido);
 
     List<Pedido> findAll();
 
