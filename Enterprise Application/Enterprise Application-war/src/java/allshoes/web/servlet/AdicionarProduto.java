@@ -84,8 +84,9 @@ public class AdicionarProduto extends HttpServlet {
             List<ListaDeDesejo> listaDesejos = listaEjb.findAll();
             boolean isOnTheList = false;
             for (ListaDeDesejo l : listaDesejos) {
-                if (l.getProduto().getIdProduto() == produto.getIdProduto() && l.getCliente().getIdPessoa() == cliente.getIdPessoa())
+                if (l.getProduto().getIdProduto() == produto.getIdProduto() && l.getCliente().getIdPessoa() == cliente.getIdPessoa()) {
                     isOnTheList = true;
+                }
             }
             if (!isOnTheList) {
             ListaDeDesejo item = new ListaDeDesejo();

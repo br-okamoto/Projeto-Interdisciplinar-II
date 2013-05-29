@@ -123,19 +123,12 @@ public class RealizarPagamento extends HttpServlet {
         
         CartBeanRemote carrinho = getCartBean(request);
 
-        ArrayList<ItemDoPedido> itens = new ArrayList<ItemDoPedido>();
-        ArrayList<ItemDoPedido> itensF = new ArrayList<ItemDoPedido>();
-        itens = (ArrayList<ItemDoPedido>)carrinho.getItems();
+        ArrayList<ItemDoPedido> itens = (ArrayList<ItemDoPedido>)carrinho.getItems();
         for (ItemDoPedido i : itens) {
-            ItemDoPedido idp = new ItemDoPedido();
-            idp.setPedido(pedido);
-            idp.setProduto(i.getProduto());
-            idp.setQuantidade(i.getQuantidade());
-            idp.setSubTotal(i.getSubTotal());
+            i.setPedido(pedido);
             itemPedidoEjb.create(i);
-            itensF.add(idp);
         }
-        session.setAttribute("itens", itensF);
+        session.setAttribute("itens", itens);
         
         RequestDispatcher rd = request.getRequestDispatcher("FinalizacaoDoPedido");
         rd.forward(request, response);
