@@ -2,8 +2,11 @@
 package Filial;
 
 import Validacao.IntegerDocument;
+import allshoes.jpa.Filial;
 import allshoes.jpa.ItemDoPedido;
 import allshoes.jpa.Pedido;
+import allshoes.jpa.StatusDoPedido;
+import controller.filialController;
 import controller.itemDoPedidoController;
 import controller.pedidoController;
 import java.util.List;
@@ -18,6 +21,21 @@ public class TelaPedido extends javax.swing.JFrame {
     public TelaPedido() {
         initComponents();
         campoPedido.setDocument(new IntegerDocument(4));
+        
+        filialController controlaFilial = null;
+        
+        try {
+            controlaFilial = new filialController();
+            List<Filial> filiais = controlaFilial.findAll();
+            for (Filial f : filiais) {
+                jComboBox1.addItem(f.getIdFilial() + " - " + f.getNome());
+                
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
     }
 
     /**
@@ -189,8 +207,18 @@ public class TelaPedido extends javax.swing.JFrame {
         });
 
         jButton2.setText("Verificar Pedidos Pendentes");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Enviar Pedido");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         campoPedido1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -291,13 +319,13 @@ public class TelaPedido extends javax.swing.JFrame {
                     } else {
                         objects[2] = p.getCliente().getNome();
                         campoTelefone.setText(p.getCliente().getTelefone().toString());
+                        campoRua.setText(p.getCliente().getEndereco().getRua());
+                        campoBairro.setText(p.getCliente().getEndereco().getBairro());
+                        campoCidade.setText(p.getCliente().getEndereco().getCidade());
+                        campoEstado.setText(p.getCliente().getEndereco().getEstado().toString());
+
                     }
                     campoCliente.setText(String.valueOf(objects[2]));
-                    
-                    //campoRua.setText(p.getCliente().getEndereco().getRua());
-                    //campoBairro.setText(p.getCliente().getEndereco().getBairro());
-                    //campoCidade.setText(p.getCliente().getEndereco().getCidade());
-                    //campoEstado.setText(p.getCliente().getEndereco().getEstado().toString());
 
                     for (ItemDoPedido i : itens) {
                         if (i.getPedido().getIdPedido() == idPedido) {
@@ -315,6 +343,7 @@ public class TelaPedido extends javax.swing.JFrame {
 
 
         } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro: Pedido não localizado");
             Logger.getLogger(TelaPedido.class.getName()).log(Level.SEVERE, null, ex);
         }
                 
@@ -330,6 +359,107 @@ public class TelaPedido extends javax.swing.JFrame {
     private void campoPedido1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoPedido1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoPedido1ActionPerformed
+
+    
+    //Verifica Pedidos Pendentes
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        pedidoController controlaPedido;
+        itemDoPedidoController controlaItemDoPedido;
+
+        //Pega id da Filial no jComboBox
+        String nomeFilial = (String) jComboBox1.getSelectedItem();
+        char letra = nomeFilial.charAt(0);
+        int idFilial = Integer.parseInt(String.valueOf(letra));
+   
+        try {
+            controlaPedido = new pedidoController();
+            controlaItemDoPedido = new itemDoPedidoController();
+            
+            List<ItemDoPedido> itens = controlaItemDoPedido.findAll();
+            List<Pedido> pedidos = controlaPedido.findAll();
+       
+            DefaultTableModel dtm = new DefaultTableModel();
+            Object[] tableColumnNames = new Object[6];
+            tableColumnNames[0] = "Código";
+            tableColumnNames[1] = "Status";
+            tableColumnNames[2] = "Cliente";
+            tableColumnNames[3] = "Produto";
+            tableColumnNames[4] = "Preço";
+            tableColumnNames[5] = "Filial";
+            dtm.setColumnIdentifiers(tableColumnNames);
+
+            Object[] objects = new Object[6];
+
+            for (Pedido p : pedidos) {
+                if (p.getStatus().compareTo(StatusDoPedido.AguardandoFilial) == 0 && p.getFilial().getIdFilial() == idFilial) {
+                    objects[0] = p.getIdPedido();
+                    objects[1] = p.getStatus();
+
+                    if (p.getCliente() == null) {
+                        objects[2] = "Venda no Balcão";
+                    } else {
+                        objects[2] = p.getCliente().getNome();
+                    }
+
+                    for (ItemDoPedido i : itens) {
+                        if (i.getPedido().getIdPedido() == p.getIdPedido()) {
+                            objects[3] = i.getProduto().getNome();
+                        }
+                        objects[4] = i.getProduto().getPreco();
+                    }
+                    objects[5] = p.getFilial().getNome();
+                    dtm.addRow(objects);
+                }
+
+            }
+            jTable1.setModel(dtm);
+            
+        } catch (Exception ex) {
+            Logger.getLogger(TelaPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+       
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+    
+    //Envia pedido para o Cliente
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+            int idPedido = Integer.parseInt(campoPedido1.getText());
+        try {            
+            pedidoController controlaPedido = new pedidoController();
+            Pedido pedido = new Pedido();
+            
+            List<Pedido> pedidos = controlaPedido.findAll();
+            
+            
+            
+            for(Pedido p : pedidos) {
+                if(p.getIdPedido() == idPedido){
+                    pedido.setIdPedido(idPedido);
+                    pedido.setDataPedido(p.getDataPedido());
+                    pedido.setFormaDePagamento(p.getFormaDePagamento());
+                    pedido.setNumeroParcelas(p.getNumeroParcelas());
+                    pedido.setPagamentoRealizado(true);
+                    pedido.setStatus(StatusDoPedido.Finalizado);
+                    pedido.setCliente(p.getCliente());
+                    pedido.setFilial(p.getFilial());
+                    pedido.setEndereco(p.getEndereco());
+  
+                    controlaPedido.edit(pedido);
+                }
+            }
+            
+            JOptionPane.showMessageDialog(null, "Pedido Enviado com Sucesso");
+        
+        
+        
+        } catch (Exception ex) {
+            Logger.getLogger(TelaPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
