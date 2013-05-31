@@ -8,11 +8,11 @@ import java.util.Properties;
 import javax.naming.InitialContext;
 
 
-public class MatrizController {
+public class MatrizFuncionarioController {
 
     private FuncionarioFacadeRemote funcionarioFacade;
 
-    public MatrizController() throws Exception {
+    public MatrizFuncionarioController() throws Exception {
         Properties props = new Properties();
         props.load(new java.io.FileInputStream("jndi.properties"));
         InitialContext ctx = new InitialContext(props);

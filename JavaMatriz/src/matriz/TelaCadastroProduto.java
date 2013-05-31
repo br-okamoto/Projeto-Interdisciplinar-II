@@ -5,16 +5,20 @@
 package matriz;
 
 import allshoes.jpa.Marca;
-import controller.MatrizController;
+import controller.MatrizFuncionarioController;
 import Validacao.FixedLengthDocument;
 import Validacao.IntegerDocument;
 import Validacao.teclasPermitidas;
+import allshoes.jpa.Estoque;
+import allshoes.jpa.Estoque_Produto;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import allshoes.jpa.Produto;
 import javax.swing.DefaultComboBoxModel;
 import allshoes.jpa.Marca;
 import controller.MatrizDepartamentoController;
+import controller.MatrizEstoqueProdutoController;
+import controller.MatrizFilialController;
 import controller.MatrizProdutoController;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -33,9 +37,7 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
         //Permite Campo com apenas 4 números
         jTextField1.setDocument(new IntegerDocument(4));
         jTextField4.setDocument(new IntegerDocument(2));
-        //Campo aceita apenas letras
-        //jTextField2.setDocument(new teclasPermitidas());
-        jTextField5.setDocument(new teclasPermitidas());
+       
         
         jComboBox1.setModel(new DefaultComboBoxModel<>(Marca.values()));
         try {
@@ -442,23 +444,42 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelarActionPerformed
 
     private void SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarActionPerformed
-        MatrizProdutoController controller = null;
-        MatrizDepartamentoController controllerDep = null;
+      MatrizProdutoController controlaProduto = null;
+        MatrizDepartamentoController controlaDepartamento = null;
+        MatrizFilialController controlaFilial = null;
+        MatrizEstoqueProdutoController controlaEstoqueProduto = null;
         try {
-            controller = new MatrizProdutoController();
-            controllerDep = new MatrizDepartamentoController();
+            controlaProduto = new MatrizProdutoController();
+            controlaDepartamento = new MatrizDepartamentoController();
+            controlaFilial = new MatrizFilialController();
+            controlaEstoqueProduto = new MatrizEstoqueProdutoController();
+            
+            Estoque estoque = new Estoque();
+            Estoque_Produto estoqueProduto = new Estoque_Produto();
             allshoes.jpa.Produto novoProduto = new Produto();
+            
+            
             novoProduto.setCod_produto(Integer.parseInt(jTextField1.getText()));
             novoProduto.setNome(jTextField2.getText());
             novoProduto.setMarca(Marca.valueOf(jComboBox1.getSelectedItem().toString()));
             novoProduto.setTamanho(Integer.parseInt(jTextField4.getText()));
             novoProduto.setCor(jTextField5.getText());
-            allshoes.jpa.Departamento departamento = controllerDep.find(jComboBox2.getSelectedItem().toString());
+            allshoes.jpa.Departamento departamento = controlaDepartamento.find(jComboBox2.getSelectedItem().toString());
             novoProduto.setDepartamento(departamento);
             novoProduto.setPreco(Double.parseDouble(jTextField7.getText()));
             novoProduto.setDescricao(jTextArea1.getText());
             
-            controller.create(novoProduto);
+            controlaProduto.create(novoProduto);
+            
+           int qtd = controlaFilial.findAll().size();
+           for(int i=0; i<qtd; i++){
+                estoqueProduto.setQuantidade(0);
+                estoque.setIdEstoque(1+i);
+                novoProduto.setIdProduto(controlaProduto.findAll().size());
+                estoqueProduto.setEstoque(estoque);
+                estoqueProduto.setProduto(novoProduto);
+                controlaEstoqueProduto.create(estoqueProduto);
+           }
             
             JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
 
