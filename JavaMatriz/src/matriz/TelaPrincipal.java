@@ -282,7 +282,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_relatoriosActionPerformed
 
     private void relatorios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relatorios1ActionPerformed
-         CadastroFilial f = new CadastroFilial();
+        TelaCadastroFilial f = new TelaCadastroFilial();
         TelaPrincipal principal = new TelaPrincipal();
         principal.setVisible(false);
         dispose();

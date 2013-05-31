@@ -6,7 +6,7 @@ import Validacao.teclasPermitidas;
 import allshoes.jpa.Endereco;
 import allshoes.jpa.Funcionario;
 import allshoes.jpa.LocalDeTrabalho;
-import controller.MatrizController;
+import controller.MatrizFuncionarioController;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -477,9 +477,9 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_PedidosActionPerformed
 
     private void SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarActionPerformed
-        MatrizController controller = null;
+        MatrizFuncionarioController controller = null;
         try {
-            controller = new MatrizController();
+            controller = new MatrizFuncionarioController();
             
             Funcionario funcionario = new Funcionario();
             

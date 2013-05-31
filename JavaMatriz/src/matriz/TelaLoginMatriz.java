@@ -2,7 +2,7 @@
 package matriz;
 
 import allshoes.jpa.Funcionario;
-import controller.MatrizController;
+import controller.MatrizFuncionarioController;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -135,11 +135,11 @@ public class TelaLoginMatriz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-        MatrizController controller = null;
+        MatrizFuncionarioController controller = null;
         TelaPrincipal principal = new TelaPrincipal();
         
         try {
-            controller = new MatrizController();
+            controller = new MatrizFuncionarioController();
             String username = usuario.getText().toString();
             char[] pass = jPasswordField1.getPassword();
             Funcionario funcionario = controller.find(username);

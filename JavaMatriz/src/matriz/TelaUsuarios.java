@@ -5,7 +5,7 @@
 package matriz;
 
 import allshoes.jpa.Funcionario;
-import controller.MatrizController;
+import controller.MatrizFuncionarioController;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,10 +22,10 @@ public class TelaUsuarios extends javax.swing.JFrame {
      */
     public TelaUsuarios() {
         initComponents();
-        MatrizController controller = null;
+        MatrizFuncionarioController controller = null;
         
         try {
-            controller = new MatrizController();
+            controller = new MatrizFuncionarioController();
 
             List<Funcionario> funcionarios = controller.findAll();
             

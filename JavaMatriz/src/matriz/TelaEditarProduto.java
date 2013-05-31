@@ -5,7 +5,7 @@
 package matriz;
 
 import allshoes.jpa.Marca;
-import controller.MatrizController;
+import controller.MatrizFuncionarioController;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import allshoes.jpa.Produto;
@@ -253,7 +253,7 @@ public class TelaEditarProduto extends javax.swing.JFrame {
 
         jLabel26.setText("CANCELAR");
 
-        jLabel25.setText("SALVAR");
+        jLabel25.setText("EDITAR");
 
         Cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matrizimg/Excluir.jpg"))); // NOI18N
         Cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -271,7 +271,7 @@ public class TelaEditarProduto extends javax.swing.JFrame {
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(0, 51, 153));
-        jLabel17.setText("CADASTRO DE PRODUTOS");
+        jLabel17.setText("EDITAR PRODUTOS");
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -429,25 +429,25 @@ public class TelaEditarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelarActionPerformed
 
     private void SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarActionPerformed
-        MatrizProdutoController controller = null;
-        MatrizDepartamentoController controllerDep = null;
+        MatrizProdutoController controlaProduto = null;
+        MatrizDepartamentoController controlaDepartamento = null;
         try {
-            controller = new MatrizProdutoController();
-            controllerDep = new MatrizDepartamentoController();
+            controlaProduto = new MatrizProdutoController();
+            controlaDepartamento = new MatrizDepartamentoController();
             allshoes.jpa.Produto novoProduto = new Produto();
             novoProduto.setCod_produto(Integer.parseInt(jTextField1.getText()));
             novoProduto.setNome(jTextField2.getText());
             novoProduto.setMarca(Marca.valueOf(jComboBox1.getSelectedItem().toString()));
             novoProduto.setTamanho(Integer.parseInt(jTextField4.getText()));
             novoProduto.setCor(jTextField5.getText());
-            allshoes.jpa.Departamento departamento = controllerDep.find(jComboBox2.getSelectedItem().toString());
+            allshoes.jpa.Departamento departamento = controlaDepartamento.find(jComboBox2.getSelectedItem().toString());
             novoProduto.setDepartamento(departamento);
             novoProduto.setPreco(Double.parseDouble(jTextField7.getText()));
             novoProduto.setDescricao(jTextArea1.getText());
             
-            controller.create(novoProduto);
+            controlaProduto.edit(novoProduto);
             
-            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Produto alterado!");
 
         }
         catch (Exception ex) {
