@@ -80,15 +80,17 @@ public class ListaDeDesejos extends HttpServlet {
             out.println("</div>");
             
             for (ListaDeDesejo l : lista) {
-                out.println("<div class='departamentoProduto'>");
-                out.println("<form action='RemoverProduto' method='post'>");
-                out.println("<img src='" + request.getContextPath() + "/images/produtos/"+l.getProduto().getCod_produto()+".jpg' alt='' />");
-                out.println("<h2>"+l.getProduto().getNome()+"</h2>");
-                out.println("<div class='precoProduto'>"+l.getProduto().getPreco()+"</div>");
-                out.println("<input type='hidden' value='RemoverListaDesejos' />");
-                out.println("<input type='submit' id='removerLista' value=' Remover ' />");
-                out.println("</form>");
-                out.println("</div>");
+                if (l.getCliente().getIdPessoa() == cliente.getIdPessoa()) {
+                    out.println("<div class='departamentoProduto'>");
+                    out.println("<form action='RemoverProduto' method='post'>");
+                    out.println("<img src='" + request.getContextPath() + "/images/produtos/"+l.getProduto().getCod_produto()+".jpg' alt='' />");
+                    out.println("<h2>"+l.getProduto().getNome()+"</h2>");
+                    out.println("<div class='precoProduto'>"+l.getProduto().getPreco()+"</div>");
+                    out.println("<input type='hidden' value='RemoverListaDesejos' />");
+                    out.println("<input type='submit' id='removerLista' value=' Remover ' />");
+                    out.println("</form>");
+                    out.println("</div>");
+                }
             }
             
             out.println("</div>");

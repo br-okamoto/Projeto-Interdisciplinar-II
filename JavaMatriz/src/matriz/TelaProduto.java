@@ -68,9 +68,7 @@ public class TelaProduto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        samplePUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("Enterprise_Application-ejbPU").createEntityManager();
-        produtoQuery = java.beans.Beans.isDesignTime() ? null : samplePUEntityManager.createQuery("SELECT p FROM Produto p");
-        produtoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : produtoQuery.getResultList();
+
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -526,9 +524,7 @@ public class TelaProduto extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private java.util.List<allshoes.jpa.Produto> produtoList;
-    private javax.persistence.Query produtoQuery;
     private javax.swing.JButton relatorios;
-    private javax.persistence.EntityManager samplePUEntityManager;
+    
     // End of variables declaration//GEN-END:variables
 }
