@@ -4,6 +4,7 @@
  */
 package matriz;
 
+import allshoes.jpa.Departamento;
 import allshoes.jpa.Marca;
 import controller.MatrizFuncionarioController;
 import java.util.logging.Level;
@@ -434,13 +435,14 @@ public class TelaEditarProduto extends javax.swing.JFrame {
         try {
             controlaProduto = new MatrizProdutoController();
             controlaDepartamento = new MatrizDepartamentoController();
-            allshoes.jpa.Produto novoProduto = new Produto();
+            Produto novoProduto = new Produto();
+            novoProduto.setIdProduto(Integer.parseInt(jTextField1.getText()));
             novoProduto.setCod_produto(Integer.parseInt(jTextField1.getText()));
             novoProduto.setNome(jTextField2.getText());
             novoProduto.setMarca(Marca.valueOf(jComboBox1.getSelectedItem().toString()));
             novoProduto.setTamanho(Integer.parseInt(jTextField4.getText()));
             novoProduto.setCor(jTextField5.getText());
-            allshoes.jpa.Departamento departamento = controlaDepartamento.find(jComboBox2.getSelectedItem().toString());
+            Departamento departamento = controlaDepartamento.find(jComboBox2.getSelectedItem().toString());
             novoProduto.setDepartamento(departamento);
             novoProduto.setPreco(Double.parseDouble(jTextField7.getText()));
             novoProduto.setDescricao(jTextArea1.getText());
@@ -451,7 +453,7 @@ public class TelaEditarProduto extends javax.swing.JFrame {
 
         }
         catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erro!\n\nCadastro não realizado. Por favor, tente novamente.");
+            JOptionPane.showMessageDialog(null, "Erro!\n\n Erro");
             Logger.getLogger(TelaLoginMatriz.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_SalvarActionPerformed
