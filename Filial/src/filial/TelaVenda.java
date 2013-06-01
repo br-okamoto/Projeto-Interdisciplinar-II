@@ -432,6 +432,7 @@ public class TelaVenda extends javax.swing.JFrame {
                 boolean res = controlaEstoque.reduzirEstoque(filial, produtos, quantidade);
                 if (res) {
                     JOptionPane.showMessageDialog(null, "Efetuada a Saída de produtos no Estoque");
+                    JOptionPane.showMessageDialog(null, "Compra Finalizada");
                 } else {
                     JOptionPane.showMessageDialog(null, "Erro. Não há estoque deste produto nesta filial para esta operação!");
                 }
@@ -443,7 +444,7 @@ public class TelaVenda extends javax.swing.JFrame {
             int tamanho = (Integer) objects[3];
             double preco = (Double) objects[5];
 
-            JOptionPane.showMessageDialog(null, "Compra Finalizada");
+            
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro: Não foi possível finalizar a compra");
