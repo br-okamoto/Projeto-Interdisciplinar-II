@@ -23,7 +23,7 @@ public class TelaEditarProduto extends javax.swing.JFrame {
     /**
      * Creates new form CadastroProduto
      */
-    public TelaEditarProduto() {
+    public TelaEditarProduto(int cod_produto) {
         initComponents();
         jComboBox1.setModel(new DefaultComboBoxModel<>(Marca.values()));
         try {
@@ -32,6 +32,17 @@ public class TelaEditarProduto extends javax.swing.JFrame {
             for (allshoes.jpa.Departamento d : departamentos) {
                jComboBox2.addItem(d.getNomeDepartamento());
             }
+            
+            MatrizProdutoController prodController = new MatrizProdutoController();
+            Produto produto = prodController.find(cod_produto);
+            
+            jTextField1.setText(String.valueOf(produto.getCod_produto()));
+            jTextField2.setText(produto.getNome());
+            jComboBox1.setSelectedItem(produto.getMarca().toString());
+            jTextField4.setText(String.valueOf(produto.getTamanho()));
+            jComboBox2.setSelectedItem(produto.getDepartamento().getNomeDepartamento());
+            jTextField7.setText(String.valueOf(produto.getPreco()));
+            jTextArea1.setText(produto.getDescricao());
         }
         catch (Exception ex) {
             Logger.getLogger(TelaLoginMatriz.class.getName()).log(Level.SEVERE, null, ex);
@@ -94,11 +105,7 @@ public class TelaEditarProduto extends javax.swing.JFrame {
 
         jLabel14.setText("DEPARTAMENTO");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
+        jTextField1.setEditable(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matrizimg/Cabeçalho.jpg"))); // NOI18N
 
@@ -383,14 +390,8 @@ public class TelaEditarProduto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeActionPerformed
         TelaPrincipal m = new TelaPrincipal();
-        TelaEditarProduto p = new TelaEditarProduto();
-        p.setVisible(false);
         dispose();
         m.setVisible(true);
         m.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -398,17 +399,13 @@ public class TelaEditarProduto extends javax.swing.JFrame {
 
     private void RelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RelatoriosActionPerformed
         TelaRelatorio r = new TelaRelatorio();
-        TelaEditarProduto p = new TelaEditarProduto();
-        p.setVisible(false);
         dispose();  
         r.setVisible(true);
-                     
+        r.setDefaultCloseOperation(DISPOSE_ON_CLOSE);         
     }//GEN-LAST:event_RelatoriosActionPerformed
 
     private void PedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PedidosActionPerformed
         TelaPedidos p = new TelaPedidos();
-        TelaEditarProduto cp = new TelaEditarProduto();
-        cp.setVisible(false);
         dispose();
         p.setVisible(true);
         p.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -418,15 +415,16 @@ public class TelaEditarProduto extends javax.swing.JFrame {
 
     private void UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioActionPerformed
         TelaUsuarios u = new TelaUsuarios();
-        TelaEditarProduto p = new TelaEditarProduto();
-        p.setVisible(false);
         dispose();
         u.setVisible(true);
         u.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_UsuarioActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
-        // TODO add your handling code here:
+        TelaPedidos p = new TelaPedidos();
+        dispose();
+        p.setVisible(true);
+        p.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_CancelarActionPerformed
 
     private void SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarActionPerformed
@@ -435,9 +433,7 @@ public class TelaEditarProduto extends javax.swing.JFrame {
         try {
             controlaProduto = new MatrizProdutoController();
             controlaDepartamento = new MatrizDepartamentoController();
-            Produto novoProduto = new Produto();
-            novoProduto.setIdProduto(Integer.parseInt(jTextField1.getText()));
-            novoProduto.setCod_produto(Integer.parseInt(jTextField1.getText()));
+            Produto novoProduto = controlaProduto.find(Integer.parseInt(jTextField1.getText()));
             novoProduto.setNome(jTextField2.getText());
             novoProduto.setMarca(Marca.valueOf(jComboBox1.getSelectedItem().toString()));
             novoProduto.setTamanho(Integer.parseInt(jTextField4.getText()));
@@ -460,24 +456,20 @@ public class TelaEditarProduto extends javax.swing.JFrame {
 
     private void SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairActionPerformed
         TelaLoginMatriz login = new TelaLoginMatriz();
-        TelaEditarProduto p = new TelaEditarProduto();
-        p.setVisible(false);
         dispose();
         login.setVisible(true);
+        login.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_SairActionPerformed
 
     private void ProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProdutosActionPerformed
         matriz.TelaProduto p = new matriz.TelaProduto();
-        TelaEditarProduto cp = new TelaEditarProduto();
-        cp.setVisible(false);
         dispose();
         p.setVisible(true);
+        p.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_ProdutosActionPerformed
 
     private void DepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepartamentoActionPerformed
         TelaDepartamento d = new TelaDepartamento();
-        TelaEditarProduto cp = new TelaEditarProduto();
-        cp.setVisible(false);
         dispose();
         d.setVisible(true);
         d.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -513,7 +505,7 @@ public class TelaEditarProduto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaEditarProduto().setVisible(true);
+                new TelaEditarProduto(1).setVisible(true);
             }
         });
     }

@@ -9,11 +9,13 @@ import allshoes.jpa.Cliente;
 import allshoes.jpa.Endereco;
 import allshoes.jpa.Estado;
 import allshoes.jpa.Filial;
+import allshoes.jpa.HistoricoDoPedido;
 import allshoes.jpa.ItemDoPedido;
 import allshoes.jpa.Pedido;
 import allshoes.jpa.StatusDoPedido;
 import allshoes.jpa.facade.ClienteFacadeRemote;
 import allshoes.jpa.facade.FilialFacadeRemote;
+import allshoes.jpa.facade.HistoricoDoPedidoFacadeRemote;
 import allshoes.jpa.facade.ItemDoPedidoFacadeRemote;
 import allshoes.jpa.facade.PedidoFacadeRemote;
 import allshoes.web.model.Footer;
@@ -45,6 +47,9 @@ public class RealizarPagamento extends HttpServlet {
     
     @EJB
     ItemDoPedidoFacadeRemote itemPedidoEjb;
+    
+    @EJB
+    HistoricoDoPedidoFacadeRemote historicoPedidoEjb;
     
     @EJB(mappedName = "ejb/ClienteFacade")
     private ClienteFacadeRemote ejb;
@@ -129,6 +134,32 @@ public class RealizarPagamento extends HttpServlet {
             itemPedidoEjb.create(i);
         }
         session.setAttribute("itens", itens);
+        
+        HistoricoDoPedido hist = new HistoricoDoPedido();
+        hist.setDataPedido(pedido.getDataPedido());
+        hist.setPedido(pedido);
+        hist.setStatus(StatusDoPedido.Aberto);
+        
+        historicoPedidoEjb.create(hist);
+        
+        if (!pedido.isPagamentoRealizado()) {
+            hist = new HistoricoDoPedido();
+            hist.setDataPedido(pedido.getDataPedido());
+            hist.setPedido(pedido);
+            hist.setStatus(StatusDoPedido.AguardandoPagamento);
+            historicoPedidoEjb.create(hist);
+        } else {
+            hist = new HistoricoDoPedido();
+            hist.setDataPedido(pedido.getDataPedido());
+            hist.setPedido(pedido);
+            hist.setStatus(pedido.getStatus());
+            historicoPedidoEjb.create(hist);
+        }
+        
+        //Limpar carrinho após a finalização da compra
+        for (ItemDoPedido idp2 : itens) {
+            carrinho.removeItemDoPedido(idp2);
+        }
         
         RequestDispatcher rd = request.getRequestDispatcher("FinalizacaoDoPedido");
         rd.forward(request, response);

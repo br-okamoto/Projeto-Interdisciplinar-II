@@ -29,6 +29,7 @@ public class TelaPedidos extends javax.swing.JFrame {
      * Creates new form TelaPedidos
      */
     public TelaPedidos() {
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
         MatrizPedidoController controller = null;
         MatrizItemPedidoController itemPedidoController = null;

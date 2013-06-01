@@ -36,6 +36,10 @@ public class MatrizProdutoController {
     public List<Produto> find(String nome){
         return produtoFacade.find(nome);
     }
+    
+    public Produto find(int cod_produto) {
+        return produtoFacade.find(cod_produto);
+    }
             
             
     public List<Produto> findAll() {

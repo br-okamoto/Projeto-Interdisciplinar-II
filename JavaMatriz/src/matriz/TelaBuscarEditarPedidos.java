@@ -8,10 +8,13 @@ import Validacao.IntegerDocument;
 import Validacao.teclasPermitidas;
 import allshoes.jpa.Cliente;
 import allshoes.jpa.Filial;
+import allshoes.jpa.HistoricoDoPedido;
 import allshoes.jpa.ItemDoPedido;
 import allshoes.jpa.Pedido;
+import allshoes.jpa.StatusDoPedido;
 import controller.MatrizClienteController;
 import controller.MatrizFilialController;
+import controller.MatrizHistoricoPedidoController;
 import controller.MatrizItemPedidoController;
 import controller.MatrizPedidoController;
 import controller.MatrizProdutoController;
@@ -54,7 +57,6 @@ public class TelaBuscarEditarPedidos extends javax.swing.JFrame {
             
             Pedido pedidoP = controller.find(idPedido);
             List<ItemDoPedido> itensDoPedido = itemPedidoController.findAll(idPedido);
-            JOptionPane.showMessageDialog(null, itensDoPedido.size());
             if (pedidoP != null) {
                 double valor = 0;
                 DefaultTableModel dtm = new DefaultTableModel();
@@ -68,7 +70,6 @@ public class TelaBuscarEditarPedidos extends javax.swing.JFrame {
                 tableColumnNames[6] = "Subtotal";
                 dtm.setColumnIdentifiers(tableColumnNames);
                 for (ItemDoPedido idp : itensDoPedido) {
-                    JOptionPane.showMessageDialog(null, idp.getIdItemDoPedido());
                     if (idp.getPedido().getIdPedido() == pedidoP.getIdPedido()) {
                         valor += idp.getSubTotal();
                         Object[] objects = new Object[7];
@@ -97,7 +98,6 @@ public class TelaBuscarEditarPedidos extends javax.swing.JFrame {
                 jTextField13.setText(pedidoP.getEndereco().getBairro());
                 jTextField12.setText(pedidoP.getEndereco().getCidade());
                 jTextField5.setText(pedidoP.getEndereco().getEstado().toString());
-                JOptionPane.showMessageDialog(null, pedidoP.getIdPedido());
             }
 
         }
@@ -779,15 +779,23 @@ public class TelaBuscarEditarPedidos extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         MatrizPedidoController pedidoController = null;
         MatrizFilialController filialController = null;
+        MatrizHistoricoPedidoController historicoController = null;
         try {
             pedidoController = new MatrizPedidoController();
             filialController = new MatrizFilialController();
+            historicoController = new MatrizHistoricoPedidoController();
             String filialSelecionada = jComboBox1.getSelectedItem().toString();
             Filial filial = filialController.find(filialSelecionada);
             int idPedido = Integer.parseInt(jTextField1.getText());
             Pedido pedido = pedidoController.find(idPedido);
             pedido.setFilial(filial);
+            pedido.setStatus(StatusDoPedido.AguardandoFilial);
             pedidoController.edit(pedido);
+            HistoricoDoPedido hist = new HistoricoDoPedido();
+            hist.setDataPedido(pedido.getDataPedido());
+            hist.setPedido(pedido);
+            hist.setStatus(pedido.getStatus());
+            historicoController.create(hist);
             JOptionPane.showMessageDialog(null, "Pedido encaminhado com sucesso!");
         }
         catch(Exception e) {

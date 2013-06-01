@@ -454,7 +454,7 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
             controlaFilial = new MatrizFilialController();
             controlaEstoqueProduto = new MatrizEstoqueProdutoController();
             
-            Estoque estoque = new Estoque();
+
             Estoque_Produto estoqueProduto = new Estoque_Produto();
             allshoes.jpa.Produto novoProduto = new Produto();
             
@@ -470,16 +470,6 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
             novoProduto.setDescricao(jTextArea1.getText());
             
             controlaProduto.create(novoProduto);
-            
-           int qtd = controlaFilial.findAll().size();
-           for(int i=0; i<qtd; i++){
-                estoqueProduto.setQuantidade(0);
-                estoque.setIdEstoque(1+i);
-                novoProduto.setIdProduto(controlaProduto.findAll().size());
-                estoqueProduto.setEstoque(estoque);
-                estoqueProduto.setProduto(novoProduto);
-                controlaEstoqueProduto.create(estoqueProduto);
-           }
             
             JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
 

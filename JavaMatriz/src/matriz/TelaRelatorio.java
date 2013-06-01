@@ -6,6 +6,15 @@ package matriz;
 
 import Validacao.IntegerDocument;
 import Validacao.teclasPermitidas;
+import allshoes.jpa.Estoque_Produto;
+import allshoes.jpa.Filial;
+import controller.MatrizEstoqueProdutoController;
+import controller.MatrizFilialController;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,7 +27,18 @@ public class TelaRelatorio extends javax.swing.JFrame {
      */
     public TelaRelatorio() {
         initComponents();
-    
+        try {
+            MatrizFilialController filialController = new MatrizFilialController();
+            List<Filial> filiais = filialController.findAll();
+            jComboBox2.removeAllItems();
+            for (Filial f : filiais) {
+                jComboBox2.addItem(f.getNome());
+            }
+        }
+        catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage());
+            Logger.getLogger(TelaProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -48,19 +68,13 @@ public class TelaRelatorio extends javax.swing.JFrame {
         Pedidos = new javax.swing.JButton();
         relatorios = new javax.swing.JButton();
         Buscar = new javax.swing.JButton();
-        Limpar = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
+        Voltar = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        dataf = new javax.swing.JFormattedTextField();
-        datai = new javax.swing.JFormattedTextField();
-        jComboBox1 = new javax.swing.JComboBox();
         jComboBox2 = new javax.swing.JComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,7 +82,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 51, 153));
-        jLabel9.setText("FILTROS DE RELATÓRIO");
+        jLabel9.setText("RELATÓRIOS DE ESTOQUE DE FILIAIS");
 
         jPanel1.setBackground(new java.awt.Color(234, 248, 245));
 
@@ -218,37 +232,33 @@ public class TelaRelatorio extends javax.swing.JFrame {
             }
         });
 
-        Limpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matrizimg/Limpar.jpg"))); // NOI18N
+        Voltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matrizimg/Excluir.jpg"))); // NOI18N
+        Voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VoltarActionPerformed(evt);
+            }
+        });
 
-        jLabel11.setText("ATÉ");
-
-        jLabel12.setText("LIMPAR");
+        jLabel12.setText("VOLTAR");
 
         jLabel14.setText("LOCAL");
 
-        jLabel15.setText("PRODUTO");
-
-        jLabel16.setText("DATA");
-
-        jLabel17.setText("DEPARTAMENTO");
-
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matrizimg/Cabeçalho.jpg"))); // NOI18N
 
-        dataf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                datafActionPerformed(evt);
-            }
-        });
-
-        datai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dataiActionPerformed(evt);
-            }
-        });
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -256,48 +266,30 @@ public class TelaRelatorio extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 866, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel14))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(datai, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel11)
-                                .addGap(12, 12, 12)
-                                .addComponent(dataf, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(380, 380, 380)
-                                .addComponent(jLabel13)
-                                .addGap(11, 11, 11))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel13))
+                            .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
+                                .addGap(14, 14, 14)
                                 .addComponent(jLabel12))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(Limpar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,35 +299,23 @@ public class TelaRelatorio extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel9)
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel11)
-                    .addComponent(dataf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(datai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel14)
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel13))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(Limpar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel12)))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -401,22 +381,60 @@ public class TelaRelatorio extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_relatoriosActionPerformed
 
-    private void datafActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datafActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_datafActionPerformed
-
-    private void dataiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dataiActionPerformed
-
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
-        TelaRelatorioProduto rp = new TelaRelatorioProduto();
-        TelaRelatorio r = new TelaRelatorio();
-        r.setVisible(false);
-        dispose();
-        rp.setVisible(true);
-        rp.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        if (jComboBox2.getSelectedItem().toString().equals("")) {
+            JOptionPane.showMessageDialog(null, "Selecione a filial!");
+            return;
+        }
+        String nomeFilial = jComboBox2.getSelectedItem().toString();
+        try {
+            MatrizFilialController filialController = new MatrizFilialController();
+            Filial filial = filialController.find(nomeFilial);
+            
+            MatrizEstoqueProdutoController estoqueProdutoController = new MatrizEstoqueProdutoController();
+            List<Estoque_Produto> estoqueProduto = estoqueProdutoController.find(filial);
+            
+            DefaultTableModel dtm = new DefaultTableModel();
+            Object[] tableColumnNames = new Object[8];
+                tableColumnNames[0] = "Cod_Produto";
+                tableColumnNames[1] = "Nome do Produto";
+                tableColumnNames[2] = "Marca";
+                tableColumnNames[3] = "Tamanho";
+                tableColumnNames[4] = "Cor";
+                tableColumnNames[5] = "Departamento";
+                tableColumnNames[6] = "Preço";
+                tableColumnNames[7] = "Quantidade";
+            dtm.setColumnIdentifiers(tableColumnNames);
+            
+            if (estoqueProduto != null) {
+                Object[] objects = new Object[8];
+                for (Estoque_Produto ep : estoqueProduto) {
+                    objects[0] = ep.getProduto().getCod_produto();
+                    objects[1] = ep.getProduto().getNome();
+                    objects[2] = ep.getProduto().getMarca();
+                    objects[3] = ep.getProduto().getTamanho();
+                    objects[4] = ep.getProduto().getCor();
+                    objects[5] = ep.getProduto().getDepartamento().getNomeDepartamento();
+                    objects[6] = ep.getProduto().getPreco();
+                    objects[7] = ep.getQuantidade();
+                    dtm.addRow(objects);
+                }
+                jTable1.setModel(dtm);
+            }
+            
+        }
+        catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage());
+            Logger.getLogger(TelaProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BuscarActionPerformed
+
+    private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
+        TelaPrincipal m = new TelaPrincipal();
+        dispose();
+        m.setVisible(true);
+        m.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_VoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -456,23 +474,16 @@ public class TelaRelatorio extends javax.swing.JFrame {
     private javax.swing.JButton Buscar;
     private javax.swing.JButton Departamento;
     private javax.swing.JButton Home;
-    private javax.swing.JButton Limpar;
     private javax.swing.JButton Pedidos;
     private javax.swing.JButton Produtos;
     private javax.swing.JButton Sair;
     private javax.swing.JButton Usuario;
-    private javax.swing.JFormattedTextField dataf;
-    private javax.swing.JFormattedTextField datai;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JButton Voltar;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -482,7 +493,8 @@ public class TelaRelatorio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JButton relatorios;
     // End of variables declaration//GEN-END:variables
 }

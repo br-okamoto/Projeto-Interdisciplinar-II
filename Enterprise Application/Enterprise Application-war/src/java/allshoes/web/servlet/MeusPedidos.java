@@ -82,12 +82,15 @@ public class MeusPedidos extends HttpServlet {
             out.println("<td>Status do Pedido</td>");
             out.println("</tr>");
             for (Pedido p : pedidos) {
-                if (p.getCliente().getIdPessoa() == cliente.getIdPessoa()) {
-                    out.println("<tr>");
-                    out.println("<td><a href='" + request.getContextPath() + "/DetalheDoPedido?idPedido="+p.getIdPedido()+"'>"+p.getIdPedido()+"</a></td>");
-                    out.println("<td>"+p.getDataPedido()+"</td>");
-                    out.println("<td>"+p.getStatus()+"</td>");
-                    out.println("</tr>");
+                //Verificar se p não é uma venda de balcao (cliente == null)
+                if (p.getCliente() != null) {
+                    if (p.getCliente().getIdPessoa() == cliente.getIdPessoa()) {
+                        out.println("<tr>");
+                        out.println("<td><a href='" + request.getContextPath() + "/DetalheDoPedido?idPedido="+p.getIdPedido()+"'>"+p.getIdPedido()+"</a></td>");
+                        out.println("<td>"+p.getDataPedido()+"</td>");
+                        out.println("<td>"+p.getStatus()+"</td>");
+                        out.println("</tr>");
+                    }
                 }
             }
             out.println("</table>");

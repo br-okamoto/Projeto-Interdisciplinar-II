@@ -18,7 +18,7 @@ public class Estoque_Produto implements Serializable, Cloneable {
     private int idEstoque_Produto;
     
     @ManyToOne(fetch=FetchType.EAGER)
-    private Estoque estoque;
+    private Filial filial;
     
     @ManyToOne(fetch=FetchType.EAGER)
     private Produto produto;
@@ -33,12 +33,12 @@ public class Estoque_Produto implements Serializable, Cloneable {
         this.idEstoque_Produto = idEstoque_Produto;
     }
 
-    public Estoque getEstoque() {
-        return estoque;
+    public Filial getFilial() {
+        return filial;
     }
 
-    public void setEstoque(Estoque estoque) {
-        this.estoque = estoque;
+    public void setFilial(Filial filial) {
+        this.filial = filial;
     }
 
     public Produto getProduto() {

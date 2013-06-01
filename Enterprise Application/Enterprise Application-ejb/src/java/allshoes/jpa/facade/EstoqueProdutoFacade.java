@@ -41,8 +41,8 @@ public class EstoqueProdutoFacade extends AbstractFacade<Estoque_Produto> implem
     
     @Override
     public List<Estoque_Produto> find(Filial filial){
-        Query q1 = em.createQuery("SELECT ep FROM Estoque_Produto ep WHERE ep.estoque.idEstoque = :idestoque");
-        q1.setParameter("idestoque", filial.getEstoque().getIdEstoque());
+        Query q1 = em.createQuery("SELECT ep FROM Estoque_Produto ep WHERE ep.filial.idFilial = :idFilial");
+        q1.setParameter("idFilial", filial.getIdFilial());
         List<Estoque_Produto> eps = q1.getResultList();
         if (eps.isEmpty()) {
             return null;
@@ -68,13 +68,13 @@ public class EstoqueProdutoFacade extends AbstractFacade<Estoque_Produto> implem
     
     @Override
     public boolean aumentarEstoque(Filial filial, Produto produto, int quantidade){
-        Query q1 = em.createQuery("SELECT ep FROM Estoque_Produto ep WHERE ep.estoque.idEstoque = :idestoque AND ep.produto.idProduto = :idproduto");
-        q1.setParameter("idestoque", filial.getEstoque().getIdEstoque());
+        Query q1 = em.createQuery("SELECT ep FROM Estoque_Produto ep WHERE ep.filial.idFilial = :idFilial AND ep.produto.idProduto = :idproduto");
+        q1.setParameter("idFilial", filial.getIdFilial());
         q1.setParameter("idproduto", produto.getIdProduto());
         List<Estoque_Produto> eps = q1.getResultList();
         if (eps.isEmpty()) {
             Estoque_Produto ep = new Estoque_Produto();
-            ep.setEstoque(filial.getEstoque());
+            ep.setFilial(filial);
             ep.setProduto(produto);
             ep.setQuantidade(quantidade);
             create(ep);
@@ -90,8 +90,8 @@ public class EstoqueProdutoFacade extends AbstractFacade<Estoque_Produto> implem
     
     @Override
     public boolean reduzirEstoque(Filial filial, Produto produto, int quantidade){
-        Query q1 = em.createQuery("SELECT ep FROM Estoque_Produto ep WHERE ep.estoque.idEstoque = :idestoque AND ep.produto.idProduto = :idproduto");
-        q1.setParameter("idestoque", filial.getEstoque().getIdEstoque());
+        Query q1 = em.createQuery("SELECT ep FROM Estoque_Produto ep WHERE ep.filial.idFilial = :idfilial AND ep.produto.idProduto = :idproduto");
+        q1.setParameter("idfilial", filial.getIdFilial());
         q1.setParameter("idproduto", produto.getIdProduto());
         List<Estoque_Produto> eps = q1.getResultList();
         if (eps.isEmpty() || eps.get(0).getQuantidade() < quantidade) {

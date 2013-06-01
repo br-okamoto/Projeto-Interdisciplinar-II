@@ -97,6 +97,35 @@ public class AdicionarProduto extends HttpServlet {
             
             RequestDispatcher rd = request.getRequestDispatcher("ListaDeDesejos");
             rd.forward(request, response);
+        } else if("RemoverListaDesejos".equals(action)) {
+            HttpSession session = request.getSession();
+        
+            String username = null;
+
+            try {
+               username = session.getAttribute("username").toString();
+            }
+            catch (NullPointerException ex) {
+                RequestDispatcher rd = request.getRequestDispatcher("Login?returnURL=/Enterprise_Application-war/ListaDeDesejos");
+                rd.forward(request, response);
+            }
+            Cliente cliente = clienteEjb.find(username);
+            
+            List<ListaDeDesejo> listaDesejos = listaEjb.findAll();
+            boolean isOnTheList = false;
+            ListaDeDesejo item = null;
+            for (ListaDeDesejo l : listaDesejos) {
+                if (l.getProduto().getIdProduto() == produto.getIdProduto() && l.getCliente().getIdPessoa() == cliente.getIdPessoa()) {
+                    isOnTheList = true;
+                    item = l;
+                }
+            }
+            if (isOnTheList) {
+                listaEjb.remove(item);
+            }
+            
+            RequestDispatcher rd = request.getRequestDispatcher("ListaDeDesejos");
+            rd.forward(request, response);
         } else if ("Comprar".equals(action)) {
 
             carrinho.addItem(produto);

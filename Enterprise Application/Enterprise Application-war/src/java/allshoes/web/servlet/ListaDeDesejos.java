@@ -82,11 +82,12 @@ public class ListaDeDesejos extends HttpServlet {
             for (ListaDeDesejo l : lista) {
                 if (l.getCliente().getIdPessoa() == cliente.getIdPessoa()) {
                     out.println("<div class='departamentoProduto'>");
-                    out.println("<form action='RemoverProduto' method='post'>");
+                    out.println("<form action='AdicionarProduto' method='post'>");
                     out.println("<img src='" + request.getContextPath() + "/images/produtos/"+l.getProduto().getCod_produto()+".jpg' alt='' />");
                     out.println("<h2>"+l.getProduto().getNome()+"</h2>");
                     out.println("<div class='precoProduto'>"+l.getProduto().getPreco()+"</div>");
-                    out.println("<input type='hidden' value='RemoverListaDesejos' />");
+                    out.println("<input type='hidden' name='cod_produto' value='" + l.getProduto().getCod_produto() + "' />");
+                    out.println("<input type='hidden' name='action' value='RemoverListaDesejos' />");
                     out.println("<input type='submit' id='removerLista' value=' Remover ' />");
                     out.println("</form>");
                     out.println("</div>");

@@ -39,9 +39,6 @@ public class TelaProduto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        samplePUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("Enterprise_Application-ejbPU").createEntityManager();
-        produtoQuery = java.beans.Beans.isDesignTime() ? null : samplePUEntityManager.createQuery("SELECT p FROM Produto p");
-        produtoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : produtoQuery.getResultList();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -401,16 +398,23 @@ public class TelaProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_AdicionarActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        TelaEditarProduto cp = new TelaEditarProduto();
-        TelaProduto p = new TelaProduto();
-        p.setVisible(false);
+        if (jTextField1.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Digite o código do produto");
+            return;
+        }
+        int cod_produto =  Integer.parseInt(jTextField1.getText());
+        TelaEditarProduto cp = new TelaEditarProduto(cod_produto);
         dispose();
         cp.setVisible(true);
         cp.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-       int codProduto = Integer.parseInt(jTextField1.getText());
+       if (jTextField1.getText().equals("")) {
+           JOptionPane.showMessageDialog(null, "Digite o código do produto!");
+           return;
+       }
+        int codProduto = Integer.parseInt(jTextField1.getText());
         try {
             MatrizProdutoController controlaProduto = new MatrizProdutoController();
             Produto produto =new Produto();
@@ -537,10 +541,7 @@ public class TelaProduto extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private java.util.List<allshoes.jpa.Produto> produtoList;
-    private javax.persistence.Query produtoQuery;
     private javax.swing.JButton relatorios;
     private javax.swing.JButton relatorios1;
-    private javax.persistence.EntityManager samplePUEntityManager;
     // End of variables declaration//GEN-END:variables
 }

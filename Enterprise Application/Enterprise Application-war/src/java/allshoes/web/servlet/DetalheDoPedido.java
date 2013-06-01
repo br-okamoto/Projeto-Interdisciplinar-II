@@ -4,20 +4,45 @@
  */
 package allshoes.web.servlet;
 
+import allshoes.jpa.Cliente;
+import allshoes.jpa.ItemDoPedido;
+import allshoes.jpa.Pedido;
+import allshoes.jpa.StatusDoPedido;
+import allshoes.jpa.facade.ClienteFacadeRemote;
+import allshoes.jpa.facade.FilialFacadeRemote;
+import allshoes.jpa.facade.ItemDoPedidoFacadeRemote;
+import allshoes.jpa.facade.PedidoFacadeRemote;
 import allshoes.web.model.Footer;
 import allshoes.web.model.Header;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Bruno
  */
 public class DetalheDoPedido extends HttpServlet {
+    
+    @EJB
+    PedidoFacadeRemote pedidoEjb;
+    
+    @EJB
+    ItemDoPedidoFacadeRemote itemPedidoEjb;
+    
+    @EJB
+    private ClienteFacadeRemote clienteEjb;
+    
+    @EJB
+    private FilialFacadeRemote filialEjb;
 
     /**
      * Processes requests for both HTTP
@@ -36,6 +61,26 @@ public class DetalheDoPedido extends HttpServlet {
         Header header = new Header(false, "Detalhe do Pedido");
         Footer footer = new Footer(false);
         
+        String username = null;
+        int idPedido = 0;
+        HttpSession session = request.getSession();
+        try {
+           username = session.getAttribute("username").toString();
+        }
+        catch (NullPointerException ex) {
+            RequestDispatcher rd = request.getRequestDispatcher("Login?returnURL=/Enterprise_Application-war/MeusPedidos");
+            rd.forward(request, response);
+        }
+        try {
+            idPedido = Integer.parseInt(request.getParameter("idPedido"));
+        }
+        catch (Exception ex) {
+            RequestDispatcher rd = request.getRequestDispatcher("/Enterprise_Application-war/MeusPedidos");
+            rd.forward(request, response);
+        }
+        Cliente cliente = clienteEjb.find(username);
+        Pedido pedido = pedidoEjb.find(idPedido);
+        
         try {
 
             out.println(header.getHeaderPadrao());
@@ -49,6 +94,91 @@ public class DetalheDoPedido extends HttpServlet {
             out.println(" > ");
             out.println("Detalhe do Pedido");
             out.println("</div>");
+            
+            out.println("<h2>Informações gerais do pedido</h2>");
+            out.println("<table border='0'>");
+            out.println("<tr>");
+            out.println("<td>Número do Pedido:</td>");
+            out.println("<td>"+pedido.getIdPedido()+"</td>");
+            out.println("</tr>");
+            out.println("<tr>");
+            out.println("<td>Status do Pedido:</td>");
+            out.println("<td>"+pedido.getStatus()+"</td>");
+            out.println("</tr>");
+            out.println("<tr>");
+            out.println("<td>Data do Pedido:</td>");
+            out.println("<td>"+pedido.getDataPedido()+"</td>");
+            out.println("</tr>");
+            out.println("</table>");
+            
+            out.println("<h2>Detalhes do Pedido</h2>");
+            out.println("<table id='tbCarrinho' border='0' cellpadding='3' cellspacing='3' width='1000'>");
+            out.println("<tr>");
+            out.println("<th colspan='2' align='left'>Produto</th>");
+            out.println("<th colspan='2' align='center'>Quantidade</th>");
+            out.println("<th align='center'>Preço</th>");
+            out.println("</tr>");
+            List<ItemDoPedido> itens = new ArrayList<ItemDoPedido>();
+            itens = itemPedidoEjb.findAll(idPedido);
+            for (ItemDoPedido i : itens) {
+                out.println("<tr>");
+                out.println("<td width='130' align='left'>");
+                out.println("<a href='DetalheDoProduto?cod_produto="+i.getProduto().getCod_produto()+"'><img src='" + request.getContextPath() + "/images/produtos/"+i.getProduto().getCod_produto()+".jpg' alt='' width='120' height='120'/></a>");
+                out.println("</td>");
+                out.println("<td valign='top'>");
+                out.println("<a href='DetalheDoProduto?cod_produto="+i.getProduto().getCod_produto()+"'><h2>"+i.getProduto().getNome()+"</h2></a>");
+                out.println("<span><b>Cor:</b> "+i.getProduto().getCor()+"</span><br/>");
+                out.println("<span><b>Tamanho:</b> "+i.getProduto().getTamanho()+"</span>");
+                out.println("</td>");
+                out.println("<td width='50' align='center'>");
+                out.println("<span>"+i.getQuantidade()+"</span>");
+                out.println("</td>");
+                out.println("<td width='50' align='center'>");
+
+                out.println("</td>");
+                out.println("<td width='150' align='center'><b>R$ "+i.getSubTotal()+"</b></td>");
+                out.println("</tr>");
+            }
+
+            out.println("</table>");
+            
+            out.println("");
+            out.println("<h2>Forma de Pagamento</h2>");
+            out.println("");
+            out.println("<h2>Endereco de Entrega</h2>");
+            out.println("<table cellpadding='3' cellspacing='3' border='0' >");
+            out.println("<tr>");
+            out.println("<td class='lbl_cadastro'>Rua</td>");
+            out.println("<td style='width:310px;'>"+pedido.getEndereco().getRua()+"</td>");
+            out.println("<td class='lbl_cadastro2'>Número</td>");
+            out.println("<td>"+pedido.getEndereco().getNumero()+"</td>");
+            out.println("</tr>");
+            out.println("<tr>");
+            out.println("<td class='lbl_cadastro'>Complemento</td>");
+            out.println("<td colspan='3'>"+pedido.getEndereco().getComplemento()+"</td>");
+            out.println("</tr>");
+            out.println("<tr>");
+            out.println("<td class='lbl_cadastro'>CEP</td>");
+            out.println("<td colspan='3'>"+pedido.getEndereco().getCep()+"</td>");
+            out.println("</tr>");
+            out.println("</tr>");
+            out.println("<tr>");
+            out.println("<td class='lbl_cadastro'>Bairro</td>");
+            out.println("<td colspan='3'>"+pedido.getEndereco().getBairro()+"</td>");
+            out.println("</tr>");
+            out.println("<tr>");
+            out.println("<td class='lbl_cadastro'>Cidade</td>");
+            out.println("<td colspan='3'>"+pedido.getEndereco().getCidade()+"</td>");
+            out.println("</tr>");
+            out.println("<tr>");
+            out.println("<td class='lbl_cadastro'>Estado</td>");
+            out.println("<td colspan='3'>");
+            out.println(pedido.getEndereco().getEstado());
+            out.println("</td>");
+            out.println("</tr>");
+            out.println("</table>");
+            out.println("");
+            
             out.println("</div>");
             
             out.println(footer.getFooterPadrao());

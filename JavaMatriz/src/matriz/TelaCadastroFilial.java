@@ -10,6 +10,7 @@ import allshoes.jpa.Endereco;
 import allshoes.jpa.Estado;
 import allshoes.jpa.Estoque;
 import allshoes.jpa.Filial;
+import controller.MatrizEstoqueController;
 import controller.MatrizFilialController;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,12 +33,6 @@ public class TelaCadastroFilial extends javax.swing.JFrame {
         jTextField4.setDocument(new IntegerDocument(4));
         jTextField7.setDocument(new IntegerDocument(8));      
         
-        //Campo aceita apenas letras
-        jTextField2.setDocument(new teclasPermitidas());
-        jTextField3.setDocument(new teclasPermitidas());
-        jTextField5.setDocument(new teclasPermitidas());
-        jTextField6.setDocument(new teclasPermitidas());
-        jTextField8.setDocument(new teclasPermitidas());
         
         jComboBox1.setModel(new DefaultComboBoxModel<>(Estado.values()));
     }
@@ -432,8 +427,6 @@ public class TelaCadastroFilial extends javax.swing.JFrame {
             endereco.setCidade(jTextField8.getText());
             endereco.setEstado(Estado.valueOf(jComboBox1.getSelectedItem().toString()));
             novaFilial.setEndereco(endereco);
-            Estoque estoque = new Estoque();
-            novaFilial.setEstoque(estoque);
             controller.create(novaFilial);
             JOptionPane.showMessageDialog(null, "Filial cadastrada com sucesso!");
         } catch (Exception ex) {

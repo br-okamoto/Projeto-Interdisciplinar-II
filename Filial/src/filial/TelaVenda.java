@@ -39,20 +39,25 @@ public class TelaVenda extends javax.swing.JFrame {
         funcionarioController controlaFuncionario = null;
         estoqueController controlaEstoque = null;
         pedidoController controlaPedido = null;
+        produtoController prodController = null;
 
-        //Campo aceita apenas números com 4 dígitos
-        jTextField1.setDocument(new IntegerDocument(4));
 
         try {
             controlaFilial = new filialController();
             List<Filial> filiais = controlaFilial.findAll();
             for (Filial f : filiais) {
-                jComboBox1.addItem(f.getIdFilial() + " - " + f.getNome());
+                jComboBox1.addItem(f.getNome());
             }
             controlaFuncionario = new funcionarioController();
             List<Funcionario> funcionario = controlaFuncionario.findAll();
             for (Funcionario func : funcionario) {
                 jComboBox2.addItem(func.getNome());
+            }
+            jComboBox4.removeAllItems();
+            prodController = new produtoController();
+            List<Produto> produtos = prodController.findAll();
+            for (Produto p : produtos) {
+                jComboBox4.addItem(p.getCod_produto());
             }
 
             //Campo número da venda
@@ -77,16 +82,16 @@ public class TelaVenda extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         jComboBox2 = new javax.swing.JComboBox();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        jComboBox4 = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jComboBox3 = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -125,8 +130,6 @@ public class TelaVenda extends javax.swing.JFrame {
 
         jLabel6.setText("Vendedor:");
 
-        jLabel9.setText("Quantidade:");
-
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione a Loja" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,6 +144,10 @@ public class TelaVenda extends javax.swing.JFrame {
             }
         });
 
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel4.setText("Código do Produto");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -154,21 +161,24 @@ public class TelaVenda extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(94, 94, 94)
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 63, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(21, 21, 21))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(76, 76, 76)))
-                .addGap(0, 12, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(224, 224, 224)
-                .addComponent(jLabel9)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,14 +190,14 @@ public class TelaVenda extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
-                .addComponent(jLabel9)
+                .addGap(43, 43, 43)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
-
-        jLabel1.setText("Código do Produto:");
 
         jButton1.setText("Adicionar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -215,6 +225,13 @@ public class TelaVenda extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel10.setText("Preço Total: ");
 
+        jButton3.setText("Remover");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -224,13 +241,11 @@ public class TelaVenda extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(93, 93, 93)
+                .addGap(301, 301, 301)
                 .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
                 .addGap(86, 86, 86))
             .addGroup(layout.createSequentialGroup()
@@ -245,17 +260,16 @@ public class TelaVenda extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(33, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(156, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton3))
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -289,7 +303,7 @@ public class TelaVenda extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             produtoController controlaProduto = new produtoController();
-            int codigo = Integer.parseInt(jTextField1.getText());
+            int codigo = Integer.parseInt(jComboBox4.getSelectedItem().toString());
             Produto prod = controlaProduto.find(codigo);
 
             //checa loja
@@ -344,27 +358,26 @@ public class TelaVenda extends javax.swing.JFrame {
             itemDoPedidoController controlaItemDoPedido = new itemDoPedidoController();
             historicoDoPedidoController controlaHistoricoDoPedido = new historicoDoPedidoController();
             estoqueController controlaEstoque = new estoqueController();
+            filialController filialController = new filialController();
             DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
             Pedido pedidos = new Pedido();
-            Filial filial = new Filial();
-            Produto produtos = new Produto();
+            int codigo = Integer.parseInt(jComboBox4.getSelectedItem().toString());
+            
+            Produto produtos = controlaProduto.find(codigo);
             ItemDoPedido item = new ItemDoPedido();
             HistoricoDoPedido historico = new HistoricoDoPedido();
-            Estoque estoques = new Estoque();
             Estoque_Produto estoqueProduto = new Estoque_Produto();
             Date data = new Date();
             //String dataFormatada = new SimpleDateFormat("yyyy-MM-dd").format(data);
 
             //Pega id da Filial no jComboBox
             String nomeFilial = (String) jComboBox1.getSelectedItem();
-            char letra = nomeFilial.charAt(0);
-            int idFilial = Integer.parseInt(String.valueOf(letra));
+            Filial filial = filialController.find(nomeFilial);
 
             int totalLinhas = jTable1.getModel().getRowCount();
             Object[] objects = new Object[7];
 
              //Adiciona dados na tabela Pedido
-             filial.setIdFilial(idFilial);
              pedidos.setDataPedido(data);
              pedidos.setPagamentoRealizado(true);
              pedidos.setStatus(StatusDoPedido.Finalizado);
@@ -415,29 +428,13 @@ public class TelaVenda extends javax.swing.JFrame {
                 controlaItemDoPedido.create(item);
 
                 //Reduz a quantidade do produto na tabela Estoque_prodtuo
-                
-                //Pega o idProduto
-                Produto prod = controlaProduto.find(codigoProduto);
-                int idProduto = prod.getIdProduto();
-           
-                int idEstoqueProduto = 0;
-                int quantidadeEstoque = 0;
-                List<Estoque_Produto> eProduto = controlaEstoque.findAll();
-                for (Estoque_Produto e : eProduto) {
-                    if ((e.getProduto().getIdProduto() == idProduto) && (e.getEstoque().getIdEstoque() == idFilial)) {
-                        idEstoqueProduto = e.getIdEstoque_Produto();
-                        quantidadeEstoque = e.getQuantidade();
-                    }
-                }
-                //idFilial = idEstoque
-                estoques.setIdEstoque(idFilial);
-                produtos.setIdProduto(idProduto);
 
-                estoqueProduto.setIdEstoque_Produto(idEstoqueProduto);
-                estoqueProduto.setQuantidade(quantidadeEstoque - quantidade);
-                estoqueProduto.setEstoque(estoques);
-                estoqueProduto.setProduto(produtos);
-                controlaEstoque.edit(estoqueProduto);
+                boolean res = controlaEstoque.reduzirEstoque(filial, produtos, quantidade);
+                if (res) {
+                    JOptionPane.showMessageDialog(null, "Efetuada a Saída de produtos no Estoque");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro. Não há estoque deste produto nesta filial para esta operação!");
+                }
             
              }
        
@@ -453,6 +450,50 @@ public class TelaVenda extends javax.swing.JFrame {
             Logger.getLogger(TelaEstoque.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            produtoController controlaProduto = new produtoController();
+            DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+            int totalLinhas = jTable1.getModel().getRowCount();
+            Object[] objects = new Object[7];
+            int codigo = Integer.parseInt(jComboBox4.getSelectedItem().toString());
+            Produto produto = controlaProduto.find(codigo);
+            
+            int quantidade = Integer.parseInt(jComboBox3.getSelectedItem().toString());
+
+            for (int linha = 0; linha < totalLinhas; linha++) {
+                    objects[0] = jTable1.getValueAt(linha, 0); //codigo do Produto
+                    objects[1] = jTable1.getValueAt(linha, 1); //nome
+                    objects[2] = jTable1.getValueAt(linha, 2); //cor
+                    objects[3] = jTable1.getValueAt(linha, 3); //tamanho
+                    objects[4] = jTable1.getValueAt(linha, 4); //quantidade
+                    objects[5] = jTable1.getValueAt(linha, 5); //preço
+                    objects[6] = jTable1.getValueAt(linha, 6); //subTotal
+                    
+                    if ((Integer)objects[0] == codigo) {
+                        if (quantidade >= Integer.parseInt(String.valueOf(objects[4]))) {
+                            valorTotal = valorTotal - (Double)objects[6];
+                            jLabel7.setText(String.valueOf(valorTotal));
+                            dtm.removeRow(linha);
+                            return;
+                        } else {
+                            objects[4] = Integer.parseInt(String.valueOf(objects[4])) - quantidade;
+                            objects[6] = Integer.parseInt(String.valueOf(objects[4])) * (Double)objects[5];
+                            valorTotal = valorTotal - (Double)objects[6];
+                            jLabel7.setText(String.valueOf(valorTotal));
+                            dtm.removeRow(linha);
+                            dtm.addRow(objects);
+                            return;
+                        }
+                        
+                    }
+            }
+        }
+        catch (Exception ex) {
+            Logger.getLogger(TelaEstoque.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
    
     public static void main(String args[]) {
@@ -491,21 +532,21 @@ public class TelaVenda extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox jComboBox4;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
