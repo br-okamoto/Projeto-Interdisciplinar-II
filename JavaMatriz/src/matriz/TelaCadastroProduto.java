@@ -9,8 +9,10 @@ import controller.MatrizFuncionarioController;
 import Validacao.FixedLengthDocument;
 import Validacao.IntegerDocument;
 import Validacao.teclasPermitidas;
+import allshoes.jpa.Departamento;
 import allshoes.jpa.Estoque;
 import allshoes.jpa.Estoque_Produto;
+import allshoes.jpa.Filial;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import allshoes.jpa.Produto;
@@ -454,9 +456,9 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
             controlaFilial = new MatrizFilialController();
             controlaEstoqueProduto = new MatrizEstoqueProdutoController();
             
-
+            Filial filial = new Filial();
             Estoque_Produto estoqueProduto = new Estoque_Produto();
-            allshoes.jpa.Produto novoProduto = new Produto();
+            Produto novoProduto = new Produto();
             
             
             novoProduto.setCod_produto(Integer.parseInt(jTextField1.getText()));
@@ -464,12 +466,22 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
             novoProduto.setMarca(Marca.valueOf(jComboBox1.getSelectedItem().toString()));
             novoProduto.setTamanho(Integer.parseInt(jTextField4.getText()));
             novoProduto.setCor(jTextField5.getText());
-            allshoes.jpa.Departamento departamento = controlaDepartamento.find(jComboBox2.getSelectedItem().toString());
+            Departamento departamento = controlaDepartamento.find(jComboBox2.getSelectedItem().toString());
             novoProduto.setDepartamento(departamento);
             novoProduto.setPreco(Double.parseDouble(jTextField7.getText()));
             novoProduto.setDescricao(jTextArea1.getText());
             
             controlaProduto.create(novoProduto);
+            
+           int qtd = controlaFilial.findAll().size();
+           for(int i=0; i<qtd; i++){
+                estoqueProduto.setQuantidade(0);
+                filial.setIdFilial(1+i);
+                novoProduto.setIdProduto(controlaProduto.findAll().size());
+                estoqueProduto.setFilial(filial);
+                estoqueProduto.setProduto(novoProduto);
+                controlaEstoqueProduto.create(estoqueProduto);
+           }
             
             JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
 
