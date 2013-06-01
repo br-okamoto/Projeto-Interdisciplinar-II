@@ -14,6 +14,7 @@ public class Estoque implements Serializable, Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idEstoque;
+    private String observacao;
     
 
     public Estoque(){
@@ -28,4 +29,13 @@ public class Estoque implements Serializable, Cloneable {
         this.idEstoque = idEstoque;
     }
     
+     public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+   
+ 
 }
