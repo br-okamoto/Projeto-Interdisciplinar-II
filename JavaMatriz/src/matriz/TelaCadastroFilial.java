@@ -414,8 +414,16 @@ public class TelaCadastroFilial extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            MatrizFilialController controller = new MatrizFilialController();
+            MatrizFilialController controlaFilial = new MatrizFilialController();
+            MatrizEstoqueController controlaEstoque = new MatrizEstoqueController();
             Filial novaFilial = new Filial();
+            Estoque novoEstoque = new Estoque();
+           Estoque estoque = new Estoque();
+           
+           estoque.setIdEstoque(Integer.parseInt(jTextField1.getText()));
+           estoque.setObservacao(jTextField2.getText()); 
+           controlaEstoque.create(estoque);
+            
             novaFilial.setCod_filial(Integer.parseInt(jTextField1.getText()));
             novaFilial.setNome(jTextField2.getText());
             Endereco endereco = new Endereco();
@@ -427,7 +435,7 @@ public class TelaCadastroFilial extends javax.swing.JFrame {
             endereco.setCidade(jTextField8.getText());
             endereco.setEstado(Estado.valueOf(jComboBox1.getSelectedItem().toString()));
             novaFilial.setEndereco(endereco);
-            controller.create(novaFilial);
+            controlaFilial.create(novaFilial);
             JOptionPane.showMessageDialog(null, "Filial cadastrada com sucesso!");
         } catch (Exception ex) {
             Logger.getLogger(TelaCadastroFilial.class.getName()).log(Level.SEVERE, null, ex);
