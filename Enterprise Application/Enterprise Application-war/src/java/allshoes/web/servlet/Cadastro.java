@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,8 +34,18 @@ public class Cadastro extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        Header header = new Header(false, "Cadastrar");
+        Header header = null;
         Footer footer = new Footer(false);
+        
+        String username = null;
+        HttpSession session = request.getSession();
+        try {
+            username = session.getAttribute("username").toString();
+            header = new Header(false,"Cadastrar", username);
+        }
+        catch (NullPointerException ex) {
+            header = new Header(false,"Cadastrar", "");
+        }
         
         try {
            

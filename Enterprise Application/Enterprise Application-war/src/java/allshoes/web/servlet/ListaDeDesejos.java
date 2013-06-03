@@ -51,13 +51,14 @@ public class ListaDeDesejos extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        Header header = new Header(false, "Lista de Desejos");
+        Header header = null;
         Footer footer = new Footer(false);
         
         String username = null;
         HttpSession session = request.getSession();
         try {
            username = session.getAttribute("username").toString();
+           header = new Header(false,"Infantil", username);
         }
         catch (NullPointerException ex) {
             RequestDispatcher rd = request.getRequestDispatcher("Login?returnURL=/Enterprise_Application-war/ListaDeDesejos");

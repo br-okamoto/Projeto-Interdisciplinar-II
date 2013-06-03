@@ -45,14 +45,14 @@ public class MeuCadastro extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        Header header = new Header(false, "Meu Cadastro");
+        Header header = null;
         Footer footer = new Footer(false);
         Date date;
         
         try {
             HttpSession session = request.getSession(false);
             String username = session.getAttribute("username").toString();
-            
+            header = new Header(false, "Meu Cadastro",username);
             Cliente cliente = ejb.find(username);
             
             out.println(header.getHeaderPadrao());
@@ -144,6 +144,7 @@ public class MeuCadastro extends HttpServlet {
             
 
         } catch (NullPointerException e) {
+            header = new Header(false, "Meu Cadastro","");
             RequestDispatcher rd = request.getRequestDispatcher("Login?returnURL=http://localhost:8080/Enterprise_Application-war/MeuCadastro");            
             rd.forward(request, response);
         }

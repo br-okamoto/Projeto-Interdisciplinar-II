@@ -52,8 +52,18 @@ public class MeuCarrinho extends HttpServlet {
             throws ServletException, IOException, NamingException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        Header header = new Header(false, "Meu Carrinho");
+        Header header = null;
         Footer footer = new Footer(false);
+        
+        String username = null;
+        HttpSession session = request.getSession();
+        try {
+            username = session.getAttribute("username").toString();
+            header = new Header(false,"Meu Carrinho", username);
+        }
+        catch (NullPointerException ex) {
+            header = new Header(false,"Meu Carrinho", "");
+        }
         
         CartBeanRemote carrinho = getCartBean(request);
         

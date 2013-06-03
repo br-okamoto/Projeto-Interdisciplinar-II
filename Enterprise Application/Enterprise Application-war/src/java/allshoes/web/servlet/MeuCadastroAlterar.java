@@ -42,9 +42,18 @@ public class MeuCadastroAlterar extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        Header header = new Header(false, "Cadastrar");
+        Header header = null;
         Footer footer = new Footer(false);
+        
+        String username = null;
         HttpSession session = request.getSession();
+        try {
+            username = session.getAttribute("username").toString();
+            header = new Header(false,"Meu Cadastro", username);
+        }
+        catch (NullPointerException ex) {
+            header = new Header(false,"Meu Cadastro", "");
+        }
         Cliente cliente = ejb.find(Integer.parseInt(session.getAttribute("idpessoa").toString()));
         
         try {

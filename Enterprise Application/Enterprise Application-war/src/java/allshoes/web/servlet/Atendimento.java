@@ -8,10 +8,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -56,8 +58,19 @@ boolean rec;
         
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        Header header = new Header(false,"Atendimento");
+        Header header = null;
         Footer footer = new Footer(false);
+        
+        String username = null;
+        HttpSession session = request.getSession();
+        try {
+            username = session.getAttribute("username").toString();
+            header = new Header(false,"Atendimento", username);
+        }
+        catch (NullPointerException ex) {
+            header = new Header(false,"Atendimento", "");
+        }
+
         
         try {
 

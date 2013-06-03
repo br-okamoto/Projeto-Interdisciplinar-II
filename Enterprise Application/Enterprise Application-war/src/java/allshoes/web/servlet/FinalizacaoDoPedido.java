@@ -64,10 +64,18 @@ public class FinalizacaoDoPedido extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        Header header = new Header(false, "Finalização do Pedido");
+        Header header = null;
         Footer footer = new Footer(false);
         
+        String username = null;
         HttpSession session = request.getSession();
+        try {
+            username = session.getAttribute("username").toString();
+            header = new Header(false,"Finalização do Pedido", username);
+        }
+        catch (NullPointerException ex) {
+            header = new Header(false,"Finalização do Pedido", "");
+        }
         
         Pedido pedido = (Pedido)session.getAttribute("pedido");
         

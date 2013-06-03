@@ -58,7 +58,7 @@ public class DetalheDoPedido extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        Header header = new Header(false, "Detalhe do Pedido");
+        Header header = null;
         Footer footer = new Footer(false);
         
         String username = null;
@@ -66,6 +66,7 @@ public class DetalheDoPedido extends HttpServlet {
         HttpSession session = request.getSession();
         try {
            username = session.getAttribute("username").toString();
+           header = new Header(false,"Detalhe do Pedido", username);
         }
         catch (NullPointerException ex) {
             RequestDispatcher rd = request.getRequestDispatcher("Login?returnURL=/Enterprise_Application-war/MeusPedidos");

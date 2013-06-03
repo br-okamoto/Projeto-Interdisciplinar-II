@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -39,8 +40,18 @@ public class DetalheDoProduto extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        Header header = new Header(false, "Detalhe do Produto");
+        Header header = null;
         Footer footer = new Footer(false);
+        
+        String username = null;
+        HttpSession session = request.getSession();
+        try {
+            username = session.getAttribute("username").toString();
+            header = new Header(false,"Detalhe do Produto", username);
+        }
+        catch (NullPointerException ex) {
+            header = new Header(false,"Detalhe do Produto", "");
+        }
         
         
         
@@ -80,11 +91,11 @@ public class DetalheDoProduto extends HttpServlet {
             out.println("<td>&nbsp;</td>");
             out.println("</tr>");
             out.println("<tr>");
-            out.println("<td colspan='2'><b>Cores disponíveis:</td>");
+            out.println("<td colspan='2'><b>Cor:</td>");
             out.println("</tr>");
             out.println("<tr>");
             out.println("<td colspan='2'>");
-            out.println("<input type='radio' name='rdCor' value='" + produto.getCor() + "'>" + produto.getCor() + "</input>");
+            out.println(produto.getCor());
             out.println("</td>");
             out.println("</tr>");
             out.println("<tr>");
@@ -92,11 +103,11 @@ public class DetalheDoProduto extends HttpServlet {
             out.println("<td>&nbsp;</td>");
             out.println("</tr>");
             out.println("<tr>");
-            out.println("<td colspan='2'><b>Tamanhos disponíveis:</td>");
+            out.println("<td colspan='2'><b>Tamanho:</td>");
             out.println("</tr>");
             out.println("<tr>");
             out.println("<td colspan='2'>");
-            out.println("<input type='radio' name='rdTamanho' value='" + produto.getTamanho() + "'>" + produto.getTamanho() + "</input>");
+            out.println(produto.getTamanho());
             out.println("</td>");
             out.println("</tr>");
             out.println("<tr>");
@@ -112,6 +123,15 @@ public class DetalheDoProduto extends HttpServlet {
             out.println("</table>");
             out.println("</form>");
             out.println("</div>");
+            
+            out.println("<div>");
+            out.println(produto.getDescricao());
+            out.println("</div>");
+            
+            out.println("<div>&nbsp;</div>");
+            out.println("<div>&nbsp;</div>");
+            out.println("<div>&nbsp;</div>");
+            out.println("<div>&nbsp;</div>");
             
             out.println("</div>");
             

@@ -47,15 +47,17 @@ public class MeusPedidos extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        Header header = new Header(false, "Meus Pedidos");
+        Header header = null;
         Footer footer = new Footer(false);
         
         String username = null;
         HttpSession session = request.getSession();
         try {
            username = session.getAttribute("username").toString();
+           header = new Header(false, "Meus Pedidos",username);
         }
         catch (NullPointerException ex) {
+            header = new Header(false, "Meus Pedidos","");
             RequestDispatcher rd = request.getRequestDispatcher("Login?returnURL=/Enterprise_Application-war/MeusPedidos");
             rd.forward(request, response);
         }
