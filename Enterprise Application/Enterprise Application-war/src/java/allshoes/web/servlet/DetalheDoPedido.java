@@ -5,11 +5,13 @@
 package allshoes.web.servlet;
 
 import allshoes.jpa.Cliente;
+import allshoes.jpa.HistoricoDoPedido;
 import allshoes.jpa.ItemDoPedido;
 import allshoes.jpa.Pedido;
 import allshoes.jpa.StatusDoPedido;
 import allshoes.jpa.facade.ClienteFacadeRemote;
 import allshoes.jpa.facade.FilialFacadeRemote;
+import allshoes.jpa.facade.HistoricoDoPedidoFacadeRemote;
 import allshoes.jpa.facade.ItemDoPedidoFacadeRemote;
 import allshoes.jpa.facade.PedidoFacadeRemote;
 import allshoes.web.model.Footer;
@@ -33,16 +35,19 @@ import javax.servlet.http.HttpSession;
 public class DetalheDoPedido extends HttpServlet {
     
     @EJB
-    PedidoFacadeRemote pedidoEjb;
+    private PedidoFacadeRemote pedidoEjb;
     
     @EJB
-    ItemDoPedidoFacadeRemote itemPedidoEjb;
+    private ItemDoPedidoFacadeRemote itemPedidoEjb;
     
     @EJB
     private ClienteFacadeRemote clienteEjb;
     
     @EJB
     private FilialFacadeRemote filialEjb;
+    
+    @EJB
+    private HistoricoDoPedidoFacadeRemote histEjb;
 
     /**
      * Processes requests for both HTTP
@@ -66,7 +71,7 @@ public class DetalheDoPedido extends HttpServlet {
         HttpSession session = request.getSession();
         try {
            username = session.getAttribute("username").toString();
-           header = new Header(false,"Detalhe do Pedido", username);
+           header = new Header(true,"Detalhe do Pedido", username);
         }
         catch (NullPointerException ex) {
             RequestDispatcher rd = request.getRequestDispatcher("Login?returnURL=/Enterprise_Application-war/MeusPedidos");
@@ -81,6 +86,7 @@ public class DetalheDoPedido extends HttpServlet {
         }
         Cliente cliente = clienteEjb.find(username);
         Pedido pedido = pedidoEjb.find(idPedido);
+        List<HistoricoDoPedido> historico = histEjb.findAllPedido(pedido);
         
         try {
 
@@ -179,6 +185,25 @@ public class DetalheDoPedido extends HttpServlet {
             out.println("</tr>");
             out.println("</table>");
             out.println("");
+            
+            out.println("<h2>Histórico do Pedido</h2>");
+            out.println("<table border='0' cellpadding='3' cellspacing='3'>");
+            out.println("<tr>");
+            out.println("<td width='230px'>Data</td>");
+            out.println("<td width='400px'>Status</td>");
+            out.println("</tr>");
+            if (historico != null) {
+                for (HistoricoDoPedido h : historico) {
+                    out.println("<tr>");
+                    out.println("<td>"+h.getDataPedido()+"</td>");
+                    out.println("<td>"+h.getStatus().toString()+"</td>");
+                    out.println("</tr>");
+                }
+            }
+            out.println("</table>");
+            
+            out.println("<div>&nbsp;</div>");
+            out.println("<div>&nbsp;</div>");
             
             out.println("</div>");
             

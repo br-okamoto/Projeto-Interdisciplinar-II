@@ -62,7 +62,7 @@ public class Pagamento extends HttpServlet {
         HttpSession session = request.getSession();
         try {
            username = session.getAttribute("username").toString();
-           header = new Header(false, "Pagamento",username);
+           header = new Header(true, "Pagamento",username);
         }
         catch (NullPointerException ex) {
             header = new Header(false, "Pagamento","");

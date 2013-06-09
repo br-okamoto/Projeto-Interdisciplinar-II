@@ -2,6 +2,7 @@
 package allshoes.jpa.facade;
 
 import allshoes.jpa.HistoricoDoPedido;
+import allshoes.jpa.Pedido;
 import java.util.List;
 import javax.ejb.Remote;
 
@@ -18,6 +19,8 @@ public interface HistoricoDoPedidoFacadeRemote {
     HistoricoDoPedido find(Object id);
 
     List<HistoricoDoPedido> findAll();
+    
+    List<HistoricoDoPedido> findAllPedido(Pedido pedido);
 
     List<HistoricoDoPedido> findRange(int[] range);
 

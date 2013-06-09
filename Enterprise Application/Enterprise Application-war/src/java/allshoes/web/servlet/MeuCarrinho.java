@@ -59,7 +59,7 @@ public class MeuCarrinho extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             username = session.getAttribute("username").toString();
-            header = new Header(false,"Meu Carrinho", username);
+            header = new Header(true,"Meu Carrinho", username);
         }
         catch (NullPointerException ex) {
             header = new Header(false,"Meu Carrinho", "");

@@ -52,7 +52,7 @@ public class MeuCadastro extends HttpServlet {
         try {
             HttpSession session = request.getSession(false);
             String username = session.getAttribute("username").toString();
-            header = new Header(false, "Meu Cadastro",username);
+            header = new Header(true, "Meu Cadastro",username);
             Cliente cliente = ejb.find(username);
             
             out.println(header.getHeaderPadrao());

@@ -41,7 +41,7 @@ public class Masculino extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             username = session.getAttribute("username").toString();
-            header = new Header(false,"Masculino", username);
+            header = new Header(true,"Masculino", username);
         }
         catch (NullPointerException ex) {
             header = new Header(false,"Masculino", "");

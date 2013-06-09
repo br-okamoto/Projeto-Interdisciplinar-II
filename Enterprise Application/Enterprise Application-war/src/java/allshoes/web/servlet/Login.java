@@ -41,7 +41,7 @@ public class Login extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             username = session.getAttribute("username").toString();
-            header = new Header(false,"Login", username);
+            header = new Header(true,"Login", username);
         }
         catch (NullPointerException ex) {
             header = new Header(false,"Login", "");

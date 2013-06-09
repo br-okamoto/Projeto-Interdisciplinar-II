@@ -792,7 +792,7 @@ public class TelaBuscarEditarPedidos extends javax.swing.JFrame {
             pedido.setStatus(StatusDoPedido.AguardandoFilial);
             pedidoController.edit(pedido);
             HistoricoDoPedido hist = new HistoricoDoPedido();
-            hist.setDataPedido(pedido.getDataPedido());
+            hist.setDataPedido(new java.util.Date());
             hist.setPedido(pedido);
             hist.setStatus(pedido.getStatus());
             historicoController.create(hist);

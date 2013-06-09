@@ -136,7 +136,7 @@ public class RealizarPagamento extends HttpServlet {
         session.setAttribute("itens", itens);
         
         HistoricoDoPedido hist = new HistoricoDoPedido();
-        hist.setDataPedido(pedido.getDataPedido());
+        hist.setDataPedido(new java.util.Date());
         hist.setPedido(pedido);
         hist.setStatus(StatusDoPedido.Aberto);
         
@@ -144,13 +144,13 @@ public class RealizarPagamento extends HttpServlet {
         
         if (!pedido.isPagamentoRealizado()) {
             hist = new HistoricoDoPedido();
-            hist.setDataPedido(pedido.getDataPedido());
+            hist.setDataPedido(new java.util.Date());
             hist.setPedido(pedido);
             hist.setStatus(StatusDoPedido.AguardandoPagamento);
             historicoPedidoEjb.create(hist);
         } else {
             hist = new HistoricoDoPedido();
-            hist.setDataPedido(pedido.getDataPedido());
+            hist.setDataPedido(new java.util.Date());
             hist.setPedido(pedido);
             hist.setStatus(pedido.getStatus());
             historicoPedidoEjb.create(hist);

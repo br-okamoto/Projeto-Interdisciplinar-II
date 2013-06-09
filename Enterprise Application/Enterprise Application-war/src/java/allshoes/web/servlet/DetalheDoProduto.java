@@ -47,7 +47,7 @@ public class DetalheDoProduto extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             username = session.getAttribute("username").toString();
-            header = new Header(false,"Detalhe do Produto", username);
+            header = new Header(true,"Detalhe do Produto", username);
         }
         catch (NullPointerException ex) {
             header = new Header(false,"Detalhe do Produto", "");

@@ -48,7 +48,7 @@ public class ConfirmarEndereco extends HttpServlet {
 
         try {
            username = session.getAttribute("username").toString();
-           header = new Header(false,"Confirmar Endereço", username);
+           header = new Header(true,"Confirmar Endereço", username);
         }
         catch (NullPointerException ex) {
             RequestDispatcher rd = request.getRequestDispatcher("Login?returnURL=/Enterprise_Application-war/ConfirmarEndereco");

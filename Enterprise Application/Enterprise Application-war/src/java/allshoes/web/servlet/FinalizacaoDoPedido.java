@@ -71,7 +71,7 @@ public class FinalizacaoDoPedido extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             username = session.getAttribute("username").toString();
-            header = new Header(false,"Finalização do Pedido", username);
+            header = new Header(true,"Finalização do Pedido", username);
         }
         catch (NullPointerException ex) {
             header = new Header(false,"Finalização do Pedido", "");

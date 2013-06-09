@@ -53,4 +53,17 @@ public class ProdutoFacade extends AbstractFacade<Produto> implements ProdutoFac
         else
             return produtos;
     }
+    
+    @Override
+    public List<Produto> busca(String termo) {
+        Query q1 = em.createQuery("SELECT p FROM Produto p WHERE lower(p.nome) LIKE :nome OR lower(p.marca) LIKE :marca OR lower(p.descricao) LIKE :descricao");
+        q1.setParameter("nome", "%"+termo.toLowerCase()+"%");
+        q1.setParameter("marca", "%"+termo.toLowerCase()+"%");
+        q1.setParameter("descricao", "%"+termo.toLowerCase()+"%");
+        List<Produto> produtos = q1.getResultList();
+        if (produtos.isEmpty())
+            return null;
+        else
+            return produtos;
+    }
 }

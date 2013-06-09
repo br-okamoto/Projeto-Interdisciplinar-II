@@ -57,7 +57,7 @@ public class Cadastrar extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             username = session.getAttribute("username").toString();
-            header = new Header(false,"Cadastrar", username);
+            header = new Header(true,"Cadastrar", username);
         }
         catch (NullPointerException ex) {
             header = new Header(false,"Cadastrar", "");

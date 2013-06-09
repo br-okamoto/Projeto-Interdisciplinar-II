@@ -58,7 +58,7 @@ public class ListaDeDesejos extends HttpServlet {
         HttpSession session = request.getSession();
         try {
            username = session.getAttribute("username").toString();
-           header = new Header(false,"Infantil", username);
+           header = new Header(true,"Infantil", username);
         }
         catch (NullPointerException ex) {
             RequestDispatcher rd = request.getRequestDispatcher("Login?returnURL=/Enterprise_Application-war/ListaDeDesejos");

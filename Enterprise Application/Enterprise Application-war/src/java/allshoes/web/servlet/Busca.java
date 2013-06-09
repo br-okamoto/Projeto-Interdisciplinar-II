@@ -4,10 +4,14 @@
  */
 package allshoes.web.servlet;
 
+import allshoes.jpa.Produto;
+import allshoes.jpa.facade.ProdutoFacadeRemote;
 import allshoes.web.model.Footer;
 import allshoes.web.model.Header;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +23,9 @@ import javax.servlet.http.HttpSession;
  * @author Bruno
  */
 public class Busca extends HttpServlet {
+    
+    @EJB
+    ProdutoFacadeRemote prodEjb;
 
     /**
      * Processes requests for both HTTP
@@ -42,11 +49,13 @@ public class Busca extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             username = session.getAttribute("username").toString();
-            header = new Header(false,"Busca", username);
+            header = new Header(true,"Busca", username);
         }
         catch (NullPointerException ex) {
             header = new Header(false,"Busca", "");
         }
+        
+        
         
         try {
             out.println(header.getHeaderPadrao());
@@ -58,6 +67,27 @@ public class Busca extends HttpServlet {
             out.println(" > ");
             out.println("Resultado da Busca");
             out.println("</div>");
+            
+            String termo = null;
+            try {
+                termo = request.getParameter("k");
+                List<Produto> produtos = prodEjb.busca(termo);
+                if (produtos == null) {
+                    out.println("<p>Nenhum resultado encontrado.</p>");
+                } else {
+                    for (Produto p : produtos) {
+                        out.println("<div class='box-produto'>");
+                        out.println("<a href='"+request.getContextPath()+"/DetalheDoProduto?cod_produto="+p.getCod_produto()+"'><img src='"+request.getContextPath()+"/images/produtos/"+p.getCod_produto()+".jpg' /></a>");
+                        out.println("<a href='"+request.getContextPath()+"/DetalheDoProduto?cod_produto="+p.getCod_produto()+"'>"+p.getNome()+"</a><br/>");
+                        out.println("R$ " + p.getPreco());
+                        out.println("</div>");
+                    }
+                }
+            }
+            catch (NullPointerException ex) {
+                out.println("<p>Por favor, digite um termo para a busca.</p>");
+            }
+            
             out.println("</div>");
             
             out.println(footer.getFooterPadrao());

@@ -41,7 +41,7 @@ public class Marcas extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             username = session.getAttribute("username").toString();
-            header = new Header(false,"Marcas", username);
+            header = new Header(true,"Marcas", username);
         }
         catch (NullPointerException ex) {
             header = new Header(false,"Marcas", "");

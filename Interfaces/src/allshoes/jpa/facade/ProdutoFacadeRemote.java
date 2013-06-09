@@ -29,6 +29,8 @@ public interface ProdutoFacadeRemote {
     List<Produto> find(String nome);
     
     List<Produto> find(Marca marca);
+    
+    List<Produto> busca(String termo);
 
     List<Produto> findAll();
 

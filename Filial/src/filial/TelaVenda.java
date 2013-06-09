@@ -65,7 +65,7 @@ public class TelaVenda extends javax.swing.JFrame {
             List<Pedido> p = controlaPedido.findAll();
 
         } catch (Exception ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaVenda.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

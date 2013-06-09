@@ -41,7 +41,7 @@ public class Infantil extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             username = session.getAttribute("username").toString();
-            header = new Header(false,"Infantil", username);
+            header = new Header(true,"Infantil", username);
         }
         catch (NullPointerException ex) {
             header = new Header(false,"Infantil", "");

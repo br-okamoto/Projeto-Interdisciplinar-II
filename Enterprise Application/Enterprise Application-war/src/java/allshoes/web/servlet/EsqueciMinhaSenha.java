@@ -41,7 +41,7 @@ public class EsqueciMinhaSenha extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             username = session.getAttribute("username").toString();
-            header = new Header(false,"Esqueci minha senha", username);
+            header = new Header(true,"Esqueci minha senha", username);
         }
         catch (NullPointerException ex) {
             header = new Header(false,"Esqueci minha senha", "");

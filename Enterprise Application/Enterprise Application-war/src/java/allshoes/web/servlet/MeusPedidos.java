@@ -54,7 +54,7 @@ public class MeusPedidos extends HttpServlet {
         HttpSession session = request.getSession();
         try {
            username = session.getAttribute("username").toString();
-           header = new Header(false, "Meus Pedidos",username);
+           header = new Header(true, "Meus Pedidos",username);
         }
         catch (NullPointerException ex) {
             header = new Header(false, "Meus Pedidos","");

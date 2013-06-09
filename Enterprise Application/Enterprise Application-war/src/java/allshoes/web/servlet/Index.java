@@ -50,7 +50,7 @@ public class Index extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             username = session.getAttribute("username").toString();
-            header = new Header(false,"Home", username);
+            header = new Header(true,"Home", username);
         }
         catch (NullPointerException ex) {
             header = new Header(false,"Home", "");
