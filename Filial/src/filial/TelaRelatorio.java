@@ -7,6 +7,7 @@ package Filial;
 import allshoes.jpa.Filial;
 import allshoes.jpa.HistoricoDoPedido;
 import allshoes.jpa.ItemDoPedido;
+import allshoes.jpa.StatusDoPedido;
 import controller.filialController;
 import controller.historicoDoPedidoController;
 import controller.itemDoPedidoController;
@@ -243,7 +244,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
             int idPedido;
             double subTotal = 0;
             for (HistoricoDoPedido h : historico) {
-                if (sd.format(h.getDataPedido()).equalsIgnoreCase(d) == true) {
+                if (sd.format(h.getDataPedido()).equalsIgnoreCase(d) == true && h.getStatus().equals(StatusDoPedido.Finalizado)) {
                     idPedido = h.getPedido().getIdPedido();
                     objects[0] = sd.format(h.getDataPedido());
                     for (ItemDoPedido p : item) {

@@ -4,10 +4,14 @@
  */
 package allshoes.web.servlet;
 
+import allshoes.jpa.Produto;
+import allshoes.jpa.facade.ProdutoFacadeRemote;
 import allshoes.web.model.Footer;
 import allshoes.web.model.Header;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +23,9 @@ import javax.servlet.http.HttpSession;
  * @author Bruno
  */
 public class Feminino extends HttpServlet {
+    
+    @EJB
+    ProdutoFacadeRemote prodEjb;
 
     /**
      * Processes requests for both HTTP
@@ -47,6 +54,8 @@ public class Feminino extends HttpServlet {
             header = new Header(false,"Feminino", "");
         }
         
+        List<Produto> produtos = prodEjb.findAll();
+        
         try {
 
             out.println(header.getHeaderPadrao());
@@ -74,6 +83,19 @@ public class Feminino extends HttpServlet {
             out.println(" > ");
             out.println("Feminino");
             out.println("</div>");
+            
+            if (produtos != null) {
+                for (Produto p : produtos) {
+                    if (p.getDepartamento().getNomeDepartamento().toString().equals("Feminino")) {
+                        out.println("<div class='departamentoProduto'>");
+                        out.println("<a href='DetalheDoProduto?cod_produto="+p.getCod_produto()+"'><img src='" + request.getContextPath() + "/images/produtos/"+p.getCod_produto()+".jpg' alt='' /></a>");
+                        out.println("<h2><a href='DetalheDoProduto?cod_produto="+p.getCod_produto()+"'>"+p.getNome()+"</a></h2>");
+                        out.println("<div class='precoProduto'>R$ "+p.getPreco()+"</div>");
+                        out.println("</div>");
+                    }
+                }
+            }
+            
             out.println("</div>");
             
             out.println(footer.getFooterPadrao());

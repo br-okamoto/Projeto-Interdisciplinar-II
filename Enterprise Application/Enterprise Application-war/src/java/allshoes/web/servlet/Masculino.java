@@ -4,10 +4,14 @@
  */
 package allshoes.web.servlet;
 
+import allshoes.jpa.Produto;
+import allshoes.jpa.facade.ProdutoFacadeRemote;
 import allshoes.web.model.Footer;
 import allshoes.web.model.Header;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +23,9 @@ import javax.servlet.http.HttpSession;
  * @author Bruno
  */
 public class Masculino extends HttpServlet {
+    
+    @EJB
+    ProdutoFacadeRemote prodEjb;
 
     /**
      * Processes requests for both HTTP
@@ -46,6 +53,8 @@ public class Masculino extends HttpServlet {
         catch (NullPointerException ex) {
             header = new Header(false,"Masculino", "");
         }
+        
+        List<Produto> produtos = prodEjb.findAll();
         
         try {
             out.println(header.getHeaderPadrao());
@@ -75,33 +84,17 @@ public class Masculino extends HttpServlet {
             out.println("Masculino");
             out.println("</div>");
             
-            out.println("<div class='departamentoProduto'>");
-            out.println("<a href='DetalheDoProduto?cod_produto=1'><img src='" + request.getContextPath() + "/images/adidas-galeria.jpg' alt='' /></a>");
-            out.println("<h2><a href='DetalheDoProduto?cod_produto=1'>Adidas 4.3</a></h2>");
-            out.println("<div class='precoProduto'>R$ 111,00</div>");
-            out.println("<div class='precoProduto'>6 x R$ 26,65 sem juros</div>");
-            out.println("</div>");
-            
-            out.println("<div class='departamentoProduto'>");
-            out.println("<img src='" + request.getContextPath() + "/images/mizuno-galeria.jpg' alt='' />");
-            out.println("<h2>Mizuno Wave Ultima 4</h2>");
-            out.println("<div class='precoProduto'>R$ 399,90</div>");
-            out.println("<div class='precoProduto'>6 x R$ 66,65 sem juros</div>");
-            out.println("</div>");
-            
-            out.println("<div class='departamentoProduto'>");
-            out.println("<img src='" + request.getContextPath() + "/images/nike-galeria.jpg' alt='' />");
-            out.println("<h2>Nike Lunarglide+4</h2>");
-            out.println("<div class='precoProduto'>R$ 499,90</div>");
-            out.println("<div class='precoProduto'>6 x R$ 83,32 sem juros</div>");
-            out.println("</div>");
-            
-            out.println("<div class='departamentoProduto'>");
-            out.println("<img src='" + request.getContextPath() + "/images/adidas-galeria.jpg' alt='' />");
-            out.println("<h2>Tênis Adidas 4.3</h2>");
-            out.println("<div class='precoProduto'>R$ 159,90</div>");
-            out.println("<div class='precoProduto'>6 x R$ 26,65 sem juros</div>");
-            out.println("</div>");
+            if (produtos != null) {
+                for (Produto p : produtos) {
+                    if (p.getDepartamento().getNomeDepartamento().toString().equals("Masculino")) {
+                        out.println("<div class='departamentoProduto'>");
+                        out.println("<a href='DetalheDoProduto?cod_produto="+p.getCod_produto()+"'><img src='" + request.getContextPath() + "/images/produtos/"+p.getCod_produto()+".jpg' alt='' /></a>");
+                        out.println("<h2><a href='DetalheDoProduto?cod_produto="+p.getCod_produto()+"'>"+p.getNome()+"</a></h2>");
+                        out.println("<div class='precoProduto'>R$ "+p.getPreco()+"</div>");
+                        out.println("</div>");
+                    }
+                }
+            }
             
             out.println("</div>");
             
