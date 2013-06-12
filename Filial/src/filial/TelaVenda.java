@@ -31,7 +31,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class TelaVenda extends javax.swing.JFrame {
 
-    static double valorTotal;
+    static double valorTotal = 0;
 
     public TelaVenda() {
         initComponents();
