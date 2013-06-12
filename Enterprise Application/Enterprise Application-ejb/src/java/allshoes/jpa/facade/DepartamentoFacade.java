@@ -34,4 +34,15 @@ public class DepartamentoFacade extends AbstractFacade<Departamento> implements 
             return departamentos.get(0);
     }
     
+    @Override
+    public Departamento find(int codigo) {
+        Query q1 = em.createQuery("SELECT p FROM Departamento p WHERE p.cod_departamento = :codigo");
+        q1.setParameter("codigo", codigo);
+        List<Departamento> departamentos = q1.getResultList();
+        if (departamentos.isEmpty())
+            return null;
+        else
+            return departamentos.get(0);
+    }
+    
 }

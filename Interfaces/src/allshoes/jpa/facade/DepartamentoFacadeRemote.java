@@ -25,6 +25,8 @@ public interface DepartamentoFacadeRemote {
     Departamento find(Object id);
     
     Departamento find(String nome);
+    
+    Departamento find(int codigo);
 
     List<Departamento> findAll();
 

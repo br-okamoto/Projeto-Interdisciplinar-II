@@ -42,5 +42,9 @@ public class MatrizDepartamentoController {
         return (departamentoFacade.findAll());
     }
     
+    public Departamento find(int codigo) {
+        return (departamentoFacade.find(codigo));
+    }
+    
     
 }

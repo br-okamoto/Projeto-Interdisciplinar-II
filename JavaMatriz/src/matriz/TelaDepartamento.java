@@ -434,13 +434,11 @@ public class TelaDepartamento extends javax.swing.JFrame {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
        MatrizDepartamentoController controlaDepartamento = null;
         try {
-            int codigoDepartamento = Integer.parseInt(jTextField1.getText());
+            int codigoDepartamento = Integer.parseInt(jTextField1.getText().toString());
             String nome = jTextField2.getText();
             controlaDepartamento = new MatrizDepartamentoController();
 
-            Departamento dep = new Departamento();
-            dep.setIdDepartamento(codigoDepartamento);
-            dep.setCod_departamento(codigoDepartamento);
+            Departamento dep = controlaDepartamento.find(codigoDepartamento);
             dep.setNomeDepartamento(nome);
             controlaDepartamento.edit(dep);
             JOptionPane.showMessageDialog(null, "Departamento Alterado");
@@ -454,12 +452,11 @@ public class TelaDepartamento extends javax.swing.JFrame {
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
          MatrizDepartamentoController controlaDepartamento = null;
         try {
-            int codigoDepartamento = Integer.parseInt(jTextField1.getText());
+            int codigoDepartamento = Integer.parseInt(jTextField1.getText().toString());
             String nome = jTextField2.getText();
             controlaDepartamento = new MatrizDepartamentoController();
 
-            Departamento dep = new Departamento();
-            dep.setIdDepartamento(codigoDepartamento);
+            Departamento dep = controlaDepartamento.find(codigoDepartamento);
            
             controlaDepartamento.remove(dep);
             JOptionPane.showMessageDialog(null, "Departamento Excluido");
@@ -488,7 +485,7 @@ public class TelaDepartamento extends javax.swing.JFrame {
                 dtm.setColumnIdentifiers(tableColumnNames);
                 Object[] objects = new Object[4];
                 for (Departamento d : departamentos) {
-                    objects[0] = d.getIdDepartamento();
+                    objects[0] = d.getCod_departamento();
                     objects[1] = d.getNomeDepartamento();
                     
                     dtm.addRow(objects);
