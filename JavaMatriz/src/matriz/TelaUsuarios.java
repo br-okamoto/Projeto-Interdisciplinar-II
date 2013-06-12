@@ -247,6 +247,11 @@ public class TelaUsuarios extends javax.swing.JFrame {
         jLabel9.setText("USUÁRIOS");
 
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matrizimg/Editar.jpg"))); // NOI18N
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matrizimg/Adicionar.jpg"))); // NOI18N
         jButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -258,6 +263,11 @@ public class TelaUsuarios extends javax.swing.JFrame {
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matrizimg/Pesquisa.jpg"))); // NOI18N
 
         jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matrizimg/Excluir.jpg"))); // NOI18N
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         jLabel10.setText("EDITAR");
 
@@ -470,6 +480,14 @@ public class TelaUsuarios extends javax.swing.JFrame {
        TelaCadastroUsuario c = new TelaCadastroUsuario();
        c.setVisible(true);
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
      * @param args the command line arguments
