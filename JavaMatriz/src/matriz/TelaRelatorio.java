@@ -420,6 +420,10 @@ public class TelaRelatorio extends javax.swing.JFrame {
                     dtm.addRow(objects);
                 }
                 jTable1.setModel(dtm);
+            } else {
+                Object[] objects = new Object[8];
+                dtm.addRow(objects);
+                jTable1.setModel(dtm);
             }
             
         }

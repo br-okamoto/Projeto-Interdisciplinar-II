@@ -157,9 +157,7 @@ public class RealizarPagamento extends HttpServlet {
         }
         
         //Limpar carrinho após a finalização da compra
-        for (ItemDoPedido idp2 : itens) {
-            carrinho.removeItemDoPedido(idp2);
-        }
+        carrinho.limpar();
         
         RequestDispatcher rd = request.getRequestDispatcher("FinalizacaoDoPedido");
         rd.forward(request, response);

@@ -247,7 +247,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
                     idPedido = h.getPedido().getIdPedido();
                     objects[0] = sd.format(h.getDataPedido());
                     for (ItemDoPedido p : item) {
-                        if (idPedido == p.getPedido().getIdPedido()) {
+                        if (idPedido == p.getPedido().getIdPedido() && p.getPedido().getFilial() != null) {
                             objects[1] = p.getProduto().getNome();
                             objects[2] = p.getQuantidade();
                             objects[3] = p.getProduto().getPreco();

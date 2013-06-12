@@ -12,4 +12,5 @@ public interface CartBeanRemote {
     public void removeItem(Produto item);
     public void removeItemDoPedido (ItemDoPedido itemDoPedido);
     public Collection getItems();
+    public void limpar();
 }

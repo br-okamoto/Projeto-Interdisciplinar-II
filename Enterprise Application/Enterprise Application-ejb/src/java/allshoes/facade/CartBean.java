@@ -78,5 +78,10 @@ public class CartBean implements CartBeanRemote{
     public Collection getItems() {
         return itensDoPedido;
     }
+    
+    @Override
+    public void limpar() {
+        itensDoPedido = new ArrayList();
+    }
 
 }
