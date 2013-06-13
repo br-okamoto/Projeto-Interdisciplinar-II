@@ -3,12 +3,15 @@ package Filial;
 
 import Validacao.IntegerDocument;
 import allshoes.jpa.Filial;
+import allshoes.jpa.HistoricoDoPedido;
 import allshoes.jpa.ItemDoPedido;
 import allshoes.jpa.Pedido;
 import allshoes.jpa.StatusDoPedido;
 import controller.filialController;
+import controller.historicoDoPedidoController;
 import controller.itemDoPedidoController;
 import controller.pedidoController;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -428,29 +431,19 @@ public class TelaPedido extends javax.swing.JFrame {
             int idPedido = Integer.parseInt(campoPedido1.getText());
         try {            
             pedidoController controlaPedido = new pedidoController();
-            Pedido pedido = new Pedido();
+            historicoDoPedidoController controlaHistorico = new historicoDoPedidoController();
+            HistoricoDoPedido historico = new HistoricoDoPedido();
+            Pedido pedido = controlaPedido.find(idPedido);
             
-            List<Pedido> pedidos = controlaPedido.findAll();
-            
-            
-            
-            for(Pedido p : pedidos) {
-                if(p.getIdPedido() == idPedido){
-                    pedido.setIdPedido(idPedido);
-                    pedido.setDataPedido(p.getDataPedido());
-                    pedido.setFormaDePagamento(p.getFormaDePagamento());
-                    pedido.setNumeroParcelas(p.getNumeroParcelas());
-                    pedido.setPagamentoRealizado(true);
+            if (pedido != null) {
                     pedido.setStatus(StatusDoPedido.Finalizado);
-                    pedido.setCliente(p.getCliente());
-                    pedido.setFilial(p.getFilial());
-                    pedido.setEndereco(p.getEndereco());
-  
                     controlaPedido.edit(pedido);
-                }
+                    historico.setDataPedido(new Date());
+                    historico.setPedido(pedido);
+                    historico.setStatus(StatusDoPedido.Finalizado);
+                    controlaHistorico.create(historico);
+                    JOptionPane.showMessageDialog(null, "Pedido Enviado com Sucesso");
             }
-            
-            JOptionPane.showMessageDialog(null, "Pedido Enviado com Sucesso");
         
         
         

@@ -35,4 +35,8 @@ public class pedidoController {
    public Pedido find(Object id){
        return pedidoFacade.find(id);
    }
+   
+   public Pedido find(int id){
+       return pedidoFacade.find(id);
+   }
 }
